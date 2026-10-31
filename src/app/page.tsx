@@ -21,7 +21,7 @@ async function CategoryTiles() {
             className="group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/10"
           >
             <span
-              className={`absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r ${visual.gradient}`}
+              className={`absolute inset-x-0 top-0 h-1.5 ${visual.bar}`}
             />
             <span
               className={`flex h-12 w-12 items-center justify-center rounded-2xl ${visual.chip}`}

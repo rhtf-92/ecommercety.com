@@ -7,7 +7,7 @@ export default function Header() {
     <header className="sticky top-0 z-40 border-b border-zinc-100 bg-white/85 backdrop-blur-md">
       <div className="container-x flex h-16 items-center gap-4">
         <Link href="/" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-brand-500 to-amber-400 text-sm font-black text-white shadow-sm">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-700 text-sm font-black text-white shadow-sm">
             T&amp;F
           </span>
           <span className="leading-tight">

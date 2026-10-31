@@ -91,7 +91,7 @@ async function ProductContent({ params }: Props) {
             <TrackedAffiliateButton
               asin={product.asin}
               href={webAffiliateUrl(product)}
-              className="flex w-full items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3.5 text-base font-bold text-white shadow-lg shadow-brand-500/25 transition hover:bg-brand-600"
+              className="flex w-full items-center justify-center gap-2 rounded-full bg-cta-500 px-6 py-3.5 text-base font-bold text-ink-900 shadow-lg shadow-cta-500/25 transition hover:bg-cta-400"
             >
               Check price on Amazon
               <IconExternal className="h-5 w-5" />

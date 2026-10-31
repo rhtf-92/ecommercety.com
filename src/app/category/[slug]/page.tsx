@@ -42,23 +42,25 @@ async function CategoryContent({ params }: Props) {
 
   return (
     <>
-      <section className={`bg-gradient-to-r ${visual.gradient} text-white`}>
+      <section className={`${visual.band} border-b border-zinc-200/60`}>
         <div className="container-x py-14">
-          <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/20 backdrop-blur">
+          <span
+            className={`flex h-14 w-14 items-center justify-center rounded-2xl ${visual.chip}`}
+          >
             <CategoryIcon slug={category.slug} className="h-7 w-7" />
           </span>
-          <h1 className="mt-5 text-4xl font-black tracking-tight sm:text-5xl">
+          <h1 className="mt-5 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl">
             {category.nameEn}
           </h1>
-          <p className="mt-2 text-lg font-medium text-white/90">
+          <p className="mt-2 text-lg font-medium text-brand-700">
             {visual.tagline}
           </p>
           {category.descriptionEn ? (
-            <p className="mt-3 max-w-2xl leading-relaxed text-white/85">
+            <p className="mt-3 max-w-2xl leading-relaxed text-zinc-600">
               {category.descriptionEn}
             </p>
           ) : null}
-          <p className="mt-5 inline-flex rounded-full bg-black/25 px-3 py-1 text-xs font-bold tracking-wide uppercase">
+          <p className="mt-5 inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold tracking-wide text-zinc-700 uppercase ring-1 ring-zinc-200">
             {products.length > 0
               ? `${products.length} verified picks`
               : "Curating the first picks"}

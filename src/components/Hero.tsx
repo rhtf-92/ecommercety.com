@@ -14,7 +14,7 @@ export default function Hero() {
         className="pointer-events-none absolute inset-0 opacity-40"
         style={{
           background:
-            "radial-gradient(600px 300px at 15% 0%, rgba(249,115,22,.45), transparent 60%), radial-gradient(700px 350px at 90% 20%, rgba(245,158,11,.25), transparent 60%)",
+            "radial-gradient(600px 300px at 15% 0%, rgba(31,138,112,.40), transparent 60%), radial-gradient(700px 350px at 90% 20%, rgba(245,158,11,.18), transparent 60%)",
         }}
       />
       <div className="container-x relative grid items-center gap-12 py-16 lg:grid-cols-2 lg:py-24">
@@ -25,7 +25,7 @@ export default function Hero() {
           </span>
           <h1 className="mt-5 text-4xl leading-[1.05] font-black tracking-tight sm:text-5xl lg:text-6xl">
             Great products.
-            <span className="block bg-gradient-to-r from-brand-400 to-amber-300 bg-clip-text text-transparent">
+            <span className="block bg-gradient-to-r from-cta-300 to-brand-300 bg-clip-text text-transparent">
               Zero guesswork.
             </span>
           </h1>
@@ -37,7 +37,7 @@ export default function Hero() {
           <div className="mt-8 flex flex-wrap gap-3">
             <a
               href="#categories"
-              className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-brand-500/30 transition hover:bg-brand-600"
+              className="inline-flex items-center gap-2 rounded-full bg-cta-500 px-6 py-3 text-sm font-bold text-ink-900 shadow-lg shadow-cta-500/25 transition hover:bg-cta-400"
             >
               Browse categories
               <IconArrowRight className="h-4 w-4" />
@@ -88,7 +88,7 @@ export default function Hero() {
               stale links, no filler.
             </p>
           </div>
-          <div className="mt-6 ml-auto w-60 rotate-1 rounded-3xl bg-gradient-to-br from-brand-500 to-amber-400 p-5 shadow-2xl">
+          <div className="mt-6 ml-auto w-60 rotate-1 rounded-3xl bg-brand-700 p-5 shadow-2xl">
             <p className="text-sm font-bold">Trending now</p>
             <p className="mt-1 text-sm text-white/85">
               Fresh finds join the catalog mid-cycle, straight from

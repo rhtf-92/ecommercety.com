@@ -55,7 +55,7 @@ export default function ProductCard({ product }: { product: ProductWithLinks }) 
         <TrackedAffiliateButton
           asin={product.asin}
           href={webAffiliateUrl(product)}
-          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-600"
+          className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-cta-500 px-5 py-2.5 text-sm font-bold text-ink-900 transition hover:bg-cta-400"
         >
           Check price on Amazon
           <IconExternal className="h-4 w-4" />

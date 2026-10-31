@@ -1,5 +1,10 @@
-import { db } from "@/lib/db";
-import type { AffiliateLink, Category, Product } from "@prisma/client";
+import { getDb } from "@/lib/db";
+import type {
+  AffiliateLink,
+  Category,
+  PrismaClient,
+  Product,
+} from "@prisma/client";
 
 export type ProductWithLinks = Product & { links: AffiliateLink[] };
 
@@ -20,9 +25,13 @@ export const FALLBACK_CATEGORIES: Pick<
   { id: "fallback-tools-home-improvement", slug: "tools-home-improvement", nameEn: "Tools & Home Improvement", descriptionEn: "Tools and fixes that make home projects easier.", phase: 1, isActive: true },
 ];
 
-async function dbOrNull<T>(query: () => Promise<T>): Promise<T | null> {
+async function dbOrNull<T>(
+  query: (client: PrismaClient) => Promise<T>,
+): Promise<T | null> {
   try {
-    return await query();
+    // getDb() va DENTRO del try: si el cliente no puede cargarse o
+    // construirse (sin generar o sin DATABASE_URL), se usa el respaldo.
+    return await query(await getDb());
   } catch {
     // Sin base de datos disponible (entorno local/CI): se usa el respaldo.
     return null;
@@ -30,15 +39,15 @@ async function dbOrNull<T>(query: () => Promise<T>): Promise<T | null> {
 }
 
 export async function getCategories() {
-  const fromDb = await dbOrNull(() =>
-    db.category.findMany({ where: { isActive: true }, orderBy: { nameEn: "asc" } }),
+  const fromDb = await dbOrNull((client) =>
+    client.category.findMany({ where: { isActive: true }, orderBy: { nameEn: "asc" } }),
   );
   return fromDb && fromDb.length > 0 ? fromDb : FALLBACK_CATEGORIES;
 }
 
 export async function getCategoryBySlug(slug: string) {
-  const fromDb = await dbOrNull(() =>
-    db.category.findUnique({ where: { slug } }),
+  const fromDb = await dbOrNull((client) =>
+    client.category.findUnique({ where: { slug } }),
   );
   if (fromDb) return fromDb;
   return FALLBACK_CATEGORIES.find((category) => category.slug === slug) ?? null;
@@ -47,8 +56,8 @@ export async function getCategoryBySlug(slug: string) {
 export async function getPublishedProductsByCategory(
   categoryId: string,
 ): Promise<ProductWithLinks[]> {
-  const fromDb = await dbOrNull(() =>
-    db.product.findMany({
+  const fromDb = await dbOrNull((client) =>
+    client.product.findMany({
       where: { categoryId, status: "PUBLISHED" },
       include: { links: { where: { isActive: true } } },
       orderBy: { publishedAt: "desc" },
@@ -60,8 +69,8 @@ export async function getPublishedProductsByCategory(
 export async function getProductByAsin(
   asin: string,
 ): Promise<(ProductWithLinks & { category: Category }) | null> {
-  return dbOrNull(() =>
-    db.product.findUnique({
+  return dbOrNull((client) =>
+    client.product.findUnique({
       where: { asin },
       include: { links: { where: { isActive: true } }, category: true },
     }),

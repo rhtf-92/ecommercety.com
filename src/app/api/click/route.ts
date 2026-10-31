@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { db } from "@/lib/db";
+import { getDb } from "@/lib/db";
 import type { Channel } from "@prisma/client";
 
 const CHANNELS: Channel[] = [
@@ -32,6 +32,7 @@ export async function POST(request: Request) {
       ? (body.channel as Channel)
       : "WEB";
 
+    const db = await getDb();
     const product = await db.product.findUnique({
       where: { asin: body.asin },
       select: { id: true },

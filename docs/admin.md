@@ -43,3 +43,17 @@ con antes/después y el actor (correo del admin; en el futuro:
   `httpOnly` firmada con HMAC-SHA256 (`SESSION_SECRET`), válida 12 h.
 - El panel no se indexa (`robots: noindex` en el login y rutas internas
   fuera del sitemap).
+
+## Carga por lotes (Dayana)
+
+Los lotes curados viven en `data/products/batch-*.ts` con título y
+descripción propios y el enlace SiteStripe exacto de cada producto.
+Para publicarlos todos de una vez (idempotente, upsert por ASIN):
+
+```
+npm run db:import               # importa y publica
+npm run db:import -- --dry-run  # solo valida, sin escribir
+```
+
+El importador valida ASIN, dominio y Tracking ID antes de escribir, y
+deja constancia en `AuditLog` con actor `dayana-import`.

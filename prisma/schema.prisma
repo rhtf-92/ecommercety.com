@@ -1,0 +1,171 @@
+// T&F Picks (by E-Commerce T&F) — modelo de datos inicial (Sprint 0)
+// Plataforma de afiliados de Amazon EE. UU. (Amazon.com)
+// Reglas clave del plan:
+// - ASIN único por producto (sin duplicados).
+// - Precios NUNCA escritos a mano: solo vía API oficial de Amazon cuando la
+//   cuenta califique; este esquema no guarda precios de cara al público.
+// - Todo cambio relevante queda en AuditLog (antes/después).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProductStatus {
+  DRAFT
+  PUBLISHED
+  DEMOTED // publicado pero degradado (p. ej., sin stock en Amazon)
+  UNPUBLISHED
+}
+
+enum Channel {
+  WEB
+  GUIDES
+  TRENDING
+  YOUTUBE
+  TIKTOK
+  PINTEREST
+  INSTAGRAM
+  FACEBOOK
+}
+
+enum TrendStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  PUBLISHED
+}
+
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Category {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  nameEn          String
+  descriptionEn   String?
+  phase           Int       @default(1)
+  amazonNodeHint  String? // referencia interna a la categoría de Amazon, si aplica
+  commissionRate  Decimal?  @db.Decimal(5, 2) // % de referencia del programa Associates EE. UU.
+  isActive        Boolean   @default(true)
+  products        Product[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+model Product {
+  id               String         @id @default(cuid())
+  asin             String         @unique
+  title            String
+  brand            String?
+  category         Category       @relation(fields: [categoryId], references: [id])
+  categoryId       String
+  status           ProductStatus  @default(DRAFT)
+  amazonUrl        String // URL del producto en Amazon.com
+  imageUrl         String? // imagen oficial vía SiteStripe / API oficial
+  shortDescription String? // descripción PROPIA, nunca copiada de Amazon
+  internalNotes    String?
+  discoveredVia    String? // curaduría manual, tendencia hora 3, etc.
+  lastVerifiedAt   DateTime?
+  publishedAt      DateTime?
+  links            AffiliateLink[]
+  clicks           ClickEvent[]
+  guideItems       GuideProduct[]
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+
+  @@index([status])
+  @@index([categoryId])
+}
+
+model AffiliateLink {
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId  String
+  channel    Channel
+  trackingId String // p. ej. ecommercety00-20
+  url        String // enlace generado con SiteStripe
+  isActive   Boolean  @default(true)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([productId, channel])
+}
+
+model Guide {
+  id        String         @id @default(cuid())
+  slug      String         @unique
+  titleEn   String
+  introEn   String?
+  status    ProductStatus  @default(DRAFT)
+  items     GuideProduct[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model GuideProduct {
+  id        String  @id @default(cuid())
+  guide     Guide   @relation(fields: [guideId], references: [id], onDelete: Cascade)
+  guideId   String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  position  Int
+  noteEn    String?
+
+  @@unique([guideId, productId])
+}
+
+model ClickEvent {
+  id        String   @id @default(cuid())
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  channel   Channel
+  sourcePage String?
+  createdAt DateTime @default(now())
+
+  @@index([productId, createdAt])
+  @@index([channel, createdAt])
+}
+
+model VerificationRun {
+  id           String    @id @default(cuid())
+  startedAt    DateTime  @default(now())
+  finishedAt   DateTime?
+  checkedCount Int       @default(0)
+  issuesFound  Int       @default(0)
+  report       String? // resumen del ciclo de verificación (cada 5 horas)
+}
+
+model TrendCandidate {
+  id         String      @id @default(cuid())
+  asin       String      @unique
+  title      String
+  sourceList String // Best Sellers, Movers & Shakers, Hot New Releases, Most Wished For
+  status     TrendStatus @default(PENDING)
+  reason     String? // motivo de descarte o nota de revisión
+  detectedAt DateTime    @default(now())
+  reviewedAt DateTime?
+}
+
+model AuditLog {
+  id         String   @id @default(cuid())
+  entityType String // Product, Category, Guide, AffiliateLink...
+  entityId   String
+  action     String // CREATE, UPDATE, PUBLISH, UNPUBLISH, DEMOTE...
+  before     Json?
+  after      Json?
+  actor      String // admin, dayana-verification, dayana-trends, system
+  createdAt  DateTime @default(now())
+
+  @@index([entityType, entityId])
+}

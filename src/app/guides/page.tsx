@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { GUIDES as PUBLISHED_GUIDES } from "@/modules/guides/content";
 import { IconArrowRight, IconBook } from "@/components/icons";
 
 export const metadata: Metadata = {
@@ -60,16 +61,51 @@ export default function GuidesPage() {
             Decide in minutes, not hours
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-zinc-300">
-            Our editors are writing the first guides now: side-by-side
-            comparisons, honest trade-offs and a clear winner for every
-            budget. While they are in production, the categories below
-            already collect the picks each guide is built from.
+            Side-by-side thinking, honest trade-offs and a clear winner for
+            every budget. The first guides are live below; more are in
+            production, and every guide is built from picks you can browse
+            in its category today.
           </p>
         </div>
       </section>
 
       <section className="container-x py-12">
-        <div className="grid gap-4 md:grid-cols-2">
+        <h2 className="text-sm font-bold tracking-wide text-zinc-500 uppercase">
+          Published guides
+        </h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
+          {PUBLISHED_GUIDES.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={`/guides/${guide.slug}`}
+              className="group rounded-3xl border border-brand-200 bg-brand-50/60 p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/10"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <p className="text-xs font-bold tracking-wide text-brand-700 uppercase">
+                  {guide.categoryLabel}
+                </p>
+                <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-bold text-emerald-700 uppercase">
+                  Published
+                </span>
+              </div>
+              <h3 className="mt-3 text-lg leading-snug font-bold text-zinc-900">
+                {guide.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+                {guide.description}
+              </p>
+              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
+                Read the guide
+                <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        <h2 className="mt-12 text-sm font-bold tracking-wide text-zinc-500 uppercase">
+          In production
+        </h2>
+        <div className="mt-4 grid gap-4 md:grid-cols-2">
           {GUIDES.map((guide) => (
             <Link
               key={guide.title}

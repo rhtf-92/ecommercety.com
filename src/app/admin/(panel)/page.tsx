@@ -3,6 +3,7 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { getDb } from "@/lib/db";
 import { isCreatorsApiConfigured } from "@/modules/amazon/creators";
+import SyncButton from "@/components/admin/SyncButton";
 
 export const metadata = { title: "Panel · Resumen" };
 
@@ -18,6 +19,7 @@ type AuditEntry = {
 type StatsData = {
   cards: { label: string; value: number }[];
   recent: AuditEntry[];
+  lastRun: { report: string | null; startedAt: Date } | null;
 };
 
 async function loadStats(): Promise<StatsData | null> {
@@ -34,6 +36,7 @@ async function loadStats(): Promise<StatsData | null> {
       clicks30,
       pendingTrends,
       recent,
+      lastRun,
     ] = await Promise.all([
       db.product.count(),
       db.product.count({ where: { status: "PUBLISHED" } }),
@@ -43,6 +46,7 @@ async function loadStats(): Promise<StatsData | null> {
       db.clickEvent.count({ where: { createdAt: { gte: since } } }),
       db.trendCandidate.count({ where: { status: "PENDING" } }),
       db.auditLog.findMany({ orderBy: { createdAt: "desc" }, take: 6 }),
+      db.verificationRun.findFirst({ orderBy: { startedAt: "desc" } }),
     ]);
     return {
       cards: [
@@ -55,6 +59,9 @@ async function loadStats(): Promise<StatsData | null> {
         { label: "Tendencias por revisar", value: pendingTrends },
       ],
       recent,
+      lastRun: lastRun
+        ? { report: lastRun.report, startedAt: lastRun.startedAt }
+        : null,
     };
   } catch {
     return null;
@@ -101,6 +108,14 @@ async function Stats() {
         </Link>
       </div>
 
+      {data.lastRun ? (
+        <p className="mt-8 rounded-2xl bg-white px-5 py-4 text-sm text-zinc-600 ring-1 ring-zinc-200">
+          <strong className="text-zinc-900">Última verificación/sincronización:</strong>{" "}
+          {data.lastRun.report ?? "sin reporte"} ·{" "}
+          {data.lastRun.startedAt.toLocaleString("es")}
+        </p>
+      ) : null}
+
       <h2 className="mt-10 text-lg font-bold">Actividad reciente</h2>
       {data.recent.length === 0 ? (
         <p className="mt-3 rounded-2xl bg-white px-5 py-4 text-sm text-zinc-500 ring-1 ring-zinc-200">
@@ -144,6 +159,7 @@ export default function DashboardPage() {
         {isCreatorsApiConfigured()
           ? "credenciales configuradas. Los precios e imágenes oficiales se sincronizan con npm run db:sync-amazon y en los ciclos de 5 horas."
           : "sin credenciales. Amazon las emite solo con la cuenta aprobada y 10+ ventas calificadas en los últimos 30 días; mientras tanto el sitio no muestra precios (cumplimiento) y usa «Check price on Amazon»."}
+        <SyncButton />
       </div>
       <div className="mt-8">
         <Suspense fallback={<p className="text-zinc-500">Cargando datos…</p>}>

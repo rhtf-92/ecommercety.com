@@ -14,13 +14,31 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ecommercety.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "T&F Picks — by E-Commerce T&F",
     template: "%s | T&F Picks",
   },
   description:
     "Hand-picked Amazon products, honest guides and comparisons from T&F Picks, by E-Commerce T&F.",
+  openGraph: {
+    type: "website",
+    siteName: "T&F Picks",
+    title: "T&F Picks — Great products. Zero guesswork.",
+    description:
+      "Curated Amazon finds, verified on a 5-hour cycle, with honest buying guides.",
+    url: SITE_URL,
+  },
+  twitter: {
+    card: "summary",
+    title: "T&F Picks — Great products. Zero guesswork.",
+    description:
+      "Curated Amazon finds, verified on a 5-hour cycle, with honest buying guides.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

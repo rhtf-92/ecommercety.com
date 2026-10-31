@@ -19,7 +19,7 @@ export const BATCH_001: BatchProduct[] = [
   {
     asin: "B0FNWCYLZN",
     brand: "Soundcore",
-    title: "Soundcore Wireless Earbuds with Real-Time Translation & Noise Cancelling",
+    title: "Soundcore P31i Wireless Earbuds with Real-Time Translation & Adaptive Noise Cancelling",
     categorySlug: "tech-smart-home",
     affiliateUrl:
       "https://www.amazon.com/Soundcore-Real-Time-Cancelling-Translation-Bluetooth/dp/B0FNWCYLZN?&linkCode=ll2&tag=ecommercety00-20&linkId=afb1fd2305b18da4988a184923ac29e4&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",

@@ -66,6 +66,43 @@ export async function getPublishedProductsByCategory(
   return fromDb ?? [];
 }
 
+export async function getFeaturedProducts(
+  limit = 6,
+): Promise<ProductWithLinks[]> {
+  const fromDb = await dbOrNull((client) =>
+    client.product.findMany({
+      where: { status: "PUBLISHED" },
+      include: { links: { where: { isActive: true } } },
+      orderBy: { publishedAt: "desc" },
+      take: limit,
+    }),
+  );
+  return fromDb ?? [];
+}
+
+export async function searchProducts(
+  query: string,
+): Promise<ProductWithLinks[]> {
+  const q = query.trim();
+  if (!q) return [];
+  const fromDb = await dbOrNull((client) =>
+    client.product.findMany({
+      where: {
+        status: "PUBLISHED",
+        OR: [
+          { title: { contains: q, mode: "insensitive" } },
+          { brand: { contains: q, mode: "insensitive" } },
+          { shortDescription: { contains: q, mode: "insensitive" } },
+        ],
+      },
+      include: { links: { where: { isActive: true } } },
+      orderBy: { publishedAt: "desc" },
+      take: 24,
+    }),
+  );
+  return fromDb ?? [];
+}
+
 export async function getProductByAsin(
   asin: string,
 ): Promise<(ProductWithLinks & { category: Category }) | null> {

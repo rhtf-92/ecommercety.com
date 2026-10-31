@@ -4,7 +4,7 @@
  */
 export default function AffiliateDisclosure() {
   return (
-    <p className="text-xs leading-relaxed text-zinc-500 dark:text-zinc-400">
+    <p className="text-xs leading-relaxed opacity-75">
       As an Amazon Associate, T&amp;F Picks earns from qualifying purchases.
       Product prices and availability are accurate as of the date/time indicated
       on Amazon.com and are subject to change. This site is not affiliated with

@@ -6,7 +6,12 @@ import type {
   Product,
 } from "@prisma/client";
 
-export type ProductWithLinks = Product & { links: AffiliateLink[] };
+import type { ProductPrice } from "@prisma/client";
+
+export type ProductWithLinks = Product & {
+  links: AffiliateLink[];
+  price?: ProductPrice | null;
+};
 
 /**
  * Categorías de la Fase 1 (aprobadas el 2026-10-31). Sirven como respaldo
@@ -59,7 +64,7 @@ export async function getPublishedProductsByCategory(
   const fromDb = await dbOrNull((client) =>
     client.product.findMany({
       where: { categoryId, status: "PUBLISHED" },
-      include: { links: { where: { isActive: true } } },
+      include: { links: { where: { isActive: true } }, price: true },
       orderBy: { publishedAt: "desc" },
     }),
   );
@@ -72,7 +77,7 @@ export async function getFeaturedProducts(
   const fromDb = await dbOrNull((client) =>
     client.product.findMany({
       where: { status: "PUBLISHED" },
-      include: { links: { where: { isActive: true } } },
+      include: { links: { where: { isActive: true } }, price: true },
       orderBy: { publishedAt: "desc" },
       take: limit,
     }),
@@ -95,7 +100,7 @@ export async function searchProducts(
           { shortDescription: { contains: q, mode: "insensitive" } },
         ],
       },
-      include: { links: { where: { isActive: true } } },
+      include: { links: { where: { isActive: true } }, price: true },
       orderBy: { publishedAt: "desc" },
       take: 24,
     }),
@@ -109,7 +114,7 @@ export async function getProductByAsin(
   return dbOrNull((client) =>
     client.product.findUnique({
       where: { asin },
-      include: { links: { where: { isActive: true } }, category: true },
+      include: { links: { where: { isActive: true } }, category: true, price: true },
     }),
   );
 }

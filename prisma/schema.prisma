@@ -50,27 +50,27 @@ model AdminUser {
 }
 
 model Category {
-  id              String    @id @default(cuid())
-  slug            String    @unique
-  nameEn          String
-  descriptionEn   String?
-  phase           Int       @default(1)
-  amazonNodeHint  String? // referencia interna a la categoría de Amazon, si aplica
-  commissionRate  Decimal?  @db.Decimal(5, 2) // % de referencia del programa Associates EE. UU.
-  isActive        Boolean   @default(true)
-  products        Product[]
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  nameEn         String
+  descriptionEn  String?
+  phase          Int       @default(1)
+  amazonNodeHint String? // referencia interna a la categoría de Amazon, si aplica
+  commissionRate Decimal?  @db.Decimal(5, 2) // % de referencia del programa Associates EE. UU.
+  isActive       Boolean   @default(true)
+  products       Product[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }
 
 model Product {
-  id               String         @id @default(cuid())
-  asin             String         @unique
+  id               String          @id @default(cuid())
+  asin             String          @unique
   title            String
   brand            String?
-  category         Category       @relation(fields: [categoryId], references: [id])
+  category         Category        @relation(fields: [categoryId], references: [id])
   categoryId       String
-  status           ProductStatus  @default(DRAFT)
+  status           ProductStatus   @default(DRAFT)
   amazonUrl        String // URL del producto en Amazon.com
   imageUrl         String? // imagen oficial vía SiteStripe / API oficial
   shortDescription String? // descripción PROPIA, nunca copiada de Amazon
@@ -81,8 +81,9 @@ model Product {
   links            AffiliateLink[]
   clicks           ClickEvent[]
   guideItems       GuideProduct[]
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
+  price            ProductPrice?
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
 
   @@index([status])
   @@index([categoryId])
@@ -126,12 +127,12 @@ model GuideProduct {
 }
 
 model ClickEvent {
-  id        String   @id @default(cuid())
-  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String
-  channel   Channel
+  id         String   @id @default(cuid())
+  product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId  String
+  channel    Channel
   sourcePage String?
-  createdAt DateTime @default(now())
+  createdAt  DateTime @default(now())
 
   @@index([productId, createdAt])
   @@index([channel, createdAt])
@@ -168,4 +169,28 @@ model AuditLog {
   createdAt  DateTime @default(now())
 
   @@index([entityType, entityId])
+}
+
+// Foto de precio SOLO desde la API oficial (Creators API). Nunca se
+// escribe a mano: sin API no hay precio visible y la ficha muestra
+// "Check price on Amazon". El contenido de Amazon caduca a las 24 h:
+// fetchedAt marca la frescura y la UI siempre muestra la hora.
+model ProductPrice {
+  id             String    @id @default(cuid())
+  product        Product   @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId      String    @unique
+  amount         Decimal?  @db.Decimal(10, 2) // precio actual (Buy Box)
+  currency       String    @default("USD")
+  listAmount     Decimal?  @db.Decimal(10, 2) // precio de lista / base de ahorro
+  savingsPercent Int? // % de descuento calculado por la API
+  availability   String? // texto de disponibilidad de la API
+  primeEligible  Boolean?
+  dealBadge      String? // p. ej. "Limited time deal" (texto de la API)
+  dealEndsAt     DateTime? // fin de oferta SOLO si la API lo entrega
+  imageLarge     String? // imagen oficial grande servida por la API
+  source         String    @default("CREATORS_API")
+  fetchedAt      DateTime
+  raw            Json? // respuesta cruda (auditoría y depuración)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 }

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getProductByAsin } from "@/modules/catalog/data";
 import { webAffiliateUrl } from "@/components/ProductCard";
 import TrackedAffiliateButton from "@/components/TrackedAffiliateButton";
+import PriceBlock, { freshPrice, UpdatedStamp } from "@/components/PriceBlock";
 import {
   IconCheck,
   IconExternal,
@@ -28,6 +29,7 @@ async function ProductContent({ params }: Props) {
   const { asin } = await params;
   const product = await getProductByAsin(asin);
   if (!product || product.status === "UNPUBLISHED") notFound();
+  const price = freshPrice(product.price);
 
   return (
     <>
@@ -88,6 +90,11 @@ async function ProductContent({ params }: Props) {
           ) : null}
 
           <div className="mt-8 rounded-3xl border-2 border-brand-100 bg-brand-50 p-6">
+            {price ? (
+              <div className="mb-5">
+                <PriceBlock price={price} size="detail" />
+              </div>
+            ) : null}
             <TrackedAffiliateButton
               asin={product.asin}
               href={webAffiliateUrl(product)}
@@ -96,10 +103,16 @@ async function ProductContent({ params }: Props) {
               Check price on Amazon
               <IconExternal className="h-5 w-5" />
             </TrackedAffiliateButton>
-            <p className="mt-3 text-center text-xs text-zinc-500">
-              Live price, deals and availability are shown on Amazon.com and
-              may change at any time.
-            </p>
+            {price ? (
+              <div className="mt-3 text-center">
+                <UpdatedStamp fetchedAt={price.fetchedAt} />
+              </div>
+            ) : (
+              <p className="mt-3 text-center text-xs text-zinc-500">
+                Live price, deals and availability are shown on Amazon.com and
+                may change at any time.
+              </p>
+            )}
             <ul className="mt-5 space-y-2.5 border-t border-brand-100 pt-5">
               {BUY_BOX_POINTS.map((point) => (
                 <li

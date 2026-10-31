@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { ProductWithLinks } from "@/modules/catalog/data";
 import TrackedAffiliateButton from "@/components/TrackedAffiliateButton";
+import PriceBlock, { freshPrice } from "@/components/PriceBlock";
 import { IconExternal } from "@/components/icons";
 
 export function webAffiliateUrl(product: ProductWithLinks): string {
@@ -10,6 +11,7 @@ export function webAffiliateUrl(product: ProductWithLinks): string {
 }
 
 export default function ProductCard({ product }: { product: ProductWithLinks }) {
+  const price = freshPrice(product.price);
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl border border-zinc-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-xl hover:shadow-brand-500/10">
       <Link href={`/product/${product.asin}`} className="block">
@@ -31,6 +33,11 @@ export default function ProductCard({ product }: { product: ProductWithLinks }) 
           <span className="absolute top-3 left-3 rounded-full bg-ink-900 px-2.5 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
             T&amp;F Pick
           </span>
+          {price?.dealBadge ? (
+            <span className="absolute top-3 right-3 rounded-full bg-red-600 px-2.5 py-1 text-[11px] font-bold tracking-wide text-white uppercase">
+              Deal
+            </span>
+          ) : null}
         </div>
       </Link>
 
@@ -52,6 +59,7 @@ export default function ProductCard({ product }: { product: ProductWithLinks }) 
         ) : null}
 
         <div className="flex-1" />
+        {price ? <PriceBlock price={price} size="card" /> : null}
         <TrackedAffiliateButton
           asin={product.asin}
           href={webAffiliateUrl(product)}

@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { getDb } from "@/lib/db";
+import { isCreatorsApiConfigured } from "@/modules/amazon/creators";
 
 export const metadata = { title: "Panel · Resumen" };
 
@@ -132,6 +133,18 @@ export default function DashboardPage() {
       <p className="mt-1 text-zinc-500">
         Estado del catálogo y de la operación de T&amp;F Picks.
       </p>
+      <div
+        className={`mt-6 rounded-2xl px-5 py-4 text-sm ring-1 ${
+          isCreatorsApiConfigured()
+            ? "bg-emerald-50 text-emerald-800 ring-emerald-200"
+            : "bg-amber-50 text-amber-800 ring-amber-200"
+        }`}
+      >
+        <strong>Amazon Creators API:</strong>{" "}
+        {isCreatorsApiConfigured()
+          ? "credenciales configuradas. Los precios e imágenes oficiales se sincronizan con npm run db:sync-amazon y en los ciclos de 5 horas."
+          : "sin credenciales. Amazon las emite solo con la cuenta aprobada y 10+ ventas calificadas en los últimos 30 días; mientras tanto el sitio no muestra precios (cumplimiento) y usa «Check price on Amazon»."}
+      </div>
       <div className="mt-8">
         <Suspense fallback={<p className="text-zinc-500">Cargando datos…</p>}>
           <Stats />

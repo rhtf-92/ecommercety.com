@@ -13,7 +13,7 @@ afiliado generado con SiteStripe y su Tracking ID por canal.
 ## Puesta en marcha (desarrollo)
 ```bash
 npm install
-cp .env.example .env.local   # ajusta DATABASE_URL
+cp .env.example .env   # ajusta DATABASE_URL
 npx prisma generate
 npx prisma migrate dev       # cuando exista una base de datos disponible
 npm run db:seed              # carga las 6 categorías de la Fase 1

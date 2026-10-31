@@ -26,6 +26,6 @@
   `TrendCandidate`, con puerta de calidad antes de publicar.
 
 ## Entornos
-- Local: `npm run dev` + PostgreSQL local o en la nube (`.env.local`).
+- Local: `npm run dev` + PostgreSQL local o en la nube (`.env`).
 - Producción: despliegue en Vercel (o equivalente) + PostgreSQL gestionado,
   dominio ecommercety.com vía Cloudflare.

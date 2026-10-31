@@ -5,7 +5,7 @@ sesión firmada) y por `requireAdmin()` en cada página y acción.
 
 ## Configuración (una sola vez por entorno)
 
-En `.env.local` (nunca en git):
+En `.env` (nunca en git):
 
 ```
 DATABASE_URL=...

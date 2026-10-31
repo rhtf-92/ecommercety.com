@@ -1,11 +1,29 @@
-const categories = [
-  "Home & Kitchen",
-  "Tech, Accessories & Smart Home",
-  "Beauty & Personal Care",
-  "Pet Supplies",
-  "Sports, Fitness & Outdoors",
-  "Tools & Home Improvement",
-];
+import { Suspense } from "react";
+import Link from "next/link";
+import { getCategories } from "@/modules/catalog/data";
+
+async function CategoryGrid() {
+  const categories = await getCategories();
+  return (
+    <ul className="mt-10 grid gap-3 sm:grid-cols-2">
+      {categories.map((category) => (
+        <li key={category.slug}>
+          <Link
+            href={`/category/${category.slug}`}
+            className="block rounded-xl border border-zinc-200 px-4 py-3 font-medium transition hover:border-amber-500 hover:text-amber-600 dark:border-zinc-800"
+          >
+            {category.nameEn}
+            {category.descriptionEn ? (
+              <span className="mt-1 block text-sm font-normal text-zinc-500">
+                {category.descriptionEn}
+              </span>
+            ) : null}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
 export default function Home() {
   return (
@@ -15,20 +33,17 @@ export default function Home() {
       </p>
       <h1 className="mt-2 text-5xl font-bold tracking-tight">T&amp;F Picks</h1>
       <p className="mt-4 max-w-2xl text-lg text-zinc-600 dark:text-zinc-300">
-        Hand-picked Amazon finds, honest guides and comparisons. Our platform is
-        under construction — these are the categories we are launching with:
+        Hand-picked Amazon finds, honest guides and comparisons. Browse our
+        launch categories:
       </p>
 
-      <ul className="mt-10 grid gap-3 sm:grid-cols-2">
-        {categories.map((category) => (
-          <li
-            key={category}
-            className="rounded-xl border border-zinc-200 px-4 py-3 font-medium dark:border-zinc-800"
-          >
-            {category}
-          </li>
-        ))}
-      </ul>
+      <Suspense
+        fallback={
+          <p className="mt-10 text-zinc-500">Loading categories…</p>
+        }
+      >
+        <CategoryGrid />
+      </Suspense>
     </main>
   );
 }

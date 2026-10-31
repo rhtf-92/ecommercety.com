@@ -1,0 +1,18 @@
+# PostgreSQL local para desarrollo (en la PC de Renato o cualquier entorno).
+# Uso: docker compose up -d  →  DATABASE_URL del .env.example ya coincide.
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ecommercety-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ecommercety
+      POSTGRES_PASSWORD: ecommercety
+      POSTGRES_DB: ecommercety
+    ports:
+      - "5432:5432"
+    volumes:
+      - ecommercety_pgdata:/var/lib/postgresql/data
+
+volumes:
+  ecommercety_pgdata:

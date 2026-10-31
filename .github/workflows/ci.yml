@@ -20,5 +20,6 @@ jobs:
       - run: npx prisma generate
       - run: npx prisma validate
       - run: npm run lint
+      - run: npx next typegen
       - run: npm run typecheck
       - run: npm run build

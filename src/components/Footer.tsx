@@ -1,20 +1,14 @@
 import Link from "next/link";
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
+import SiteLogo from "@/components/SiteLogo";
 
 export default function Footer() {
   return (
     <footer className="bg-ink-900 text-zinc-300">
       <div className="container-x grid gap-10 py-14 md:grid-cols-5">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-700 text-sm font-black text-white">
-              T&amp;F
-            </span>
-            <span className="text-base font-extrabold text-white">
-              T&amp;F Picks
-            </span>
-          </div>
+          <SiteLogo tone="light" />
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-zinc-400">
             Hand-picked Amazon products, honest guides and comparisons. We do
             the research and keep every pick verified, so you can buy with

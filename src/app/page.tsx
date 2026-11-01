@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { getCategories, getFeaturedProducts } from "@/modules/catalog/data";
-import { getShowProductImages } from "@/modules/settings/site";
+import { getBannerVariant, getShowProductImages } from "@/modules/settings/site";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
 import ProductCard from "@/components/ProductCard";
 import Hero from "@/components/Hero";
+import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import { Faq, HowWePick, SectionHeading, TrustStrip } from "@/components/Sections";
 import { IconArrowRight, IconBook } from "@/components/icons";
 
@@ -96,10 +97,61 @@ const GUIDE_TEASERS = [
   },
 ];
 
+const BRAND_SLIDE: HeroSlide = {
+  id: "brand",
+  eyebrow: "Curated for US shoppers",
+  title: "Great products. Zero guesswork.",
+  subtitle:
+    "We research, compare and keep verifying the best Amazon finds, so every pick you see here is one we would buy ourselves.",
+  href: "#categories",
+  cta: "Browse categories",
+  band: "bg-ink-900",
+  dark: true,
+};
+
+async function HomeBanner() {
+  const variant = await getBannerVariant();
+  if (variant === "classic") return <Hero />;
+
+  const categories = await getCategories();
+  const categorySlides: HeroSlide[] = categories.map((category) => {
+    const visual = CATEGORY_VISUALS[category.slug] ?? DEFAULT_VISUAL;
+    return {
+      id: `cat-${category.slug}`,
+      slug: category.slug,
+      eyebrow: category.nameEn,
+      title: visual.tagline,
+      subtitle:
+        category.descriptionEn ??
+        "Hand-picked products in this category, verified on our 5-hour cycle.",
+      href: `/category/${category.slug}`,
+      cta: "Explore picks",
+      band: visual.band,
+    };
+  });
+
+  const slides: HeroSlide[] = [BRAND_SLIDE, ...categorySlides];
+  if (variant === "showcase") {
+    slides.push({
+      id: "guides",
+      eyebrow: "Buying guides",
+      title: "Decide in minutes, not hours",
+      subtitle:
+        "Side-by-side thinking, honest trade-offs and a clear winner: read the guide, then buy with confidence on Amazon.",
+      href: "/guides",
+      cta: "Read the guides",
+      band: "bg-brand-50",
+    });
+  }
+  return <HeroCarousel slides={slides} />;
+}
+
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
-      <Hero />
+      <Suspense fallback={<Hero />}>
+        <HomeBanner />
+      </Suspense>
 
       <section className="container-x py-14">
         <TrustStrip />

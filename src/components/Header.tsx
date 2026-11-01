@@ -1,23 +1,14 @@
 import Link from "next/link";
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import { IconSearch } from "@/components/icons";
+import SiteLogo from "@/components/SiteLogo";
 
 export default function Header() {
   return (
     <header className="sticky top-0 z-40 border-b border-zinc-100 bg-white/85 backdrop-blur-md">
       <div className="container-x flex h-16 items-center gap-4">
-        <Link href="/" className="flex items-center gap-2.5">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-brand-700 text-sm font-black text-white shadow-sm">
-            T&amp;F
-          </span>
-          <span className="leading-tight">
-            <span className="block text-base font-extrabold tracking-tight">
-              T&amp;F Picks
-            </span>
-            <span className="block text-[11px] font-medium text-zinc-500">
-              by E-Commerce T&amp;F
-            </span>
-          </span>
+        <Link href="/" aria-label="T&F Picks — home">
+          <SiteLogo />
         </Link>
 
         <nav className="ml-6 hidden items-center gap-1 lg:flex">

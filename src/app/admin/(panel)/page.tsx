@@ -5,7 +5,12 @@ import { getDb } from "@/lib/db";
 import { isCreatorsApiConfigured } from "@/modules/amazon/creators";
 import SyncButton from "@/components/admin/SyncButton";
 import ImagesToggle from "@/components/admin/ImagesToggle";
-import { getShowProductImages } from "@/modules/settings/site";
+import BrandSettings from "@/components/admin/BrandSettings";
+import {
+  getBannerVariant,
+  getLogoVariant,
+  getShowProductImages,
+} from "@/modules/settings/site";
 
 export const metadata = { title: "Panel · Resumen" };
 
@@ -148,6 +153,16 @@ async function ImagesSettingValue() {
   return <ImagesToggle initial={showImages} />;
 }
 
+async function BrandSettingValue() {
+  const [logoVariant, bannerVariant] = await Promise.all([
+    getLogoVariant(),
+    getBannerVariant(),
+  ]);
+  return (
+    <BrandSettings logoVariant={logoVariant} bannerVariant={bannerVariant} />
+  );
+}
+
 export default function DashboardPage() {
   return (
     <>
@@ -178,6 +193,17 @@ export default function DashboardPage() {
         </p>
         <Suspense fallback={<p className="text-sm text-zinc-400">Cargando ajuste…</p>}>
           <ImagesSettingValue />
+        </Suspense>
+      </section>
+      <section className="mt-6 rounded-3xl bg-white p-6 ring-1 ring-zinc-200">
+        <h2 className="text-base font-bold">Marca y banner</h2>
+        <p className="mt-1 mb-4 max-w-2xl text-sm text-zinc-500">
+          Elige entre las 5 alternativas de logo diseñadas para T&amp;F Picks
+          y el estilo del banner de portada. El cambio se aplica a todo el
+          sitio al guardar y queda registrado en la auditoría.
+        </p>
+        <Suspense fallback={<p className="text-sm text-zinc-400">Cargando marca…</p>}>
+          <BrandSettingValue />
         </Suspense>
       </section>
       <div className="mt-8">

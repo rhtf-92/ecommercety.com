@@ -38,3 +38,52 @@ export function shouldRenderImage(
 ): boolean {
   return showImages && Boolean(imageUrl);
 }
+
+// ---- Marca: variante de logo y de banner, elegibles desde el panel ----
+
+export const LOGO_VARIANT_KEY = "logoVariant";
+export const BANNER_VARIANT_KEY = "bannerVariant";
+export const LOGO_VARIANT_IDS = ["badge", "tag", "arrow", "seal", "wordmark"] as const;
+export const BANNER_VARIANT_IDS = ["slider", "classic", "showcase"] as const;
+export type BannerVariant = (typeof BANNER_VARIANT_IDS)[number];
+
+async function getSetting(key: string): Promise<string | null> {
+  try {
+    const db = await getDb();
+    const row = await db.siteSetting.findUnique({ where: { key } });
+    return row?.value ?? null;
+  } catch {
+    return null;
+  }
+}
+
+async function setSetting(key: string, value: string): Promise<void> {
+  const db = await getDb();
+  await db.siteSetting.upsert({
+    where: { key },
+    create: { key, value },
+    update: { value },
+  });
+}
+
+export async function getLogoVariant(): Promise<string> {
+  const value = await getSetting(LOGO_VARIANT_KEY);
+  return (LOGO_VARIANT_IDS as readonly string[]).includes(value ?? "")
+    ? (value as string)
+    : "badge";
+}
+
+export async function getBannerVariant(): Promise<BannerVariant> {
+  const value = await getSetting(BANNER_VARIANT_KEY);
+  return (BANNER_VARIANT_IDS as readonly string[]).includes(value ?? "")
+    ? (value as BannerVariant)
+    : "slider";
+}
+
+export async function setLogoVariant(value: string): Promise<void> {
+  await setSetting(LOGO_VARIANT_KEY, value);
+}
+
+export async function setBannerVariant(value: string): Promise<void> {
+  await setSetting(BANNER_VARIANT_KEY, value);
+}

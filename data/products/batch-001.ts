@@ -33,14 +33,14 @@ export const BATCH_001: BatchProduct[] = [
   {
     asin: "B0GYXT61F8",
     brand: "MOKiN",
-    title: "MOKiN Foldable Charging Station for Multiple Devices",
+    title: "MOKiN 70W USB-C GaN Fast Charger with Smart Display (3-Port)",
     categorySlug: "tech-smart-home",
     affiliateUrl:
       "https://www.amazon.com/MOKiN-Charger-Charging-Foldable-4%EF%BD%9CLumiNext/dp/B0GYXT61F8?&linkCode=ll2&tag=ecommercety00-20&linkId=81550121a210f1455b2056557d8424a3&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
-      "One foldable station instead of a nest of cables: charge your phone and everyday wearables in a single spot, then fold it flat for your bag. It is the kind of small desk-and-nightstand upgrade that quietly removes daily friction.",
-    highlights: ["One station for phone and everyday wearables", "Folds flat for your bag or nightstand drawer", "Ends the multi-cable mess in one move", "Made for desks, hotels and travel"],
+      "A pocket-size GaN brick with a brain: 70W across three ports for your laptop, phone and earbuds at once, and a smart display that shows exactly what each port is pulling, so you always know whether the cable or the charger is the bottleneck. The travel charger that ends the multi-brick era.",
+    highlights: ["70W GaN power for laptop, phone and earbuds at once", "Smart display shows live watts per port", "Three ports: 2 USB-C + 1 USB-A", "Mini size made for travel bags"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {

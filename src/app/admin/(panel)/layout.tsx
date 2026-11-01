@@ -55,14 +55,34 @@ async function Shell({ children }: { children: React.ReactNode }) {
         </form>
       </aside>
       <div className="min-w-0 flex-1">
-        <header className="flex items-center justify-between border-b border-zinc-200 bg-white px-6 py-3 md:hidden">
-          <span className="font-extrabold">T&amp;F Picks · Panel</span>
-          <nav className="flex gap-4 text-sm font-medium">
-            <Link href="/admin/productos">Productos</Link>
-            <Link href="/admin/productos/nuevo">Nuevo</Link>
+        <header className="border-b border-zinc-200 bg-white px-4 py-3 md:hidden">
+          <div className="flex items-center justify-between gap-3">
+            <span className="font-extrabold">T&amp;F Picks · Panel</span>
+            <form action={logoutAction}>
+              <button
+                type="submit"
+                className="rounded-full border border-zinc-300 px-3 py-1.5 text-xs font-semibold text-zinc-600"
+              >
+                Cerrar sesión
+              </button>
+            </form>
+          </div>
+          <nav className="scrollbar-none mt-3 flex gap-2 overflow-x-auto text-sm font-medium">
+            <Link href="/admin" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
+              Resumen
+            </Link>
+            <Link href="/admin/productos" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
+              Productos
+            </Link>
+            <Link href="/admin/productos/nuevo" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
+              Nuevo producto
+            </Link>
+            <Link href="/" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap text-zinc-500">
+              Ver sitio ↗
+            </Link>
           </nav>
         </header>
-        <main className="mx-auto w-full max-w-6xl px-6 py-8">{children}</main>
+        <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:px-6">{children}</main>
       </div>
     </div>
   );

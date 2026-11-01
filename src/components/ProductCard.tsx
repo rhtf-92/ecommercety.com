@@ -63,7 +63,7 @@ export default function ProductCard({
             {product.brand}
           </p>
         ) : null}
-        <h3 className="mt-1 leading-snug font-bold text-zinc-900">
+        <h3 className="mt-1 leading-snug font-bold break-words text-zinc-900">
           <Link href={`/product/${product.asin}`} className="hover:text-brand-700">
             {product.title}
           </Link>

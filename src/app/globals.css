@@ -39,12 +39,19 @@
   --color-ink-700: #1c2740;
   --color-ink-800: #131a2c;
   --color-ink-900: #0d1220;
+  --color-ink-950: #070b14;
 
   --color-paper: #fafaf8;
 }
 
+/* ===== Sistema responsivo (ver docs/responsive.md) =====
+   Reglas estructurales para que NINGUNA página desborde ni pierda
+   espacio en horizontal o vertical, en ningún dispositivo. */
+
 html {
   scroll-behavior: smooth;
+  /* Guarda global anti-desborde: `clip` no rompe position: sticky. */
+  overflow-x: clip;
 }
 
 body {
@@ -52,6 +59,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  /* Evita el zoom automático de iOS en inputs con fuente < 16px es
+     responsabilidad de cada input; aquí solo estabilizamos texto. */
+  text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
 ::selection {
@@ -59,10 +71,58 @@ body {
   color: #ffffff;
 }
 
-/* Contenedor estándar del sitio */
+/* Contenedor estándar del sitio: fluido, con respiro creciente.
+   Móvil 16px · ≥640px 24px · ≥1024px 32px. Nunca fijo. */
 .container-x {
   margin-inline: auto;
   width: 100%;
   max-width: 72rem;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
+}
+@media (min-width: 640px) {
+  .container-x {
+    padding-inline: 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .container-x {
+    padding-inline: 2rem;
+  }
+}
+
+/* Tira horizontal deslizable sin barra visible (nav móvil). */
+.scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Medios siempre contenidos en su caja. */
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+/* Movimiento reducido: se apagan las animaciones del slide y las
+   transiciones decorativas para quien lo pide en su sistema. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .kenburns,
+  .slide-in,
+  .progress-fill {
+    animation: none !important;
+  }
+  .progress-fill {
+    width: 100% !important;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
 }

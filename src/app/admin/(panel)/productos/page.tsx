@@ -78,8 +78,8 @@ async function ProductTable({ searchParams }: Props) {
           .
         </p>
       ) : (
-        <div className="mt-6 overflow-hidden rounded-2xl bg-white ring-1 ring-zinc-200">
-          <table className="w-full text-left text-sm">
+        <div className="mt-6 overflow-x-auto rounded-2xl bg-white ring-1 ring-zinc-200">
+          <table className="w-full min-w-[680px] text-left text-sm">
             <thead className="border-b border-zinc-100 text-xs tracking-wide text-zinc-400 uppercase">
               <tr>
                 <th className="px-5 py-3">Producto</th>

@@ -32,9 +32,9 @@ export default function PageBanner({
       <div
         className={`container-x relative ${size === "lg" ? "py-16 lg:py-20" : "py-10 lg:py-12"}`}
       >
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold tracking-[0.14em] text-white uppercase backdrop-blur-sm">
-          <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-          {eyebrow}
+        <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold tracking-[0.14em] text-white uppercase backdrop-blur-sm">
+          <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+          <span className="truncate">{eyebrow}</span>
         </span>
         <h1
           className={`mt-4 font-black tracking-tight text-white ${
@@ -46,7 +46,7 @@ export default function PageBanner({
           {title}
         </h1>
         {subtitle ? (
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-200">
+          <p className="mt-4 max-w-2xl text-base leading-relaxed text-zinc-200 sm:text-lg">
             {subtitle}
           </p>
         ) : null}

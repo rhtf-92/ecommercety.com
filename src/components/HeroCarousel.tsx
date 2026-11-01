@@ -75,23 +75,23 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
 
       {/* Contador editorial */}
       <div className="container-x pointer-events-none absolute inset-x-0 top-6 flex justify-end">
-        <p className="font-mono text-sm tracking-[0.3em] text-white/70">
+        <p className="font-mono text-xs tracking-[0.3em] text-white/70 sm:text-sm">
           {String(index + 1).padStart(2, "0")}
           <span className="mx-1 text-white/35">/</span>
           <span className="text-white/45">{String(slides.length).padStart(2, "0")}</span>
         </p>
       </div>
 
-      <div className="container-x relative flex min-h-[540px] flex-col justify-end pb-24 lg:min-h-[600px]">
+      <div className="container-x relative flex min-h-[500px] flex-col justify-end pb-24 sm:min-h-[540px] lg:min-h-[600px]">
         <div key={slide.id} className="slide-in max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold tracking-[0.14em] text-white uppercase backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
-            {slide.eyebrow}
+          <span className="inline-flex max-w-full items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1.5 text-xs font-bold tracking-[0.14em] text-white uppercase backdrop-blur-sm">
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-amber-400" />
+            <span className="truncate">{slide.eyebrow}</span>
           </span>
-          <h1 className="mt-5 text-5xl leading-[1.02] font-black tracking-tight text-white sm:text-6xl">
+          <h1 className="mt-5 text-4xl leading-[1.02] font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
             {slide.title}
           </h1>
-          <p className="mt-5 max-w-xl text-lg leading-relaxed text-zinc-200">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-zinc-200 sm:text-lg">
             {slide.subtitle}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">

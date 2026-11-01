@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -16,6 +16,15 @@ const geistMono = Geist_Mono({
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://ecommercety.com";
+
+// Viewport explícito: escala correcta en todo dispositivo, uso del
+// área segura en pantallas con notch y color de tema de marca.
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0d1220",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),

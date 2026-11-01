@@ -14,7 +14,7 @@ export default function NotFound() {
         during one of our verification cycles, because we only keep live,
         verified picks.
       </p>
-      <div className="mt-8 flex gap-3">
+      <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Link
           href="/"
           className="rounded-full bg-brand-700 px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-800"

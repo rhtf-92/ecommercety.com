@@ -42,7 +42,14 @@ export default function Header() {
         </form>
       </div>
 
-      <nav className="container-x flex gap-1 overflow-x-auto pb-2 lg:hidden">
+      <nav className="container-x scrollbar-none flex gap-1 overflow-x-auto pb-2 lg:hidden">
+        <Link
+          href="/search"
+          className="inline-flex items-center gap-1.5 rounded-full bg-ink-900 px-3 py-1 text-xs font-semibold whitespace-nowrap text-white"
+        >
+          <IconSearch className="h-3.5 w-3.5" />
+          Search
+        </Link>
         {FALLBACK_CATEGORIES.map((category) => (
           <Link
             key={category.slug}

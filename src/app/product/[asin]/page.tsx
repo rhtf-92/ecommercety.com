@@ -47,17 +47,17 @@ async function ProductContent({ params }: Props) {
         size="sm"
       />
       <div className="container-x py-10">
-      <nav className="text-sm text-zinc-500">
-        <Link href="/" className="hover:text-zinc-800">Home</Link>
-        <span className="mx-1.5">/</span>
+      <nav className="flex min-w-0 items-center text-sm text-zinc-500">
+        <Link href="/" className="shrink-0 hover:text-zinc-800">Home</Link>
+        <span className="mx-1.5 shrink-0">/</span>
         <Link
           href={`/category/${product.category.slug}`}
-          className="hover:text-zinc-800"
+          className="shrink-0 hover:text-zinc-800"
         >
           {product.category.nameEn}
         </Link>
-        <span className="mx-1.5">/</span>
-        <span className="text-zinc-800">{product.title}</span>
+        <span className="mx-1.5 shrink-0">/</span>
+        <span className="min-w-0 truncate text-zinc-800">{product.title}</span>
       </nav>
 
       <div className={`mt-8 grid gap-10 ${renderImage ? "lg:grid-cols-2" : ""}`}>

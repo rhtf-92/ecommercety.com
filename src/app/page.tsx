@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { getCategories, getFeaturedProducts } from "@/modules/catalog/data";
+import { getShowProductImages } from "@/modules/settings/site";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
 import ProductCard from "@/components/ProductCard";
@@ -51,7 +52,10 @@ async function CategoryTiles() {
 }
 
 async function FeaturedPicks() {
-  const products = await getFeaturedProducts(6);
+  const [products, showImages] = await Promise.all([
+    getFeaturedProducts(6),
+    getShowProductImages(),
+  ]);
   if (products.length === 0) {
     return (
       <div className="mt-10 rounded-3xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-12 text-center">
@@ -68,7 +72,7 @@ async function FeaturedPicks() {
   return (
     <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} />
+        <ProductCard key={product.id} product={product} showImages={showImages} />
       ))}
     </div>
   );

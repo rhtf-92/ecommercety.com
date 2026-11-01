@@ -4,6 +4,8 @@ import { connection } from "next/server";
 import { getDb } from "@/lib/db";
 import { isCreatorsApiConfigured } from "@/modules/amazon/creators";
 import SyncButton from "@/components/admin/SyncButton";
+import ImagesToggle from "@/components/admin/ImagesToggle";
+import { getShowProductImages } from "@/modules/settings/site";
 
 export const metadata = { title: "Panel · Resumen" };
 
@@ -141,6 +143,11 @@ async function Stats() {
   );
 }
 
+async function ImagesSettingValue() {
+  const showImages = await getShowProductImages();
+  return <ImagesToggle initial={showImages} />;
+}
+
 export default function DashboardPage() {
   return (
     <>
@@ -161,6 +168,18 @@ export default function DashboardPage() {
           : "sin credenciales. Amazon las emite solo con la cuenta aprobada y 10+ ventas calificadas en los últimos 30 días; mientras tanto el sitio no muestra precios (cumplimiento) y usa «Check price on Amazon»."}
         <SyncButton />
       </div>
+      <section className="mt-6 rounded-3xl bg-white p-6 ring-1 ring-zinc-200">
+        <h2 className="text-base font-bold">Imágenes de productos en el sitio</h2>
+        <p className="mt-1 mb-4 max-w-2xl text-sm text-zinc-500">
+          Interruptor global de visualización. Además, por diseño, un
+          producto sin imagen nunca muestra un espacio vacío: su tarjeta y
+          su ficha se dibujan solo con texto. Cuando la Creators API traiga
+          las fotos oficiales, actívalo para lucirlas en todo el sitio.
+        </p>
+        <Suspense fallback={<p className="text-sm text-zinc-400">Cargando ajuste…</p>}>
+          <ImagesSettingValue />
+        </Suspense>
+      </section>
       <div className="mt-8">
         <Suspense fallback={<p className="text-zinc-500">Cargando datos…</p>}>
           <Stats />

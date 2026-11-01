@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getProductByAsin } from "@/modules/catalog/data";
+import { getShowProductImages } from "@/modules/settings/site";
 import { webAffiliateUrl } from "@/components/ProductCard";
 import TrackedAffiliateButton from "@/components/TrackedAffiliateButton";
 import PriceBlock, { freshPrice, UpdatedStamp } from "@/components/PriceBlock";
@@ -30,6 +31,9 @@ async function ProductContent({ params }: Props) {
   const product = await getProductByAsin(asin);
   if (!product || product.status === "UNPUBLISHED") notFound();
   const price = freshPrice(product.price);
+  const showImages = await getShowProductImages();
+  // Sin imagen (o interruptor apagado): ficha a una columna, sin panel vacío.
+  const renderImage = showImages && Boolean(product.imageUrl);
 
   return (
     <>
@@ -46,25 +50,21 @@ async function ProductContent({ params }: Props) {
         <span className="text-zinc-800">{product.title}</span>
       </nav>
 
-      <div className="mt-8 grid gap-10 lg:grid-cols-2">
-        <div className="flex items-center justify-center rounded-3xl bg-gradient-to-b from-zinc-50 to-zinc-100 p-10">
-          {product.imageUrl ? (
+      <div className={`mt-8 grid gap-10 ${renderImage ? "lg:grid-cols-2" : ""}`}>
+        {renderImage ? (
+          <div className="flex items-center justify-center rounded-3xl bg-gradient-to-b from-zinc-50 to-zinc-100 p-10">
             <Image
-              src={product.imageUrl}
+              src={product.imageUrl!}
               alt={product.title}
               width={640}
               height={480}
               className="max-h-96 w-auto object-contain"
               unoptimized
             />
-          ) : (
-            <p className="text-sm font-medium text-zinc-400">
-              Official product photo available on Amazon
-            </p>
-          )}
-        </div>
+          </div>
+        ) : null}
 
-        <div>
+        <div className={renderImage ? "" : "max-w-3xl"}>
           {product.brand ? (
             <p className="text-sm font-bold tracking-wide text-zinc-400 uppercase">
               {product.brand}

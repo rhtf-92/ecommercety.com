@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { searchProducts } from "@/modules/catalog/data";
+import { getShowProductImages } from "@/modules/settings/site";
 import ProductCard from "@/components/ProductCard";
 import { IconSearch } from "@/components/icons";
 
@@ -14,7 +15,10 @@ type Props = { searchParams: Promise<{ q?: string }> };
 async function Results({ searchParams }: Props) {
   const { q } = await searchParams;
   const query = (q ?? "").trim();
-  const products = query ? await searchProducts(query) : [];
+  const [products, showImages] = await Promise.all([
+    query ? searchProducts(query) : Promise.resolve([]),
+    getShowProductImages(),
+  ]);
 
   if (!query) {
     return (
@@ -38,7 +42,7 @@ async function Results({ searchParams }: Props) {
       </p>
       <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} showImages={showImages} />
         ))}
       </div>
     </>

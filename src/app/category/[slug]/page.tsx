@@ -10,6 +10,7 @@ import {
 } from "@/modules/catalog/data";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import ProductCard from "@/components/ProductCard";
+import { getShowProductImages } from "@/modules/settings/site";
 import CategoryIcon from "@/components/CategoryIcon";
 import { IconArrowRight } from "@/components/icons";
 
@@ -33,9 +34,10 @@ async function CategoryContent({ params }: Props) {
   const category = await getCategoryBySlug(slug);
   if (!category) notFound();
 
-  const [products, allCategories] = await Promise.all([
+  const [products, allCategories, showImages] = await Promise.all([
     getPublishedProductsByCategory(category.id),
     getCategories(),
+    getShowProductImages(),
   ]);
   const visual = CATEGORY_VISUALS[category.slug] ?? DEFAULT_VISUAL;
   const others = allCategories.filter((item) => item.slug !== category.slug);
@@ -82,7 +84,7 @@ async function CategoryContent({ params }: Props) {
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
-              <ProductCard key={product.id} product={product} />
+              <ProductCard key={product.id} product={product} showImages={showImages} />
             ))}
           </div>
         )}

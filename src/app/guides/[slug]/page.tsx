@@ -5,6 +5,7 @@ import Link from "next/link";
 import { getGuideBySlug } from "@/modules/guides/content";
 import { getProductByAsin } from "@/modules/catalog/data";
 import ProductCard from "@/components/ProductCard";
+import { getShowProductImages } from "@/modules/settings/site";
 import { IconArrowRight, IconBook } from "@/components/icons";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -21,9 +22,11 @@ async function GuideContent({ params }: Props) {
   const guide = getGuideBySlug(slug);
   if (!guide) notFound();
 
-  const products = (
-    await Promise.all(guide.asins.map((asin) => getProductByAsin(asin)))
-  ).filter((p) => p && p.status !== "UNPUBLISHED");
+  const [fetched, showImages] = await Promise.all([
+    Promise.all(guide.asins.map((asin) => getProductByAsin(asin))),
+    getShowProductImages(),
+  ]);
+  const products = fetched.filter((p) => p && p.status !== "UNPUBLISHED");
 
   return (
     <>
@@ -73,7 +76,7 @@ async function GuideContent({ params }: Props) {
             </h2>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {products.map((product) => (
-                <ProductCard key={product!.id} product={product!} />
+                <ProductCard key={product!.id} product={product!} showImages={showImages} />
               ))}
             </div>
           </>

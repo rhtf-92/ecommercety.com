@@ -90,6 +90,13 @@ model Product {
   @@index([categoryId])
 }
 
+/// Ajustes globales del sitio, editables desde el panel (clave/valor).
+model SiteSetting {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
 model AffiliateLink {
   id         String   @id @default(cuid())
   product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)

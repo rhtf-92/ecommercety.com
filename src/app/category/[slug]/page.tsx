@@ -10,6 +10,7 @@ import {
 } from "@/modules/catalog/data";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import ProductCard from "@/components/ProductCard";
+import PageBanner from "@/components/PageBanner";
 import { getShowProductImages } from "@/modules/settings/site";
 import CategoryIcon from "@/components/CategoryIcon";
 import { IconArrowRight } from "@/components/icons";
@@ -44,31 +45,23 @@ async function CategoryContent({ params }: Props) {
 
   return (
     <>
-      <section className={`${visual.band} border-b border-zinc-200/60`}>
-        <div className="container-x py-14">
-          <span
-            className={`flex h-14 w-14 items-center justify-center rounded-2xl ${visual.chip}`}
-          >
-            <CategoryIcon slug={category.slug} className="h-7 w-7" />
+      <PageBanner
+        image={visual.image}
+        eyebrow={visual.tagline}
+        title={category.nameEn}
+        subtitle={category.descriptionEn ?? undefined}
+      >
+        <p className="mt-6 inline-flex items-center gap-2.5">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/25 bg-white/10 text-white backdrop-blur-sm">
+            <CategoryIcon slug={category.slug} className="h-5 w-5" />
           </span>
-          <h1 className="mt-5 text-4xl font-black tracking-tight text-zinc-900 sm:text-5xl">
-            {category.nameEn}
-          </h1>
-          <p className="mt-2 text-lg font-medium text-brand-700">
-            {visual.tagline}
-          </p>
-          {category.descriptionEn ? (
-            <p className="mt-3 max-w-2xl leading-relaxed text-zinc-600">
-              {category.descriptionEn}
-            </p>
-          ) : null}
-          <p className="mt-5 inline-flex rounded-full bg-white px-3 py-1 text-xs font-bold tracking-wide text-zinc-700 uppercase ring-1 ring-zinc-200">
+          <span className="rounded-full bg-white/10 px-3 py-1 text-xs font-bold tracking-wide text-white uppercase ring-1 ring-white/25 backdrop-blur-sm">
             {products.length > 0
-              ? `${products.length} verified picks`
+              ? `${products.length} curated picks`
               : "Curating the first picks"}
-          </p>
-        </div>
-      </section>
+          </span>
+        </p>
+      </PageBanner>
 
       <section className="container-x py-12">
         {products.length === 0 ? (

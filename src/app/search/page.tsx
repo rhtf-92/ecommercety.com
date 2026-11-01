@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { searchProducts } from "@/modules/catalog/data";
 import { getShowProductImages } from "@/modules/settings/site";
 import ProductCard from "@/components/ProductCard";
-import { IconSearch } from "@/components/icons";
+import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
   title: "Search picks",
@@ -51,23 +51,27 @@ async function Results({ searchParams }: Props) {
 
 export default function SearchPage({ searchParams }: Props) {
   return (
-    <main className="container-x flex-1 py-12">
-      <h1 className="flex items-center gap-3 text-3xl font-extrabold tracking-tight text-zinc-900">
-        <IconSearch className="h-7 w-7 text-brand-600" />
-        Search picks
-      </h1>
-      <form action="/search" className="mt-6 max-w-xl">
-        <input
-          type="search"
-          name="q"
-          placeholder="Try “air fryer”, “dog toy”, “LED strip”…"
-          className="w-full rounded-full border border-zinc-300 px-5 py-3 text-sm outline-none transition placeholder:text-zinc-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
-        />
-      </form>
-      <div className="mt-10">
-        <Suspense fallback={<p className="text-zinc-500">Searching…</p>}>
-          <Results searchParams={searchParams} />
-        </Suspense>
+    <main className="flex flex-1 flex-col">
+      <PageBanner
+        image="/slides/brand.jpg"
+        eyebrow="Catalog search"
+        title="Search picks"
+        size="sm"
+      />
+      <div className="container-x py-10">
+        <form action="/search" className="max-w-xl">
+          <input
+            type="search"
+            name="q"
+            placeholder="Try “air fryer”, “dog toy”, “LED strip”…"
+            className="w-full rounded-full border border-zinc-300 px-5 py-3 text-sm outline-none transition placeholder:text-zinc-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+          />
+        </form>
+        <div className="mt-10">
+          <Suspense fallback={<p className="text-zinc-500">Searching…</p>}>
+            <Results searchParams={searchParams} />
+          </Suspense>
+        </div>
       </div>
     </main>
   );

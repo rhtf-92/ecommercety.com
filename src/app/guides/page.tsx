@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { GUIDES as PUBLISHED_GUIDES } from "@/modules/guides/content";
-import { IconArrowRight, IconBook } from "@/components/icons";
+import { IconArrowRight } from "@/components/icons";
+import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
   title: "Buying Guides",
@@ -51,23 +52,12 @@ const GUIDES = [
 export default function GuidesPage() {
   return (
     <main className="flex flex-1 flex-col">
-      <section className="bg-ink-900 text-white">
-        <div className="container-x py-14">
-          <p className="flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-amber-300 uppercase">
-            <IconBook className="h-4 w-4" />
-            Buying guides
-          </p>
-          <h1 className="mt-3 text-4xl font-black tracking-tight sm:text-5xl">
-            Decide in minutes, not hours
-          </h1>
-          <p className="mt-4 max-w-2xl leading-relaxed text-zinc-300">
-            Side-by-side thinking, honest trade-offs and a clear winner for
-            every budget. The first guides are live below; more are in
-            production, and every guide is built from picks you can browse
-            in its category today.
-          </p>
-        </div>
-      </section>
+      <PageBanner
+        image="/slides/brand.jpg"
+        eyebrow="Buying guides"
+        title="Decide in minutes, not hours"
+        subtitle="Side-by-side thinking, honest trade-offs and a clear winner for every budget. The first guides are live below; more are in production, and every guide is built from picks you can browse in its category today."
+      />
 
       <section className="container-x py-12">
         <h2 className="text-sm font-bold tracking-wide text-zinc-500 uppercase">

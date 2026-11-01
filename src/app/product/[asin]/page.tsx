@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { getProductByAsin } from "@/modules/catalog/data";
+import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
+import PageBanner from "@/components/PageBanner";
 import { getShowProductImages } from "@/modules/settings/site";
 import { webAffiliateUrl } from "@/components/ProductCard";
 import TrackedAffiliateButton from "@/components/TrackedAffiliateButton";
@@ -34,9 +36,17 @@ async function ProductContent({ params }: Props) {
   const showImages = await getShowProductImages();
   // Sin imagen (o interruptor apagado): ficha a una columna, sin panel vacío.
   const renderImage = showImages && Boolean(product.imageUrl);
+  const visual = CATEGORY_VISUALS[product.category.slug] ?? DEFAULT_VISUAL;
 
   return (
     <>
+      <PageBanner
+        image={visual.image}
+        eyebrow={product.category.nameEn}
+        title={visual.tagline}
+        size="sm"
+      />
+      <div className="container-x py-10">
       <nav className="text-sm text-zinc-500">
         <Link href="/" className="hover:text-zinc-800">Home</Link>
         <span className="mx-1.5">/</span>
@@ -146,14 +156,15 @@ async function ProductContent({ params }: Props) {
           </div>
         </div>
       </div>
+      </div>
     </>
   );
 }
 
 export default function ProductPage({ params }: Props) {
   return (
-    <main className="container-x flex-1 py-10">
-      <Suspense fallback={<p className="text-zinc-500">Loading…</p>}>
+    <main className="flex flex-1 flex-col">
+      <Suspense fallback={<p className="container-x py-16 text-zinc-500">Loading…</p>}>
         <ProductContent params={params} />
       </Suspense>
     </main>

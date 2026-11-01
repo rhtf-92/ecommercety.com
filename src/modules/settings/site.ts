@@ -87,3 +87,59 @@ export async function setLogoVariant(value: string): Promise<void> {
 export async function setBannerVariant(value: string): Promise<void> {
   await setSetting(BANNER_VARIANT_KEY, value);
 }
+
+// ---- Diagnóstico para el panel ----
+// Distingue "sin base", "base sin la tabla de ajustes" (migraciones
+// pendientes) y "todo operativo", para que un fallo de guardado nunca
+// sea silencioso: el panel muestra la causa y el comando exacto.
+
+export type SettingsHealth = {
+  dbOk: boolean;
+  tableOk: boolean;
+  appliedMigrations: number;
+};
+
+export const EXPECTED_MIGRATIONS = 4;
+
+export async function getSettingsHealth(): Promise<SettingsHealth> {
+  try {
+    const db = await getDb();
+    let appliedMigrations = 0;
+    try {
+      const rows = await db.$queryRaw<{ count: bigint }[]>`
+        SELECT COUNT(*)::bigint AS count FROM "_prisma_migrations"
+        WHERE finished_at IS NOT NULL`;
+      appliedMigrations = Number(rows[0]?.count ?? 0);
+    } catch {
+      appliedMigrations = 0;
+    }
+    try {
+      await db.siteSetting.findFirst({ select: { key: true } });
+      return { dbOk: true, tableOk: true, appliedMigrations };
+    } catch {
+      return { dbOk: true, tableOk: false, appliedMigrations };
+    }
+  } catch {
+    return { dbOk: false, tableOk: false, appliedMigrations: 0 };
+  }
+}
+
+/** Mensaje accionable cuando un guardado de ajustes falla. */
+export function settingsErrorMessage(error: unknown): string {
+  const text = error instanceof Error ? error.message : String(error);
+  if (
+    text.includes("SiteSetting") ||
+    text.includes("does not exist") ||
+    text.includes("P2021")
+  ) {
+    return "No se pudo guardar: falta la tabla de ajustes en tu base de datos. Ejecuta «npx prisma migrate deploy» en tu carpeta del proyecto y vuelve a intentarlo.";
+  }
+  if (
+    text.includes("Can't reach database") ||
+    text.includes("ECONNREFUSED") ||
+    text.includes("P1001")
+  ) {
+    return "No se pudo guardar: la base de datos no responde. Verifica que Docker esté corriendo (docker compose up -d).";
+  }
+  return "No se pudo guardar el ajuste. Revisa la conexión con la base de datos e inténtalo de nuevo.";
+}

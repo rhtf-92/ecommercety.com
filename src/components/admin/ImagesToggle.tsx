@@ -13,36 +13,48 @@ export default function ImagesToggle({ initial }: { initial: boolean }) {
   );
   const on = state.showImages;
   return (
-    <form action={action} className="flex items-center gap-4">
-      <input type="hidden" name="next" value={String(!on)} />
-      <button
-        type="submit"
-        disabled={pending}
-        role="switch"
-        aria-checked={on}
-        aria-label="Mostrar imágenes de productos en el sitio"
-        className={`relative h-8 w-14 shrink-0 rounded-full transition disabled:opacity-60 ${
-          on ? "bg-brand-600" : "bg-zinc-300"
-        }`}
-      >
-        <span
-          className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-all ${
-            on ? "left-7" : "left-1"
+    <div>
+      <form action={action} className="flex items-center gap-4">
+        <input type="hidden" name="next" value={String(!on)} />
+        <button
+          type="submit"
+          disabled={pending}
+          role="switch"
+          aria-checked={on}
+          aria-label="Mostrar imágenes de productos en el sitio"
+          className={`relative h-8 w-14 shrink-0 rounded-full transition disabled:opacity-60 ${
+            on ? "bg-brand-600" : "bg-zinc-300"
           }`}
-        />
-      </button>
-      <div className="text-sm">
-        <p className="font-bold text-zinc-900">
-          {on ? "Imágenes activadas" : "Imágenes desactivadas"}
+        >
+          <span
+            className={`absolute top-1 h-6 w-6 rounded-full bg-white shadow transition-all ${
+              on ? "left-7" : "left-1"
+            }`}
+          />
+        </button>
+        <div className="text-sm">
+          <p className="font-bold text-zinc-900">
+            {on ? "Imágenes activadas" : "Imágenes desactivadas"}
+            {state.savedAt && !pending ? (
+              <span className="ml-2 rounded-full bg-brand-100 px-2 py-0.5 text-[11px] font-bold text-brand-700 uppercase">
+                Guardado
+              </span>
+            ) : null}
+          </p>
+          <p className="text-zinc-500">
+            {pending
+              ? "Aplicando…"
+              : on
+                ? "El sitio muestra la foto de cada producto que tenga imagen oficial."
+                : "El sitio no muestra ninguna imagen de producto (ni espacios vacíos)."}
+          </p>
+        </div>
+      </form>
+      {state.error ? (
+        <p role="alert" className="mt-3 rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 ring-1 ring-red-200">
+          {state.error}
         </p>
-        <p className="text-zinc-500">
-          {pending
-            ? "Aplicando…"
-            : on
-              ? "El sitio muestra la foto de cada producto que tenga imagen oficial."
-              : "El sitio no muestra ninguna imagen de producto (ni espacios vacíos)."}
-        </p>
-      </div>
-    </form>
+      ) : null}
+    </div>
   );
 }

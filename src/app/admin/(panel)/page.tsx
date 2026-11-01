@@ -7,8 +7,10 @@ import SyncButton from "@/components/admin/SyncButton";
 import ImagesToggle from "@/components/admin/ImagesToggle";
 import BrandSettings from "@/components/admin/BrandSettings";
 import {
+  EXPECTED_MIGRATIONS,
   getBannerVariant,
   getLogoVariant,
+  getSettingsHealth,
   getShowProductImages,
 } from "@/modules/settings/site";
 
@@ -148,6 +150,28 @@ async function Stats() {
   );
 }
 
+async function SystemHealth() {
+  const health = await getSettingsHealth();
+  if (health.dbOk && health.tableOk) {
+    return (
+      <div className="rounded-2xl bg-emerald-50 px-5 py-4 text-sm text-emerald-800 ring-1 ring-emerald-200">
+        <strong>Estado del sistema:</strong> base de datos conectada y tabla
+        de ajustes operativa ({health.appliedMigrations}/{EXPECTED_MIGRATIONS}{" "}
+        migraciones aplicadas). Los interruptores y selectores de esta página
+        guardan al instante.
+      </div>
+    );
+  }
+  return (
+    <div className="rounded-2xl bg-red-50 px-5 py-4 text-sm text-red-800 ring-1 ring-red-200">
+      <strong>Estado del sistema:</strong>{" "}
+      {!health.dbOk
+        ? "la base de datos no responde, así que ningún ajuste puede guardarse. Levanta PostgreSQL con «docker compose up -d» y recarga esta página."
+        : `la tabla de ajustes todavía no existe (${health.appliedMigrations}/${EXPECTED_MIGRATIONS} migraciones aplicadas), así que el interruptor de imágenes y los selectores de marca no pueden guardar. Ejecuta «npx prisma migrate deploy» en tu carpeta del proyecto y recarga esta página.`}
+    </div>
+  );
+}
+
 async function ImagesSettingValue() {
   const showImages = await getShowProductImages();
   return <ImagesToggle initial={showImages} />;
@@ -182,6 +206,11 @@ export default function DashboardPage() {
           ? "credenciales configuradas. Los precios e imágenes oficiales se sincronizan con npm run db:sync-amazon y en los ciclos de 5 horas."
           : "sin credenciales. Amazon las emite solo con la cuenta aprobada y 10+ ventas calificadas en los últimos 30 días; mientras tanto el sitio no muestra precios (cumplimiento) y usa «Check price on Amazon»."}
         <SyncButton />
+      </div>
+      <div className="mt-6">
+        <Suspense fallback={null}>
+          <SystemHealth />
+        </Suspense>
       </div>
       <section className="mt-6 rounded-3xl bg-white p-6 ring-1 ring-zinc-200">
         <h2 className="text-base font-bold">Imágenes de productos en el sitio</h2>

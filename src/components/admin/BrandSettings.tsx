@@ -114,13 +114,25 @@ export default function BrandSettings({
         </div>
       </div>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="rounded-full bg-brand-700 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800 disabled:opacity-60"
-      >
-        {pending ? "Aplicando…" : "Guardar marca y banner"}
-      </button>
+      <div className="flex flex-wrap items-center gap-3">
+        <button
+          type="submit"
+          disabled={pending}
+          className="rounded-full bg-brand-700 px-6 py-2.5 text-sm font-bold text-white transition hover:bg-brand-800 disabled:opacity-60"
+        >
+          {pending ? "Aplicando…" : "Guardar marca y banner"}
+        </button>
+        {state.savedAt && !pending ? (
+          <span className="rounded-full bg-brand-100 px-3 py-1 text-xs font-bold text-brand-700 uppercase">
+            Guardado y aplicado al sitio
+          </span>
+        ) : null}
+      </div>
+      {state.error ? (
+        <p role="alert" className="rounded-xl bg-red-50 px-4 py-3 text-sm font-medium text-red-700 ring-1 ring-red-200">
+          {state.error}
+        </p>
+      ) : null}
     </form>
   );
 }

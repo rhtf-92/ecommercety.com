@@ -6,7 +6,9 @@ import { getGuideBySlug } from "@/modules/guides/content";
 import { getProductByAsin } from "@/modules/catalog/data";
 import ProductCard from "@/components/ProductCard";
 import { getShowProductImages } from "@/modules/settings/site";
-import { IconArrowRight, IconBook } from "@/components/icons";
+import { IconArrowRight } from "@/components/icons";
+import PageBanner from "@/components/PageBanner";
+import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -28,22 +30,15 @@ async function GuideContent({ params }: Props) {
   ]);
   const products = fetched.filter((p) => p && p.status !== "UNPUBLISHED");
 
+  const visual = CATEGORY_VISUALS[guide.categorySlug] ?? DEFAULT_VISUAL;
   return (
     <>
-      <section className="bg-ink-900 text-white">
-        <div className="container-x py-14">
-          <p className="flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-amber-300 uppercase">
-            <IconBook className="h-4 w-4" />
-            {guide.categoryLabel} · {guide.readingMinutes} min read
-          </p>
-          <h1 className="mt-3 max-w-3xl text-4xl leading-tight font-black tracking-tight sm:text-5xl">
-            {guide.title}
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg leading-relaxed text-zinc-300">
-            {guide.intro}
-          </p>
-        </div>
-      </section>
+      <PageBanner
+        image={visual.image}
+        eyebrow={`${guide.categoryLabel} · ${guide.readingMinutes} min read`}
+        title={guide.title}
+        subtitle={guide.intro}
+      />
 
       <section className="container-x py-12">
         <div className="max-w-3xl space-y-10">

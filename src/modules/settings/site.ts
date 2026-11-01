@@ -95,6 +95,9 @@ export async function setBannerVariant(value: string): Promise<void> {
 
 export type SettingsHealth = {
   dbOk: boolean;
+  /** El cliente Prisma generado conoce el modelo SiteSetting. */
+  clientOk: boolean;
+  /** La tabla física existe (information_schema, no depende del cliente). */
   tableOk: boolean;
   appliedMigrations: number;
 };
@@ -102,31 +105,54 @@ export type SettingsHealth = {
 export const EXPECTED_MIGRATIONS = 4;
 
 export async function getSettingsHealth(): Promise<SettingsHealth> {
+  const down: SettingsHealth = {
+    dbOk: false,
+    clientOk: false,
+    tableOk: false,
+    appliedMigrations: 0,
+  };
   try {
     const db = await getDb();
     let appliedMigrations = 0;
+    let tableOk = false;
     try {
       const rows = await db.$queryRaw<{ count: bigint }[]>`
         SELECT COUNT(*)::bigint AS count FROM "_prisma_migrations"
         WHERE finished_at IS NOT NULL`;
       appliedMigrations = Number(rows[0]?.count ?? 0);
+      const found = await db.$queryRaw<{ exists: boolean }[]>`
+        SELECT EXISTS (
+          SELECT 1 FROM information_schema.tables
+          WHERE table_schema = 'public' AND table_name = 'SiteSetting'
+        ) AS exists`;
+      tableOk = Boolean(found[0]?.exists);
     } catch {
-      appliedMigrations = 0;
+      return down;
     }
-    try {
-      await db.siteSetting.findFirst({ select: { key: true } });
-      return { dbOk: true, tableOk: true, appliedMigrations };
-    } catch {
-      return { dbOk: true, tableOk: false, appliedMigrations };
-    }
+    // Sonda del cliente generado: si el esquema creció (nuevo modelo) y
+    // no se regeneró, el delegado no existe y cualquier lectura/escritura
+    // del modelo lanza TypeError. Es un caso distinto a "falta la tabla".
+    const delegate = (db as unknown as Record<string, unknown>)[
+      "siteSetting"
+    ] as { findFirst?: unknown } | undefined;
+    const clientOk = Boolean(delegate && typeof delegate.findFirst === "function");
+    return { dbOk: true, clientOk, tableOk, appliedMigrations };
   } catch {
-    return { dbOk: false, tableOk: false, appliedMigrations: 0 };
+    return down;
   }
 }
 
 /** Mensaje accionable cuando un guardado de ajustes falla. */
 export function settingsErrorMessage(error: unknown): string {
   const text = error instanceof Error ? error.message : String(error);
+  if (
+    text.includes("is not a function") ||
+    text.includes("Cannot read properties of undefined") ||
+    text.includes("siteSetting is undefined") ||
+    text.includes(".siteSetting.")
+  ) {
+    return "No se pudo guardar: el cliente de base de datos está desactualizado (se generó antes de existir la tabla de ajustes). Ejecuta «npx prisma generate», reinicia el servidor (npm run dev) y vuelve a intentarlo.";
+  }
   if (
     text.includes("SiteSetting") ||
     text.includes("does not exist") ||

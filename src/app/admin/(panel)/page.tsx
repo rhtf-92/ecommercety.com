@@ -152,22 +152,32 @@ async function Stats() {
 
 async function SystemHealth() {
   const health = await getSettingsHealth();
-  if (health.dbOk && health.tableOk) {
+  if (health.dbOk && health.clientOk && health.tableOk) {
     return (
       <div className="rounded-2xl bg-emerald-50 px-5 py-4 text-sm text-emerald-800 ring-1 ring-emerald-200">
-        <strong>Estado del sistema:</strong> base de datos conectada y tabla
-        de ajustes operativa ({health.appliedMigrations}/{EXPECTED_MIGRATIONS}{" "}
-        migraciones aplicadas). Los interruptores y selectores de esta página
-        guardan al instante.
+        <strong>Estado del sistema:</strong> base de datos conectada, tabla de
+        ajustes operativa y cliente actualizado ({health.appliedMigrations}/
+        {EXPECTED_MIGRATIONS} migraciones aplicadas). Los interruptores y
+        selectores de esta página guardan al instante.
       </div>
     );
   }
+  let message: string;
+  if (!health.dbOk) {
+    message =
+      "la base de datos no responde, así que ningún ajuste puede guardarse. Levanta PostgreSQL con «docker compose up -d» y recarga esta página.";
+  } else if (!health.clientOk) {
+    message =
+      "la tabla de ajustes SÍ existe en la base, pero el cliente de datos que usa el servidor se generó antes de que esa tabla existiera, así que el panel no puede leer ni guardar ajustes (por eso los selectores no responden). Solución: detén el servidor, ejecuta «npx prisma generate» en tu carpeta del proyecto, vuelve a arrancar «npm run dev» y recarga esta página.";
+  } else if (!health.tableOk) {
+    message = `falta la tabla de ajustes en la base (${health.appliedMigrations}/${EXPECTED_MIGRATIONS} migraciones aplicadas), así que el interruptor de imágenes y los selectores de marca no pueden guardar. Ejecuta «npx prisma migrate deploy» en tu carpeta del proyecto y recarga esta página.`;
+  } else {
+    message =
+      "hay una inconsistencia entre el cliente de datos y la base. Ejecuta «npx prisma generate», reinicia el servidor y recarga esta página.";
+  }
   return (
-    <div className="rounded-2xl bg-red-50 px-5 py-4 text-sm text-red-800 ring-1 ring-red-200">
-      <strong>Estado del sistema:</strong>{" "}
-      {!health.dbOk
-        ? "la base de datos no responde, así que ningún ajuste puede guardarse. Levanta PostgreSQL con «docker compose up -d» y recarga esta página."
-        : `la tabla de ajustes todavía no existe (${health.appliedMigrations}/${EXPECTED_MIGRATIONS} migraciones aplicadas), así que el interruptor de imágenes y los selectores de marca no pueden guardar. Ejecuta «npx prisma migrate deploy» en tu carpeta del proyecto y recarga esta página.`}
+    <div className="rounded-2xl bg-red-50 px-5 py-4 text-sm leading-relaxed text-red-800 ring-1 ring-red-200">
+      <strong>Estado del sistema:</strong> {message}
     </div>
   );
 }

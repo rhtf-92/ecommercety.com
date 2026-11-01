@@ -1,0 +1,49 @@
+# Blueprint de Render — T&F Picks (ecommercety.com)
+# Uso: en render.com → New → Blueprint → conectar este repo.
+# Render lee este archivo, crea el servicio web en el plan Starter
+# (US$7/mes, siempre encendido; el plan gratuito se duerme a los
+# 15 min y NO sirve para una tienda pública) y pide las variables
+# marcadas con sync: false (secretos: nunca van en el repo).
+# La base de datos NO se crea aquí: vive en Neon (ver
+# docs/deployment.md). Solo hay que pegar su connection string
+# AGRUPADO (pooled, el que contiene "-pooler") en DATABASE_URL.
+services:
+  - type: web
+    name: ecommercety
+    runtime: node
+    region: ohio # EE. UU. Este: cerca del público y de Neon US East
+    plan: starter
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start
+    # Migraciones automáticas antes de servir cada despliegue
+    # (función de los planes pagos). La carga inicial de datos
+    # (seed + import) se hace una vez desde la PC de Renato.
+    preDeployCommand: npx prisma migrate deploy
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: NEXT_PUBLIC_BRAND_NAME
+        value: "T&F Picks"
+      # Connection string AGRUPADO (pooled) de Neon.
+      - key: DATABASE_URL
+        sync: false
+      # Primero la URL *.onrender.com que asigne Render; cuando el
+      # dominio esté verificado, cambiar a https://ecommercety.com
+      # y redesplegar (Manual Deploy).
+      - key: NEXT_PUBLIC_SITE_URL
+        sync: false
+      # Credenciales NUEVAS del panel (no las de desarrollo).
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Render genera un secreto aleatorio seguro.
+      - key: SESSION_SECRET
+        generateValue: true
+      # Las credenciales de la Creators API se agregan después en el
+      # panel de Render (Environment) cuando Amazon las emita:
+      # CREATORS_API_CREDENTIAL_ID / CREATORS_API_CREDENTIAL_SECRET.
+      # Igual GOOGLE_SITE_VERIFICATION / BING_SITE_VERIFICATION si se
+      # usa ese método (la guía usa el registro TXT en Cloudflare).

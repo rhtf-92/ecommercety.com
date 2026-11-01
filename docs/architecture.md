@@ -27,5 +27,5 @@
 
 ## Entornos
 - Local: `npm run dev` + PostgreSQL local o en la nube (`.env`).
-- Producción: despliegue en Vercel (o equivalente) + PostgreSQL gestionado,
+- Producción: despliegue en Render (plan Starter) + PostgreSQL en Neon,
   dominio ecommercety.com vía Cloudflare.

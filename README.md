@@ -8,7 +8,7 @@ afiliado generado con SiteStripe y su Tracking ID por canal.
 - **Next.js 16 + TypeScript** (App Router), monolito modular
 - **PostgreSQL + Prisma ORM**
 - **Tailwind CSS 4**
-- Despliegue previsto: Vercel + PostgreSQL gestionado, DNS en Cloudflare
+- Despliegue: Render (plan Starter) + Neon (PostgreSQL), DNS en Cloudflare
 
 ## Puesta en marcha (desarrollo)
 ```bash

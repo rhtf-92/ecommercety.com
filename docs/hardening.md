@@ -44,7 +44,7 @@ Upstash/Redis conservando la interfaz `rateLimit(clave, límite, ventana)`.
 
 - **Logger estructurado** (`src/lib/log.ts`): una línea JSON por
   evento (`login.failed`, `login.rate_limited`, `click.record_failed`,
-  `settings.*_save_failed`...), visible en los logs de Vercel sin
+  `settings.*_save_failed`...), visible en los logs de Render sin
   servicios externos. Punto único de conexión si se adopta un
   agregador (Sentry/Axiom).
 - **Visitas propias** (tabla `PageView`, migración

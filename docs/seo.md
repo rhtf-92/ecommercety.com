@@ -45,7 +45,7 @@ para rich results desde el día del lanzamiento.
    crear propiedad de **dominio** `ecommercety.com` → Google entrega
    un registro **TXT** → agregarlo en Cloudflare → DNS → verificar.
    (Alternativa sin DNS: propiedad por URL + el código en la
-   variable `GOOGLE_SITE_VERIFICATION` de Railway.)
+   variable `GOOGLE_SITE_VERIFICATION` de Render.)
 2. En Search Console → Sitemaps → enviar `sitemap.xml`.
 3. **Bing Webmaster Tools**: importar el sitio desde Search
    Console (un clic) o verificar con `BING_SITE_VERIFICATION`.

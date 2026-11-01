@@ -167,7 +167,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="Start here"
           title="Shop by category"
-          sub="Six focused categories, each one curated by hand and kept verified. No endless aisles, no filler products."
+          sub="Fourteen focused categories, each one curated by hand and kept verified. No endless aisles, no filler products."
         />
         <Suspense fallback={<p className="mt-10 text-zinc-500">Loading…</p>}>
           <CategoryTiles />

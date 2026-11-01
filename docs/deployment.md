@@ -59,8 +59,8 @@ hacía; en Vercel ese paso no existe y no hace falta).
 3. Antes de desplegar, cargar las variables de entorno
    (ambiente **Production**):
    - `DATABASE_URL` = connection string **agrupado (pooled)** de
-     Neon (el mismo que usaba Render; se puede copiar desde
-     Render → *Environment* antes de retirar ese servicio)
+     Neon (el mismo que usa la app desde el lanzamiento; Render
+     ya fue retirado, ver §7)
    - `NEXT_PUBLIC_SITE_URL` = `https://ecommercety.com` (el valor
      final desde el inicio, igual que se hizo en Render)
    - `NEXT_PUBLIC_BRAND_NAME` = `T&F Picks`

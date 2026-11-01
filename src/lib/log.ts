@@ -1,5 +1,5 @@
 // Registro estructurado del servidor: una línea JSON por evento en
-// stdout/stderr, lista para los logs de Render o cualquier colector.
+// stdout/stderr, lista para los logs de Vercel o cualquier colector.
 // Sin dependencias ni servicios externos; si mañana se adopta un
 // agregador (Sentry, Axiom...), este es el único punto a conectar.
 

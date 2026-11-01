@@ -43,7 +43,7 @@ export function rateLimit(
   return { ok: true, remaining: limit - bucket.count, retryAfterSec: 0 };
 }
 
-/** IP del cliente detrás del proxy de producción (Render) o local. */
+/** IP del cliente detrás del proxy de producción (Vercel) o local. */
 export function clientIp(headers: Headers): string {
   const forwarded = headers.get("x-forwarded-for");
   if (forwarded) {

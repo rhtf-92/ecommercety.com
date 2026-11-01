@@ -1,35 +1,35 @@
 # Despliegue en producción — runbook
 
-Arquitectura de producción: **Render** (Web Service, plan Starter
-US$7/mes) para la aplicación + **Neon** (PostgreSQL, nivel
-gratuito) como base + **Cloudflare Registrar** (dominio
-ecommercety.com, ya comprado el 2026-11-01).
+Arquitectura de producción: **Vercel** (plan Pro, US$20/mes) para
+la aplicación + **Neon** (PostgreSQL, nivel gratuito) como base +
+**Cloudflare Registrar** (dominio ecommercety.com, comprado el
+2026-11-01).
 
-**Ruta elegida por Renato el 2026-11-01:** Render. Descartados:
-Railway (registros nuevos pausados sin fecha tras su brecha de
-seguridad del 21-oct-2026) y Vercel Hobby (su plan gratuito prohíbe
-uso comercial y sitios de afiliación; Vercel Pro costaba
-US$20/mes). El plan **gratuito de Render tampoco sirve** para la
-tienda pública: el servicio se duerme tras 15 min sin tráfico y
-tarda ~1 min en despertar. El Starter queda siempre encendido.
-La base en Neon es independiente del host: si mañana se migra la
-app, la base no se toca. El archivo `render.yaml` en la raíz del
-repo define el servicio (plan, comandos, healthcheck y variables);
-`railway.json` se eliminó.
+**Historia de la ruta:** el lanzamiento del 2026-11-01 salió en
+Render Starter (US$7/mes), pero su instancia única (0.5 CPU /
+512 MB) se saturó con el tráfico normal de la tienda y sirvió
+errores 502 intermitentes desde el primer día, incluso tras
+optimizar el código (topes al optimizador de imágenes). El mismo
+2026-11-01 Renato decidió migrar la app a **Vercel Pro**: cómputo
+serverless (Fluid) que escala por petición, sin instancia única
+que se caiga. La base en Neon **no se mueve**: solo cambia dónde
+corre la app. Esa independencia fue la decisión de diseño original
+y es lo que hace esta migración un trámite de DNS y variables.
 
 Todo el código ya está listo; estos pasos son de cuentas y
 configuración, en orden.
 
-## 1. Base de datos de producción (Neon)
+## 1. Base de datos de producción (Neon) — sin cambios
 
-1. Crear proyecto en neon.tech (región US East, la más cercana al
-   público de EE. UU.). Nombre sugerido: `ecommercety-prod`.
+1. Proyecto `ecommercety-prod` en neon.tech, región AWS US East 2
+   (Ohio). Ya creado y cargado; no se toca en esta migración.
 2. Guardar FUERA del chat (nunca pegar en el chat) DOS connection
    strings, en *Connect*:
    - **Directo** (sin `-pooler`): para migraciones, seed e import
      desde la PC de Renato.
    - **Agrupado / pooled** (el host contiene `-pooler`): es el que
-     usa la app en Render.
+     usa la app en Vercel (ideal para serverless: muchas funciones,
+     pocas conexiones reales).
 
 ## 2. Datos iniciales (desde la PC de Renato, apuntando a Neon)
 
@@ -40,94 +40,118 @@ Neon (no al Docker local), en este orden:
 2. `npm run db:seed` (crea las 14 categorías)
 3. `npm run db:import` (carga los 128 productos con enlace)
 
-La tienda abre con el catálogo completo enlazado (128 productos en
-14 categorías). Los lotes sin enlace SiteStripe (002, navideño y 7
-de las olas) se suman después con el mismo `db:import`.
+Ya ejecutado el 2026-11-01. Las migraciones futuras se aplican
+igual, desde la PC de Renato contra el string directo: **ningún
+despliegue corre migraciones** (en Render el pre-deploy sí lo
+hacía; en Vercel ese paso no existe y no hace falta).
 
-## 3. Aplicación en Render (verificación previa al dominio)
+## 3. Aplicación en Vercel (verificación previa al dominio)
 
-1. En render.com: registrarse con GitHub (registros abiertos).
-2. *New → Blueprint* → conectar `rhtf-92/ecommercety.com`. Render
-   lee `render.yaml` y crea el servicio **ecommercety** (Node,
-   región Ohio, plan Starter).
-3. Al crear el Blueprint, Render pide las variables con
-   `sync: false`:
-   - `DATABASE_URL` = connection string **agrupado (pooled)** de Neon
-   - `NEXT_PUBLIC_SITE_URL` = por ahora la URL que asigne Render
-     (`https://ecommercety.onrender.com` o la que muestre el panel);
-     al conectar el dominio pasa a `https://ecommercety.com`
-   - `ADMIN_EMAIL` y `ADMIN_PASSWORD` = valores NUEVOS, distintos
-     de los de desarrollo
-   (`SESSION_SECRET` lo genera Render automáticamente.)
-4. Render compila, corre `npx prisma migrate deploy` (pre-deploy) y
-   arranca. Verificar en la URL `*.onrender.com`: `/api/health`
-   responde `{"status":"ok", ...}`, la portada carga el catálogo
-   completo y `/admin` entra con las credenciales de producción.
-   Todavía sin dominio ni promoción.
+1. En vercel.com: registrarse con GitHub (`rhtf-92`) y pasar el
+   equipo a **Pro** (US$20/mes; el plan Hobby prohíbe uso
+   comercial y sitios de afiliación, por eso Pro es el piso).
+2. *Add New → Project → Import* `rhtf-92/ecommercety.com`.
+   Framework **Next.js** detectado automáticamente; raíz `./`;
+   comandos por defecto (install/build). El `postinstall` genera
+   el cliente Prisma. El archivo `vercel.json` del repo fija la
+   región de funciones en **iad1** (US East, la más cercana a
+   Neon Ohio).
+3. Antes de desplegar, cargar las variables de entorno
+   (ambiente **Production**):
+   - `DATABASE_URL` = connection string **agrupado (pooled)** de
+     Neon (el mismo que usaba Render; se puede copiar desde
+     Render → *Environment* antes de retirar ese servicio)
+   - `NEXT_PUBLIC_SITE_URL` = `https://ecommercety.com` (el valor
+     final desde el inicio, igual que se hizo en Render)
+   - `NEXT_PUBLIC_BRAND_NAME` = `T&F Picks`
+   - `ADMIN_EMAIL` y `ADMIN_PASSWORD` = las credenciales de
+     producción del panel
+   - `SESSION_SECRET` = cadena aleatoria NUEVA y larga (32+
+     caracteres; puede salir de un generador de contraseñas)
+4. *Deploy*. Verificar en la URL `*.vercel.app` asignada:
+   `/api/health` responde `{"status":"ok","database":true,...}`,
+   la portada carga el catálogo completo, `/admin` pide login y
+   entra con las credenciales de producción. Todavía sin mover
+   el dominio.
 
-## 4. Dominio (Renato, en Render y Cloudflare)
+## 4. Dominio (Renato, en Vercel y Cloudflare)
 
-Según la guía oficial de Render para Cloudflare:
-
-1. En Render: *servicio → Settings → Custom Domains → + Add*:
-   agregar `ecommercety.com` y `www.ecommercety.com`.
-2. En Cloudflare → *SSL/TLS → Overview*: modo de cifrado **Full**.
-3. En Cloudflare → *DNS → Records*: borrar cualquier registro
-   `AAAA` del dominio (Render usa IPv4) y crear:
-   - CNAME, nombre `@`, destino `ecommercety.onrender.com`
-     (el subdominio exacto que muestre Render), **DNS only**
-     (nube GRIS, sin proxy). Cloudflare aplica *CNAME flattening*
-     en la raíz automáticamente.
-   - CNAME, nombre `www`, mismo destino, **DNS only**.
+1. En Vercel: *proyecto → Settings → Domains → Add*:
+   `ecommercety.com` y `www.ecommercety.com`. Configurar `www`
+   como **redirect** hacia el dominio raíz.
+2. En Cloudflare → *DNS → Records*: **borrar** los dos CNAME que
+   apuntan a `ecommercety.onrender.com` y crear (si el panel de
+   Vercel mostrara valores distintos, mandan los de Vercel):
+   - A, nombre `@`, destino `76.76.21.21`, **DNS only** (nube
+     GRIS, sin proxy).
+   - CNAME, nombre `www`, destino `cname.vercel-dns.com`,
+     **DNS only**.
    No tocar los registros MX/TXT de Email Routing: el buzón
    `contact@ecommercety.com` sigue funcionando igual.
-4. Esperar a que Render muestre ambos dominios **verificados y con
-   certificado emitido** (minutos). Recomendación: dejar los CNAME
-   en DNS only de forma permanente (Render ya emite y renueva el
-   HTTPS; el proxy de Cloudflare sobre Render es opcional y suma
-   una capa que puede dar conflictos de certificado).
-5. Cambiar `NEXT_PUBLIC_SITE_URL` a `https://ecommercety.com` en
-   Render (*Environment*) y redesplegar (*Manual Deploy → Deploy
-   latest commit*).
+3. Esperar a que Vercel muestre ambos dominios con
+   **configuración válida y certificado emitido** (minutos).
+   `NEXT_PUBLIC_SITE_URL` ya tiene el valor final: no requiere
+   redespliegue por el dominio.
+4. Verificación de Dayana desde fuera: el dominio responde con
+   cabeceras de Vercel, salud en verde y el barrido completo de
+   rutas sin 502.
 
 ## 5. Declarar el sitio en Associates Central (obligatorio)
 
-1. Associates Central → Configuración de la cuenta → Editar lista de
-   sitios web y aplicaciones móviles → agregar `ecommercety.com`.
-2. Sin este paso, las comisiones del dominio no se atribuyen. No se
-   promociona el sitio antes de completar este paso.
+1. Associates Central → Configuración de la cuenta → Editar lista
+   de sitios web y aplicaciones móviles → agregar
+   `ecommercety.com`.
+2. Sin este paso, las comisiones del dominio no se atribuyen. No
+   se promociona el sitio antes de completar este paso.
 
 ## 6. Verificación post-lanzamiento
 
 - [ ] Portada, categorías, fichas y guías cargan con HTTPS.
-- [ ] `/admin` pide login y entra con las credenciales de producción.
+- [ ] `/admin` pide login y entra con las credenciales de
+      producción.
 - [ ] Un clic en "Check price on Amazon" abre Amazon con
       `tag=ecommercety00-20` y suma en el contador del panel.
 - [ ] `/sitemap.xml` y `/robots.txt` responden en el dominio.
-- [ ] Registrar el dominio en Google Search Console (TXT en
-      Cloudflare) y enviar el sitemap. Ver `docs/seo.md`.
+- [ ] Registrar el dominio en Google Search Console (el TXT ya
+      existe en Cloudflare) y enviar el sitemap. Ver
+      `docs/seo.md`.
 - [ ] Reservar usuarios sociales: @ecommercety / @tandfpicks.
-- [ ] Activar con Dayana los ciclos: verificación cada 5 horas y
+- [ ] Ciclos de Dayana activos: verificación cada 5 horas y
       descubrimiento de tendencias en la hora 3.
 
-## 7. Cuando Amazon apruebe la Creators API
+## 7. Retiro de Render (al confirmar estabilidad en Vercel)
+
+1. Con el dominio sirviendo desde Vercel y estable: Render →
+   servicio **ecommercety** → *Settings* → **Delete Web
+   Service**. Esto detiene la facturación del Starter (US$7/mes).
+2. Dayana elimina `render.yaml` del repo en el commit de cierre
+   (hacerlo antes de borrar el servicio podría disparar una
+   sincronización del Blueprint que proponga borrar recursos).
+
+## 8. Cuando Amazon apruebe la Creators API
 
 Requisito: 10 ventas calificadas en 30 días. Entonces: Associates
 Central → Herramientas → Creators API → crear aplicación → pegar
-las credenciales en las variables de Render (*Environment*:
-`CREATORS_API_CREDENTIAL_ID` / `CREATORS_API_CREDENTIAL_SECRET`) →
-`npm run db:sync-amazon` (o el botón del panel) → precios, ofertas
-e imágenes oficiales aparecen con su sello de hora. Ver
-`docs/amazon-data.md`.
+las credenciales en las variables de Vercel (*Settings →
+Environment Variables*: `CREATORS_API_CREDENTIAL_ID` /
+`CREATORS_API_CREDENTIAL_SECRET`) → `npm run db:sync-amazon`
+(o el botón del panel) → precios, ofertas e imágenes oficiales
+aparecen con su sello de hora. Ver `docs/amazon-data.md`.
 
-## Notas de operación en Render
+## Notas de operación en Vercel
 
-- **Despliegues:** cada push a `main` despliega solo; el
-  pre-deploy aplica migraciones nuevas antes de servir. Si un
-  despliegue falla el healthcheck, Render mantiene viva la versión
-  anterior.
-- **Si el Starter quedara justo** (0.5 CPU / 512 MB) con el
-  tráfico de temporada: *Settings → Instance Type → Standard*
-  (US$25/mes), un clic, sin migración.
-- **Logs:** pestaña *Logs* del servicio (el logger JSON de la app
-  está pensado para esto).
+- **Despliegues:** cada push a `main` despliega solo. Ante un
+  despliegue malo, *Deployments → ⋯ → Rollback* vuelve al
+  anterior al instante (no hay «instancia» que reiniciar).
+- **Cómputo:** funciones Fluid con 2 GB / 1 vCPU por defecto
+  (hasta 4 GB / 2 vCPU si una ruta lo necesitara); el tiempo
+  esperando a la base no consume CPU activa. La región está
+  fijada en `iad1` por `vercel.json`.
+- **Imágenes:** el optimizador es el de Vercel; los topes del
+  repo (`deviceSizes` hasta 1920px, caché de 30 días) mantienen
+  las transformaciones dentro de las 5.000 incluidas en Pro.
+- **Rate limiting:** es en memoria por instancia de función
+  (best-effort en serverless): frena abuso básico por IP; no es
+  un contador global.
+- **Logs:** pestaña *Logs* del proyecto (el logger JSON de la
+  app está pensado para esto).

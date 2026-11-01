@@ -3,9 +3,9 @@
 // guardan resueltos a su destino completo, todos con
 // tag=ecommercety00-20, canal WEB, verificados uno a uno).
 // Títulos y descripciones: redacción PROPIA de T&F Picks.
-// Faltan del checklist original: AirTag 4-pack (sin enlace aún) y
-// Bowflex 552 B001ARYU58 (listing caído, 404 confirmado; reemplazo
-// vigente B0FRNG2N5H pendiente de enlace).
+// COMPLETO: 24/24 productos (2026-11-01). El Bowflex 552 entró por
+// su listing vigente B0FRNG2N5H tras confirmarse que el ASIN
+// original B001ARYU58 devuelve 404 en Amazon.
 
 import type { BatchProduct } from "./batch-001";
 
@@ -99,6 +99,19 @@ export const BATCH_TRENDING_2026: BatchProduct[] = [
     shortDescription:
       "Amazon's flagship Alexa display: an 11-inch Full HD screen for video calls, recipes, calendars and camera feeds, with a built-in smart home hub that speaks Zigbee, Matter and Thread. The command center that makes a smart home feel finished.",
     highlights: ["11-inch Full HD display with spatial audio", "Built-in hub: Zigbee, Matter and Thread", "13 MP camera for video calls and home monitoring", "Alexa+ ready for smarter routines"],
+    discoveredVia: "Tendencias con descuento (SiteStripe, 2026-11-01)",
+  },
+  {
+    asin: "B0GJTXVN9Z",
+    brand: "Apple",
+    title: "Apple AirTag (2nd Generation) — 4 Pack: Find Everything, Gift-Ready",
+    categorySlug: "tech-smart-home",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0GJTXVN9Z?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=745bf11a7db776afc1fd480f7a2aa857&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-2a7a563bdab19413&btn_type=ss&btn_ref=srctok-2a7a563bdab19413",
+    imageUrl: null,
+    shortDescription:
+      "The second-generation AirTag stretches Precision Finding range and makes the speaker easier to hear — and the 4-pack is the season's default stocking stuffer: keys, luggage, backpack and the car, all findable from the Find My app.",
+    highlights: ["Extended Precision Finding range (2nd gen)", "Louder speaker, easier to locate", "Four trackers: keys, bags, luggage and more", "Works with Apple's Find My network"],
     discoveredVia: "Tendencias con descuento (SiteStripe, 2026-11-01)",
   },
   {
@@ -216,6 +229,19 @@ export const BATCH_TRENDING_2026: BatchProduct[] = [
     shortDescription:
       "Fitbit's most complete band: built-in GPS, the line's most accurate heart-rate tracking, ECG and sleep tools, plus Google Maps, Wallet and YouTube Music controls. Seven days of battery and 40+ exercise modes — the tracker that sells out first each season.",
     highlights: ["Built-in GPS for runs and rides", "ECG, heart-rate and sleep tracking", "Up to 7 days of battery life", "Google Wallet, Maps and YouTube Music built in"],
+    discoveredVia: "Tendencias con descuento (SiteStripe, 2026-11-01)",
+  },
+  {
+    asin: "B0FRNG2N5H",
+    brand: "Bowflex",
+    title: "Bowflex Results Series 552 SelectTech Adjustable Dumbbells (Pair) — 15 Sets in One",
+    categorySlug: "sports-outdoors",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0FRNG2N5H?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=bc35ab3e2e466001d3dbab3759763bf6&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-20f86e04a0d41e16&btn_type=ss&btn_ref=srctok-20f86e04a0d41e16",
+    imageUrl: null,
+    shortDescription:
+      "Turn the dial, change the weight — from 5 to 52.5 lb in seconds, replacing 15 pairs of dumbbells with one compact set. The Results Series refresh of the home-gym icon, and the strength gift that anchors a whole training corner.",
+    highlights: ["5 to 52.5 lb per dumbbell, dial-selected", "Replaces 15 sets of weights", "Space-saving footprint for home gyms", "JRNY app workouts included"],
     discoveredVia: "Tendencias con descuento (SiteStripe, 2026-11-01)",
   },
   {

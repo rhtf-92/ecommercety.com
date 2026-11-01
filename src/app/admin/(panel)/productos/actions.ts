@@ -35,6 +35,8 @@ function productData(result: { data: ProductInput }) {
     amazonUrl: d.amazonUrl,
     imageUrl: d.imageUrl || null,
     shortDescription: d.shortDescription || null,
+    highlights: d.highlights,
+    internalNotes: d.internalNotes || null,
     status: d.status,
     publishedAt: d.status === "PUBLISHED" ? new Date() : null,
   };

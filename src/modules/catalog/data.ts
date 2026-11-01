@@ -58,17 +58,41 @@ export async function getCategoryBySlug(slug: string) {
   return FALLBACK_CATEGORIES.find((category) => category.slug === slug) ?? null;
 }
 
+/**
+ * Los precios se cargan SIEMPRE por separado del catálogo. Motivo
+ * (bug real, 2026-10-31): si la tabla ProductPrice aún no existe en la
+ * base (migración sin aplicar), una consulta del catálogo que la
+ * incluya falla entera y la tienda aparece vacía aunque los productos
+ * existan. Con el desacople, el peor caso es "sin precios", nunca
+ * "sin productos".
+ */
+async function attachPrices<T extends { id: string }>(
+  products: T[],
+): Promise<(T & { price: ProductPrice | null })[]> {
+  if (products.length === 0) return products as (T & { price: null })[];
+  const prices = await dbOrNull((client) =>
+    client.productPrice.findMany({
+      where: { productId: { in: products.map((p) => p.id) } },
+    }),
+  );
+  const byId = new Map((prices ?? []).map((price) => [price.productId, price]));
+  return products.map((product) => ({
+    ...product,
+    price: byId.get(product.id) ?? null,
+  }));
+}
+
 export async function getPublishedProductsByCategory(
   categoryId: string,
 ): Promise<ProductWithLinks[]> {
   const fromDb = await dbOrNull((client) =>
     client.product.findMany({
       where: { categoryId, status: "PUBLISHED" },
-      include: { links: { where: { isActive: true } }, price: true },
+      include: { links: { where: { isActive: true } } },
       orderBy: { publishedAt: "desc" },
     }),
   );
-  return fromDb ?? [];
+  return attachPrices(fromDb ?? []);
 }
 
 export async function getFeaturedProducts(
@@ -77,12 +101,12 @@ export async function getFeaturedProducts(
   const fromDb = await dbOrNull((client) =>
     client.product.findMany({
       where: { status: "PUBLISHED" },
-      include: { links: { where: { isActive: true } }, price: true },
+      include: { links: { where: { isActive: true } } },
       orderBy: { publishedAt: "desc" },
       take: limit,
     }),
   );
-  return fromDb ?? [];
+  return attachPrices(fromDb ?? []);
 }
 
 export async function searchProducts(
@@ -100,21 +124,24 @@ export async function searchProducts(
           { shortDescription: { contains: q, mode: "insensitive" } },
         ],
       },
-      include: { links: { where: { isActive: true } }, price: true },
+      include: { links: { where: { isActive: true } } },
       orderBy: { publishedAt: "desc" },
       take: 24,
     }),
   );
-  return fromDb ?? [];
+  return attachPrices(fromDb ?? []);
 }
 
 export async function getProductByAsin(
   asin: string,
 ): Promise<(ProductWithLinks & { category: Category }) | null> {
-  return dbOrNull((client) =>
+  const product = await dbOrNull((client) =>
     client.product.findUnique({
       where: { asin },
-      include: { links: { where: { isActive: true } }, category: true, price: true },
+      include: { links: { where: { isActive: true } }, category: true },
     }),
   );
+  if (!product) return null;
+  const [withPrice] = await attachPrices([product]);
+  return withPrice;
 }

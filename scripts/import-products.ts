@@ -96,6 +96,7 @@ async function main() {
           amazonUrl,
           imageUrl: product.imageUrl,
           shortDescription: product.shortDescription,
+          highlights: product.highlights,
           discoveredVia: product.discoveredVia,
           publishedAt: new Date(),
         },
@@ -107,6 +108,7 @@ async function main() {
           amazonUrl,
           imageUrl: product.imageUrl,
           shortDescription: product.shortDescription,
+          highlights: product.highlights,
           publishedAt: existing?.publishedAt ?? new Date(),
         },
       });

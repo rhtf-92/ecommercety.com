@@ -112,13 +112,45 @@ export default function ProductForm({
         <input name="affiliateUrl" defaultValue={v.affiliateUrl ?? ""} className={inputCls} placeholder="https://www.amazon.com/dp/...?tag=ecommercety00-20" />
       </Field>
 
-      <Field label="URL de la imagen oficial" error={e.imageUrl} hint="Imagen obtenida de SiteStripe o de la API oficial de Amazon.">
-        <input name="imageUrl" defaultValue={v.imageUrl ?? ""} className={inputCls} placeholder="https://m.media-amazon.com/images/I/..." />
+      <Field
+        label="URL de la imagen"
+        error={e.imageUrl}
+        hint="Solo imágenes con derecho de uso: las oficiales llegan solas vía la Creators API de Amazon cuando la cuenta califique; también puedes pegar una imagen propia o del fabricante con permiso. No pegues URLs de imágenes copiadas de Amazon fuera de la API: viola la licencia de Associates."
+      >
+        <input name="imageUrl" defaultValue={v.imageUrl ?? ""} className={inputCls} placeholder="https://…" />
+        {v.imageUrl ? (
+          <a
+            href={v.imageUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-1 inline-block text-xs font-semibold text-brand-700 underline"
+          >
+            Ver la imagen actual
+          </a>
+        ) : null}
       </Field>
 
       <Field label="Descripción propia (Why we picked it)" error={e.shortDescription} hint="Texto original nuestro, nunca copiado de Amazon. Máximo 1200 caracteres.">
         <textarea name="shortDescription" defaultValue={v.shortDescription ?? ""} rows={4} className={inputCls} />
       </Field>
+
+      <Field
+        label="Puntos destacados (se publican en la ficha)"
+        error={e.highlights}
+        hint="Uno por línea, máximo 8, frases propias y cortas: qué lo hace bueno, para quién es, qué problema resuelve. Esto SÍ se muestra al visitante."
+      >
+        <textarea name="highlights" defaultValue={v.highlights ?? ""} rows={4} className={inputCls} placeholder={"Traducción en tiempo real para viajar sin barreras\nCancelación de ruido adaptativa\nEstuche compacto para el equipaje de mano"} />
+      </Field>
+
+      <div className="rounded-2xl border border-amber-200 bg-amber-50 p-4">
+        <Field
+          label="Notas internas del panel (NO se publican)"
+          error={e.internalNotes}
+          hint="Aquí sí puedes anotar a mano el precio que viste, el fin de una oferta o cualquier dato de Amazon: queda solo como referencia interna de gestión. Por la licencia de Associates, los precios públicos deben venir de la API oficial (con su hora de verificación); un precio escrito a mano y publicado es causal de cierre de la cuenta."
+        >
+          <textarea name="internalNotes" defaultValue={v.internalNotes ?? ""} rows={3} className={inputCls} placeholder="Ej.: visto a $32.99 el 31-oct, oferta vista hasta agotar stock…" />
+        </Field>
+      </div>
 
       <div className="flex items-center gap-3 pt-2">
         <button

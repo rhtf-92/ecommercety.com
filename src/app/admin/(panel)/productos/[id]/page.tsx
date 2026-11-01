@@ -41,6 +41,8 @@ async function Form({ params }: Props) {
     affiliateUrl: product.links[0]?.url ?? "",
     imageUrl: product.imageUrl ?? "",
     shortDescription: product.shortDescription ?? "",
+    highlights: (product.highlights ?? []).join("\n"),
+    internalNotes: product.internalNotes ?? "",
   };
 
   const action = updateProductAction.bind(null, id);

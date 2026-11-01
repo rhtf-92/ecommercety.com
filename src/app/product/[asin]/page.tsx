@@ -89,6 +89,25 @@ async function ProductContent({ params }: Props) {
             </div>
           ) : null}
 
+          {product.highlights && product.highlights.length > 0 ? (
+            <div className="mt-6">
+              <h2 className="text-sm font-bold tracking-wide text-zinc-500 uppercase">
+                Highlights
+              </h2>
+              <ul className="mt-3 grid gap-2 sm:grid-cols-2">
+                {product.highlights.map((highlight) => (
+                  <li
+                    key={highlight}
+                    className="flex items-start gap-2 rounded-2xl bg-white px-3.5 py-2.5 text-sm font-medium text-zinc-700 ring-1 ring-zinc-200"
+                  >
+                    <IconCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           <div className="mt-8 rounded-3xl border-2 border-brand-100 bg-brand-50 p-6">
             {price ? (
               <div className="mb-5">

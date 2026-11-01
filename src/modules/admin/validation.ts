@@ -12,6 +12,8 @@ export type ProductInput = {
   amazonUrl: string;
   imageUrl: string;
   shortDescription: string;
+  highlights: string[]; // puntos destacados editoriales propios
+  internalNotes: string; // notas internas: NUNCA se publican
   affiliateUrl: string; // enlace WEB (SiteStripe)
   status: "DRAFT" | "PUBLISHED" | "DEMOTED" | "UNPUBLISHED";
 };
@@ -51,6 +53,12 @@ export function validateProductInput(raw: {
     amazonUrl: get("amazonUrl"),
     imageUrl: get("imageUrl"),
     shortDescription: get("shortDescription"),
+    highlights: get("highlights")
+      .split("\n")
+      .map((line) => line.replace(/^[-•]\s*/, "").trim())
+      .filter(Boolean)
+      .slice(0, 8),
+    internalNotes: get("internalNotes"),
     affiliateUrl: get("affiliateUrl"),
     status: (get("status") || "DRAFT") as ProductInput["status"],
   };
@@ -72,6 +80,12 @@ export function validateProductInput(raw: {
   }
   if (data.shortDescription.length > 1200) {
     errors.shortDescription = "La descripción propia no debe pasar de 1200 caracteres.";
+  }
+  if (data.highlights.some((h) => h.length > 140)) {
+    errors.highlights = "Cada punto destacado debe tener máximo 140 caracteres.";
+  }
+  if (data.internalNotes.length > 2000) {
+    errors.internalNotes = "Las notas internas no deben pasar de 2000 caracteres.";
   }
 
   // Enlace de afiliado: obligatorio si se publica; debe ser de Amazon y

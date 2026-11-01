@@ -12,6 +12,7 @@ export type BatchProduct = {
   affiliateUrl: string; // enlace exacto generado con SiteStripe
   imageUrl: string | null;
   shortDescription: string;
+  highlights: string[]; // puntos destacados editoriales PROPIOS
   discoveredVia: string;
 };
 
@@ -26,6 +27,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "Travelers and multilingual households, this one is for you: these Soundcore earbuds pair active noise cancelling for flights and calls with real-time translation, so conversations across languages stop being a barrier. A pocketable everyday carry that pulls double duty at home, at work and abroad.",
+    highlights: ["Real-time translation for travel conversations", "Adaptive noise cancelling for flights and calls", "Everyday earbuds that pull double duty abroad", "Compact case, easy carry-on space"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -38,6 +40,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "One foldable station instead of a nest of cables: charge your phone and everyday wearables in a single spot, then fold it flat for your bag. It is the kind of small desk-and-nightstand upgrade that quietly removes daily friction.",
+    highlights: ["One station for phone and everyday wearables", "Folds flat for your bag or nightstand drawer", "Ends the multi-cable mess in one move", "Made for desks, hotels and travel"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -50,6 +53,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "Café-style drinks at home without the café learning curve: the AutoFroth system textures the milk for you, so lattes and cappuccinos come out consistent while the stainless build looks the part on the counter. For daily coffee drinkers, it pays for itself in skipped coffee-shop runs.",
+    highlights: ["AutoFroth textures the milk for you, hands-free", "Lattes and cappuccinos without the learning curve", "Stainless build that earns its counter space", "Café-style drinks at home, every day"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -62,6 +66,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "A holiday anchor piece: a full, realistic Dunhill fir that comes pre-lit, so the tree is up and glowing without the annual wrestling match with light strings. Buy it once and it returns every December, ready for ornaments in minutes.",
+    highlights: ["Pre-lit: up and glowing in minutes", "Full, realistic Dunhill fir look", "Buy once, reuse every December", "No annual wrestling match with light strings"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -74,6 +79,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "Built for big living spaces and open floor plans, this LEVOIT pairs large-room coverage with smart controls you can run from your phone. Dust, pet dander and seasonal allergens meet a purifier that stays quiet enough for the bedroom and strong enough for the living room.",
+    highlights: ["Large-room coverage for open floor plans", "Smart controls from your phone", "Quiet enough for the bedroom", "Built for dust, dander and allergy season"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -86,6 +92,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "K-beauty's most talked-about booster step: medicube's exosome spicule serum is designed to smooth rough texture and bring back glow, layered under your usual moisturizer. If your routine feels stuck, this is the targeted upgrade the skincare community keeps reordering.",
+    highlights: ["Targets rough texture and dull-looking skin", "Layers under your usual moisturizer", "The booster step K-beauty keeps reordering", "Made for glow-focused routines"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {
@@ -98,6 +105,7 @@ export const BATCH_001: BatchProduct[] = [
     imageUrl: null,
     shortDescription:
       "No outlet, no problem: a battery-powered projector that turns the backyard, the campsite or a blank wall into movie night. Portable enough to travel, simple enough that setup never becomes the main event.",
+    highlights: ["Built-in battery: no outlet needed", "Backyard, campsite or blank wall movie nights", "Portable enough to travel with", "Setup stays simple, focus stays on the movie"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
 ];

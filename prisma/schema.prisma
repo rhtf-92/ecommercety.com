@@ -74,7 +74,8 @@ model Product {
   amazonUrl        String // URL del producto en Amazon.com
   imageUrl         String? // imagen oficial vía SiteStripe / API oficial
   shortDescription String? // descripción PROPIA, nunca copiada de Amazon
-  internalNotes    String?
+  highlights       String[]        @default([]) // puntos destacados editoriales PROPIOS; se publican en la ficha
+  internalNotes    String? // notas internas del panel (precio/oferta observados); NUNCA se publican: los precios públicos solo salen de ProductPrice vía API oficial
   discoveredVia    String? // curaduría manual, tendencia hora 3, etc.
   lastVerifiedAt   DateTime?
   publishedAt      DateTime?

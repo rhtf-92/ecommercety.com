@@ -210,6 +210,6 @@ confirmación de los 22 del lote tendencias reenviados. Detalles:
 
 ## Conteo final
 
-- Con enlace SiteStripe: **31** (lote 001: 7 + tendencias: 24)
-- Sin enlace, en checklists: **128** (lote 002: 12 + navideño: 12 + ola 1: 40 + ola 2: 64)
+- Con enlace SiteStripe: **128** (lote 001: 7 + tendencias: 24 + olas 1 y 2: 97, con fichas completas en `data/products/batch-wave1-a.ts`, `batch-wave1-b.ts`, `batch-wave2-a.ts` y `batch-wave2-b.ts`)
+- Sin enlace, en checklists: **31** (lote 002: 12 + navideño: 12 + 7 de las olas sin SiteStripe: CeraVe, Klein RT250, HOTOR, DualSense, Xbox Elite, chocolate Dubái y caja japonesa)
 - **Total curado: 159 productos en 14 categorías** (6 actuales + 8 nuevas)

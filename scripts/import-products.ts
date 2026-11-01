@@ -15,11 +15,19 @@ try {
 import { PrismaClient } from "@prisma/client";
 import { BATCH_001, type BatchProduct } from "../data/products/batch-001";
 import { BATCH_TRENDING_2026 } from "../data/products/batch-trending-2026";
+import { BATCH_WAVE1_A } from "../data/products/batch-wave1-a";
+import { BATCH_WAVE1_B } from "../data/products/batch-wave1-b";
+import { BATCH_WAVE2_A } from "../data/products/batch-wave2-a";
+import { BATCH_WAVE2_B } from "../data/products/batch-wave2-b";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
 const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-001", items: BATCH_001 },
   { id: "batch-trending-2026", items: BATCH_TRENDING_2026 },
+  { id: "batch-wave1-a", items: BATCH_WAVE1_A },
+  { id: "batch-wave1-b", items: BATCH_WAVE1_B },
+  { id: "batch-wave2-a", items: BATCH_WAVE2_A },
+  { id: "batch-wave2-b", items: BATCH_WAVE2_B },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 const OFFICIAL_TAGS = Object.values(TRACKING_IDS);

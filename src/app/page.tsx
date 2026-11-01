@@ -105,8 +105,8 @@ const BRAND_SLIDE: HeroSlide = {
     "We research, compare and keep verifying the best Amazon finds, so every pick you see here is one we would buy ourselves.",
   href: "#categories",
   cta: "Browse categories",
+  image: "/slides/brand.jpg",
   band: "bg-ink-900",
-  dark: true,
 };
 
 async function HomeBanner() {
@@ -118,14 +118,14 @@ async function HomeBanner() {
     const visual = CATEGORY_VISUALS[category.slug] ?? DEFAULT_VISUAL;
     return {
       id: `cat-${category.slug}`,
-      slug: category.slug,
       eyebrow: category.nameEn,
       title: visual.tagline,
       subtitle:
         category.descriptionEn ??
-        "Hand-picked products in this category, verified on our 5-hour cycle.",
+        "Hand-picked products in this category, researched and kept up to date by our editors.",
       href: `/category/${category.slug}`,
       cta: "Explore picks",
+      image: visual.image,
       band: visual.band,
     };
   });
@@ -140,6 +140,7 @@ async function HomeBanner() {
         "Side-by-side thinking, honest trade-offs and a clear winner: read the guide, then buy with confidence on Amazon.",
       href: "/guides",
       cta: "Read the guides",
+      image: "/slides/home-kitchen.jpg",
       band: "bg-brand-50",
     });
   }

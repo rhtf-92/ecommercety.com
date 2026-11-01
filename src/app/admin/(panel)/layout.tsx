@@ -6,18 +6,23 @@ import { logoutAction } from "./actions";
 async function Shell({ children }: { children: React.ReactNode }) {
   const email = await requireAdmin();
   return (
-    <div className="flex min-h-screen">
-      <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col bg-ink-900 p-6 text-white md:flex">
-        <Link href="/admin" className="flex items-center gap-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-700 text-sm font-black">
-            T&amp;F
-          </span>
-          <span className="leading-tight">
-            <span className="block font-extrabold">T&amp;F Picks</span>
-            <span className="block text-xs text-zinc-400">Panel interno</span>
-          </span>
-        </Link>
-        <nav className="mt-10 space-y-1 text-sm font-medium">
+    <div className="flex min-h-dvh">
+      {/* Sidebar: exactamente la altura visible (dvh), con la
+          navegación en scroll interno y el pie (correo + Cerrar
+          sesión) SIEMPRE visible, en cualquier pantalla. */}
+      <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col bg-ink-900 text-white md:flex lg:w-64">
+        <div className="shrink-0 p-6 pb-0">
+          <Link href="/admin" className="flex items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-sm font-black">
+              T&amp;F
+            </span>
+            <span className="min-w-0 leading-tight">
+              <span className="block truncate font-extrabold">T&amp;F Picks</span>
+              <span className="block text-xs text-zinc-400">Panel interno</span>
+            </span>
+          </Link>
+        </div>
+        <nav className="scrollbar-none mt-8 min-h-0 flex-1 space-y-1 overflow-y-auto px-6 text-sm font-medium">
           <Link
             href="/admin"
             className="block rounded-xl px-3 py-2.5 transition hover:bg-white/10"
@@ -43,16 +48,19 @@ async function Shell({ children }: { children: React.ReactNode }) {
             Ver sitio público ↗
           </Link>
         </nav>
-        <div className="flex-1" />
-        <p className="truncate text-xs text-zinc-400">{email}</p>
-        <form action={logoutAction} className="mt-3">
-          <button
-            type="submit"
-            className="w-full rounded-full border border-white/20 px-4 py-2 text-sm font-semibold transition hover:bg-white/10"
-          >
-            Cerrar sesión
-          </button>
-        </form>
+        <div className="shrink-0 border-t border-white/10 p-6 pt-4">
+          <p className="truncate text-xs text-zinc-400" title={email}>
+            {email}
+          </p>
+          <form action={logoutAction} className="mt-3">
+            <button
+              type="submit"
+              className="w-full rounded-full border border-white/20 px-4 py-2.5 text-sm font-semibold transition hover:bg-white/10"
+            >
+              Cerrar sesión
+            </button>
+          </form>
+        </div>
       </aside>
       <div className="min-w-0 flex-1">
         <header className="border-b border-zinc-200 bg-white px-4 py-3 md:hidden">

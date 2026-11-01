@@ -79,7 +79,7 @@ const num = (v: unknown): number | null =>
 const str = (v: unknown): string | null =>
   typeof v === "string" && v.length > 0 ? v : null;
 
-function mapItem(item: Loose): AmazonItemData {
+export function mapAmazonItem(item: Loose): AmazonItemData {
   const images = obj(item.images);
   const primary = obj(images.primary);
   const large = obj(primary.large);
@@ -171,5 +171,5 @@ export async function getItems(asins: string[]): Promise<AmazonItemData[]> {
   // como itemResults según la página: se aceptan ambos.
   const container = obj(data.itemsResult ?? data.itemResults);
   const items = Array.isArray(container.items) ? container.items : [];
-  return items.map((item) => mapItem(obj(item)));
+  return items.map((item) => mapAmazonItem(obj(item)));
 }

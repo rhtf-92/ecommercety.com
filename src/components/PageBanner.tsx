@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Image from "next/image";
 
 // Banner fotográfico estándar para todas las páginas internas:
 // misma dirección de arte que el slide de portada (foto propia a
@@ -21,11 +22,13 @@ export default function PageBanner({
 }) {
   return (
     <section className="relative isolate overflow-hidden bg-ink-900">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
+      <Image
         src={image}
         alt=""
-        className="absolute inset-0 -z-10 h-full w-full object-cover"
+        fill
+        priority
+        sizes="100vw"
+        className="-z-10 object-cover"
       />
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink-950/85 via-ink-950/50 to-ink-950/10" />
       <div className="absolute inset-x-0 bottom-0 -z-10 h-28 bg-gradient-to-t from-ink-950/70 to-transparent" />

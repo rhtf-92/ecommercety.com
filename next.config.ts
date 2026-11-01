@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
+    // Formatos modernos primero: AVIF/WebP reducen el peso del slide
+    // y de los banners ~40-60% frente al JPG original (LCP).
+    formats: ["image/avif", "image/webp"],
     // Imágenes oficiales de producto servidas por Amazon (SiteStripe / API).
     remotePatterns: [
       { protocol: "https", hostname: "m.media-amazon.com" },

@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { getDb } from "@/lib/db";
+import { rateLimit, clientIp } from "@/lib/rate-limit";
+import { logEvent } from "@/lib/log";
 import type { Channel } from "@prisma/client";
 
 const CHANNELS: Channel[] = [
@@ -19,6 +21,11 @@ const CHANNELS: Channel[] = [
  * beacon en segundo plano y nunca bloquea ni redirige la navegación.
  */
 export async function POST(request: Request) {
+  // Anti-spam de métricas: 120 registros por minuto y por IP.
+  const gate = rateLimit(`click:${clientIp(request.headers)}`, 120, 60_000);
+  if (!gate.ok) {
+    return NextResponse.json({ ok: false }, { status: 429 });
+  }
   try {
     const body = (await request.json()) as {
       asin?: string;
@@ -46,9 +53,12 @@ export async function POST(request: Request) {
         },
       });
     }
-  } catch {
+  } catch (error) {
     // Sin base de datos o payload inválido: el clic del usuario ya ocurrió
-    // en Amazon; el registro es best-effort.
+    // en Amazon; el registro es best-effort (pero queda en el log).
+    logEvent("warn", "click.record_failed", {
+      error: error instanceof Error ? error.message : String(error),
+    });
   }
   return new NextResponse(null, { status: 204 });
 }

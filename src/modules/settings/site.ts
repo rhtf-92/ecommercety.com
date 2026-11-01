@@ -102,7 +102,7 @@ export type SettingsHealth = {
   appliedMigrations: number;
 };
 
-export const EXPECTED_MIGRATIONS = 4;
+export const EXPECTED_MIGRATIONS = 5;
 
 export async function getSettingsHealth(): Promise<SettingsHealth> {
   const down: SettingsHealth = {

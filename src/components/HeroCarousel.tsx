@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { IconArrowRight } from "@/components/icons";
 
 // Slide de marketing de portada (v2, rediseño senior): fotografía
@@ -56,13 +57,15 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       {/* Fondos fotográficos con crossfade + Ken Burns sutil */}
       {slides.map((item, i) =>
         item.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
+          <Image
             key={item.id}
             src={item.image}
             alt=""
+            fill
+            priority={i === 0}
+            sizes="100vw"
             aria-hidden={i !== index}
-            className={`absolute inset-0 -z-10 h-full w-full object-cover transition-opacity duration-1000 ${
+            className={`-z-10 object-cover transition-opacity duration-1000 ${
               i === index ? "kenburns opacity-100" : "opacity-0"
             }`}
           />

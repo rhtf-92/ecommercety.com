@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
+import { logEvent } from "@/lib/log";
 import { writeAudit } from "@/modules/audit/log";
 import {
   getShowProductImages,
@@ -35,6 +36,9 @@ export async function toggleImagesAction(
     });
   } catch (error) {
     // Nunca fallar en silencio: el panel muestra la causa exacta.
+    logEvent("error", "settings.images_save_failed", {
+      error: error instanceof Error ? error.message : String(error),
+    });
     const current = await getShowProductImages();
     return { showImages: current, error: settingsErrorMessage(error) };
   }

@@ -97,6 +97,16 @@ model SiteSetting {
   updatedAt DateTime @updatedAt
 }
 
+// Analítica propia de visitas (sin terceros ni cookies): solo ruta y
+// momento. Alimenta las métricas del panel; nunca se expone en público.
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+}
+
 model AffiliateLink {
   id         String   @id @default(cuid())
   product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)

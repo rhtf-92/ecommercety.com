@@ -29,6 +29,7 @@ type StatsData = {
   cards: { label: string; value: number }[];
   recent: AuditEntry[];
   lastRun: { report: string | null; startedAt: Date } | null;
+  topPages: { path: string; views: number }[];
 };
 
 async function loadStats(): Promise<StatsData | null> {
@@ -43,9 +44,11 @@ async function loadStats(): Promise<StatsData | null> {
       demoted,
       clicksTotal,
       clicks30,
+      views30,
       pendingTrends,
       recent,
       lastRun,
+      topPagesRaw,
     ] = await Promise.all([
       db.product.count(),
       db.product.count({ where: { status: "PUBLISHED" } }),
@@ -53,9 +56,17 @@ async function loadStats(): Promise<StatsData | null> {
       db.product.count({ where: { status: "DEMOTED" } }),
       db.clickEvent.count(),
       db.clickEvent.count({ where: { createdAt: { gte: since } } }),
+      db.pageView.count({ where: { createdAt: { gte: since } } }),
       db.trendCandidate.count({ where: { status: "PENDING" } }),
       db.auditLog.findMany({ orderBy: { createdAt: "desc" }, take: 6 }),
       db.verificationRun.findFirst({ orderBy: { startedAt: "desc" } }),
+      db.pageView.groupBy({
+        by: ["path"],
+        where: { createdAt: { gte: since } },
+        _count: { path: true },
+        orderBy: { _count: { path: "desc" } },
+        take: 5,
+      }),
     ]);
     return {
       cards: [
@@ -63,6 +74,7 @@ async function loadStats(): Promise<StatsData | null> {
         { label: "Publicados", value: published },
         { label: "En borrador", value: drafts },
         { label: "Degradados", value: demoted },
+        { label: "Visitas (30 días)", value: views30 },
         { label: "Clics totales", value: clicksTotal },
         { label: "Clics (30 días)", value: clicks30 },
         { label: "Tendencias por revisar", value: pendingTrends },
@@ -71,6 +83,10 @@ async function loadStats(): Promise<StatsData | null> {
       lastRun: lastRun
         ? { report: lastRun.report, startedAt: lastRun.startedAt }
         : null,
+      topPages: topPagesRaw.map((row) => ({
+        path: row.path,
+        views: row._count.path,
+      })),
     };
   } catch {
     return null;
@@ -123,6 +139,31 @@ async function Stats() {
           {data.lastRun.report ?? "sin reporte"} ·{" "}
           {data.lastRun.startedAt.toLocaleString("es")}
         </p>
+      ) : null}
+
+      {data.topPages.length > 0 ? (
+        <>
+          <h2 className="mt-10 text-lg font-bold">Páginas más vistas (30 días)</h2>
+          <ul className="mt-3 divide-y divide-zinc-100 rounded-2xl bg-white ring-1 ring-zinc-200">
+            {data.topPages.map((page) => (
+              <li
+                key={page.path}
+                className="flex items-center gap-3 px-5 py-3 text-sm"
+              >
+                <span className="min-w-0 flex-1 truncate font-medium text-zinc-700">
+                  {page.path}
+                </span>
+                <span className="font-bold text-brand-700">
+                  {page.views} visitas
+                </span>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-2 text-xs text-zinc-400">
+            Analítica propia de la plataforma (sin cookies ni servicios
+            externos): solo se guardan la ruta y el momento de la visita.
+          </p>
+        </>
       ) : null}
 
       <h2 className="mt-10 text-lg font-bold">Actividad reciente</h2>

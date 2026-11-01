@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { requireAdmin } from "@/lib/auth";
+import { logEvent } from "@/lib/log";
 import { writeAudit } from "@/modules/audit/log";
 import {
   BANNER_VARIANT_IDS,
@@ -52,6 +53,9 @@ export async function setBrandAction(
       after: { logoVariant: nextLogo, bannerVariant: nextBanner },
     });
   } catch (error) {
+    logEvent("error", "settings.brand_save_failed", {
+      error: error instanceof Error ? error.message : String(error),
+    });
     return {
       logoVariant: beforeLogo,
       bannerVariant: beforeBanner,

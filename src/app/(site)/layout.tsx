@@ -1,5 +1,7 @@
+import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ViewBeacon from "@/components/ViewBeacon";
 
 // Chrome del sitio público SOLO para las rutas del grupo (site).
 // El panel /admin vive fuera de este grupo: nunca hereda la cabecera
@@ -15,6 +17,10 @@ export default function SiteLayout({
       <Header />
       <div className="flex flex-1 flex-col">{children}</div>
       <Footer />
+      {/* usePathname es dinámico: frontera Suspense (Cache Components). */}
+      <Suspense fallback={null}>
+        <ViewBeacon />
+      </Suspense>
     </>
   );
 }

@@ -3,8 +3,10 @@ import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
 import { SiteLogoMark } from "@/components/SiteLogo";
 import { logoutAction } from "./actions";
+import { connection } from "next/server";
 
 async function Shell({ children }: { children: React.ReactNode }) {
+  await connection();
   const email = await requireAdmin();
   return (
     <div className="flex min-h-dvh">

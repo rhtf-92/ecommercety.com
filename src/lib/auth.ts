@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { connection } from "next/server";
 
 // Autenticación del panel de administración (usuario único por entorno).
 // Credenciales en variables de entorno: ADMIN_EMAIL, ADMIN_PASSWORD y
@@ -58,6 +59,7 @@ export function checkCredentials(email: string, password: string): boolean {
 }
 
 export async function currentAdmin(): Promise<string | null> {
+  await connection();
   const store = await cookies();
   return verifySessionToken(store.get(SESSION_COOKIE)?.value);
 }

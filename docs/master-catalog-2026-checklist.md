@@ -31,6 +31,27 @@ Videojuegos y Electrónica · `health-household` Salud y Hogar ·
 `grocery-gourmet` Gourmet y Despensa. Crearlas implica un sprint
 (semilla, identidad visual y slide por categoría).
 
+**Actualización 2026-11-01 (tarde) — enlaces y Sprint 8:**
+Renato generó los enlaces de las olas 1 y 2 y Dayana los verificó
+resolviéndolos uno a uno: **101 productos de este checklist con
+enlace válido** (tag oficial en todos, HTTP 200), más la
+confirmación de los 22 del lote tendencias reenviados. Detalles:
+- Variantes aceptadas: The Ordinary entró por su listing Pack of 2
+  (`B0DDQ4MSXS` en lugar de `B01MDTVZTZ`) y el organizador SKYDUE
+  por `B0GH771384` (variante, mismo bloque de oficina).
+- Sin enlace (7): CeraVe `B07XP8K162`, Klein RT250 `B08QW7K1JJ`,
+  HOTOR `B07VGRVKSN`, Xbox Elite `B07SFKTLZM` (no generados) y
+  DualSense `B0CQKLS4RP`, chocolate Dubái `B0F1KLZB1C` y caja
+  japonesa `B09VGH1ZSB` (SiteStripe no permitió generarlos).
+- Duplicados inofensivos reenviados: MX Master 3S, LifePro Waver,
+  ThisWorx y WD_BLACK SSD (mismo ASIN dos veces).
+- **Sprint 8 ejecutado:** las 8 categorías nuevas ya existen en la
+  plataforma (semilla Fase 2, respaldo sin base, identidad visual
+  con matiz e icono propios y foto de slide 2048×1152 por
+  categoría). Renato debe correr `npm run db:seed` tras el pull
+  para crearlas en su base local; en producción entrarán con la
+  primera carga.
+
 ---
 
 ## OLA 1 — Categorías actuales

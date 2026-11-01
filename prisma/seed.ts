@@ -11,6 +11,16 @@ const categories = [
   { slug: "pet-supplies", nameEn: "Pet Supplies", phase: 1, commissionRate: 3.0 },
   { slug: "sports-outdoors", nameEn: "Sports, Fitness & Outdoors", phase: 1, commissionRate: 3.0 },
   { slug: "tools-home-improvement", nameEn: "Tools & Home Improvement", phase: 1, commissionRate: 3.0 },
+  // Fase 2 (Sprint 8, 2026-11-01): categorías nuevas de la expansión
+  // exhaustiva del catálogo maestro 2026, aprobadas por Renato.
+  { slug: "toys-games", nameEn: "Toys & Games", phase: 2, commissionRate: 3.0 },
+  { slug: "baby-products", nameEn: "Baby Products", phase: 2, commissionRate: 3.0 },
+  { slug: "fashion-accessories", nameEn: "Fashion & Accessories", phase: 2, commissionRate: 4.0 },
+  { slug: "automotive", nameEn: "Automotive", phase: 2, commissionRate: 4.5 },
+  { slug: "office-products", nameEn: "Office & School Supplies", phase: 2, commissionRate: 3.0 },
+  { slug: "video-games", nameEn: "Video Games & Electronics", phase: 2, commissionRate: 1.0 },
+  { slug: "health-household", nameEn: "Health & Household", phase: 2, commissionRate: 1.0 },
+  { slug: "grocery-gourmet", nameEn: "Grocery & Gourmet Gifts", phase: 2, commissionRate: 1.0 },
 ];
 
 async function main() {
@@ -21,7 +31,7 @@ async function main() {
       create: category,
     });
   }
-  console.log(`Seed completado: ${categories.length} categorías de Fase 1.`);
+  console.log(`Seed completado: ${categories.length} categorías (Fase 1 + Fase 2).`);
 }
 
 main()

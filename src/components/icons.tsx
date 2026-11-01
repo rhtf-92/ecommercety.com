@@ -69,6 +69,86 @@ export function IconWrench(p: P) {
   );
 }
 
+export function IconBlocks(p: P) {
+  return (
+    <svg {...base(p)}>
+      <rect x="3" y="3" width="8" height="8" rx="1.5" />
+      <rect x="13" y="3" width="8" height="8" rx="1.5" />
+      <rect x="3" y="13" width="8" height="8" rx="1.5" />
+      <rect x="13" y="13" width="8" height="8" rx="4" />
+    </svg>
+  );
+}
+
+export function IconBaby(p: P) {
+  return (
+    <svg {...base(p)}>
+      <circle cx="12" cy="7.5" r="3.5" />
+      <path d="M12 4c.3-1.2 1.3-1.9 2.6-1.7" />
+      <path d="M5.5 21c.8-3.8 3.4-5.7 6.5-5.7s5.7 1.9 6.5 5.7" />
+    </svg>
+  );
+}
+
+export function IconShirt(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M20.4 3.5 16 2a4 4 0 0 1-8 0L3.6 3.5a2 2 0 0 0-1.3 2.2l.6 3.5a1 1 0 0 0 1 .8H6v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V10h2.1a1 1 0 0 0 1-.8l.6-3.5a2 2 0 0 0-1.3-2.2z" />
+    </svg>
+  );
+}
+
+export function IconCar(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M5.5 15.5 6.8 8a2 2 0 0 1 2-1.5h6.4a2 2 0 0 1 2 1.5l1.3 7.5" />
+      <path d="M3 15.5h18a1 1 0 0 1 1 1V19a1 1 0 0 1-1 1h-1.5M3 20.5a1 1 0 0 1-1-1v-2.5a1 1 0 0 1 1-1" />
+      <circle cx="7" cy="18" r="1.8" />
+      <circle cx="17" cy="18" r="1.8" />
+      <path d="M8.8 18h6.4" />
+    </svg>
+  );
+}
+
+export function IconBriefcase(p: P) {
+  return (
+    <svg {...base(p)}>
+      <rect x="2.5" y="7" width="19" height="13" rx="2" />
+      <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2" />
+      <path d="M2.5 13h19" />
+    </svg>
+  );
+}
+
+export function IconGamepad(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M6.7 5h10.6a4 4 0 0 1 4 3.6l.7 6.9a3 3 0 0 1-5.2 2.3L14 14.5h-4L7.2 17.8A3 3 0 0 1 2 15.5l.7-6.9A4 4 0 0 1 6.7 5z" />
+      <path d="M7 10v4M5 12h4" />
+      <path d="M15.5 10h.01M18 13h.01" />
+    </svg>
+  );
+}
+
+export function IconHeartPulse(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M19.5 13.5 12 21l-7.5-7.5A5.3 5.3 0 0 1 12 6.2a5.3 5.3 0 0 1 7.5 7.3z" />
+      <path d="M3.5 12h4l1.5-3 3.5 6 1.5-3h6" />
+    </svg>
+  );
+}
+
+export function IconBasket(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="m5 11 4-7M19 11l-4-7M2.5 11h19" />
+      <path d="m4 11 1.5 7.2A2 2 0 0 0 7.5 20h9a2 2 0 0 0 2-1.8L20 11" />
+      <path d="M9.5 14.5v3M14.5 14.5v3" />
+    </svg>
+  );
+}
+
 export function IconShieldCheck(p: P) {
   return (
     <svg {...base(p)}>

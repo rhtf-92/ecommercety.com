@@ -14,9 +14,10 @@ export type ProductWithLinks = Product & {
 };
 
 /**
- * Categorías de la Fase 1 (aprobadas el 2026-10-31). Sirven como respaldo
- * para que el sitio renderice aunque la base de datos aún no esté
- * provisionada; en cuanto exista DATABASE_URL, manda la base de datos.
+ * Categorías de Fase 1 (aprobadas el 2026-10-31) y Fase 2 (Sprint 8,
+ * 2026-11-01). Sirven como respaldo para que el sitio renderice aunque
+ * la base de datos aún no esté provisionada; en cuanto exista
+ * DATABASE_URL, manda la base de datos.
  */
 export const FALLBACK_CATEGORIES: Pick<
   Category,
@@ -28,6 +29,14 @@ export const FALLBACK_CATEGORIES: Pick<
   { id: "fallback-pet-supplies", slug: "pet-supplies", nameEn: "Pet Supplies", descriptionEn: "Food, toys and care essentials your pets will actually enjoy.", phase: 1, isActive: true },
   { id: "fallback-sports-outdoors", slug: "sports-outdoors", nameEn: "Sports, Fitness & Outdoors", descriptionEn: "Fitness gear and outdoor equipment for every level.", phase: 1, isActive: true },
   { id: "fallback-tools-home-improvement", slug: "tools-home-improvement", nameEn: "Tools & Home Improvement", descriptionEn: "Tools and fixes that make home projects easier.", phase: 1, isActive: true },
+  { id: "fallback-toys-games", slug: "toys-games", nameEn: "Toys & Games", descriptionEn: "Building sets, board games and gifts kids actually ask for.", phase: 2, isActive: true },
+  { id: "fallback-baby-products", slug: "baby-products", nameEn: "Baby Products", descriptionEn: "Registry-worthy essentials for newborns and new parents.", phase: 2, isActive: true },
+  { id: "fallback-fashion-accessories", slug: "fashion-accessories", nameEn: "Fashion & Accessories", descriptionEn: "Shoes, bags, watches and seasonal style staples.", phase: 2, isActive: true },
+  { id: "fallback-automotive", slug: "automotive", nameEn: "Automotive", descriptionEn: "Car care, safety and accessories for every drive.", phase: 2, isActive: true },
+  { id: "fallback-office-products", slug: "office-products", nameEn: "Office & School Supplies", descriptionEn: "Desk upgrades and supplies that make workdays smoother.", phase: 2, isActive: true },
+  { id: "fallback-video-games", slug: "video-games", nameEn: "Video Games & Electronics", descriptionEn: "Consoles, controllers and gear for every kind of player.", phase: 2, isActive: true },
+  { id: "fallback-health-household", slug: "health-household", nameEn: "Health & Household", descriptionEn: "Wellness, rest and everyday-care essentials.", phase: 2, isActive: true },
+  { id: "fallback-grocery-gourmet", slug: "grocery-gourmet", nameEn: "Grocery & Gourmet Gifts", descriptionEn: "Gift baskets, coffee and treats worth sharing.", phase: 2, isActive: true },
 ];
 
 async function dbOrNull<T>(

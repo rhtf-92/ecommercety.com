@@ -1,8 +1,16 @@
 import {
+  IconBaby,
+  IconBasket,
+  IconBlocks,
+  IconBriefcase,
+  IconCar,
   IconCpu,
   IconDumbbell,
+  IconGamepad,
+  IconHeartPulse,
   IconHome,
   IconPaw,
+  IconShirt,
   IconSparkles,
   IconTrending,
   IconWrench,
@@ -29,6 +37,22 @@ export default function CategoryIcon({
       return <IconDumbbell className={cls} />;
     case "tools-home-improvement":
       return <IconWrench className={cls} />;
+    case "toys-games":
+      return <IconBlocks className={cls} />;
+    case "baby-products":
+      return <IconBaby className={cls} />;
+    case "fashion-accessories":
+      return <IconShirt className={cls} />;
+    case "automotive":
+      return <IconCar className={cls} />;
+    case "office-products":
+      return <IconBriefcase className={cls} />;
+    case "video-games":
+      return <IconGamepad className={cls} />;
+    case "health-household":
+      return <IconHeartPulse className={cls} />;
+    case "grocery-gourmet":
+      return <IconBasket className={cls} />;
     default:
       return <IconTrending className={cls} />;
   }

@@ -8,6 +8,10 @@ import PageBanner from "@/components/PageBanner";
 export const metadata: Metadata = {
   title: "Search picks",
   description: "Search the T&F Picks catalog of hand-picked Amazon products.",
+  // Las páginas de resultados de búsqueda no se indexan (práctica
+  // estándar: contenido delgado y duplicado); el buscador interno se
+  // descubre vía el SearchAction del WebSite.
+  robots: { index: false, follow: true },
 };
 
 type Props = { searchParams: Promise<{ q?: string }> };

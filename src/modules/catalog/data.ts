@@ -154,3 +154,19 @@ export async function getProductByAsin(
   const [withPrice] = await attachPrices([product]);
   return withPrice;
 }
+
+// Lista mínima para el sitemap: ASIN y fecha de actualización de los
+// productos publicados. Sin base de datos devuelve vacío (el sitemap
+// sigue siendo válido con categorías y guías).
+export async function getSitemapProducts(): Promise<
+  { asin: string; updatedAt: Date }[]
+> {
+  const products = await dbOrNull((client) =>
+    client.product.findMany({
+      where: { status: "PUBLISHED" },
+      select: { asin: true, updatedAt: true },
+      orderBy: { updatedAt: "desc" },
+    }),
+  );
+  return products ?? [];
+}

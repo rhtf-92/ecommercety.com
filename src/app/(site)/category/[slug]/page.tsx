@@ -13,20 +13,29 @@ import ProductCard from "@/components/ProductCard";
 import PageBanner from "@/components/PageBanner";
 import { getShowProductImages } from "@/modules/settings/site";
 import CategoryIcon from "@/components/CategoryIcon";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd, itemListLd } from "@/modules/seo/jsonld";
 import { IconArrowRight } from "@/components/icons";
 
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  // Metadatos desde el catálogo estático de Fase 1 (sincrónico, sin DB).
+  // Metadatos desde el catálogo estático (sincrónico, sin DB).
   const category = FALLBACK_CATEGORIES.find((item) => item.slug === slug);
   if (!category) return {};
+  const title = `Best Amazon ${category.nameEn} Deals & Trending Picks`;
+  const description = `Shop the best Amazon deals and trending products in ${category.nameEn}, hand-picked and re-verified every 5 hours by T&F Picks. ${category.descriptionEn ?? ""}`.trim();
   return {
-    title: category.nameEn,
-    description:
-      category.descriptionEn ??
-      `Hand-picked ${category.nameEn} products from T&F Picks.`,
+    title,
+    description,
+    alternates: { canonical: `/category/${category.slug}` },
+    openGraph: {
+      title: `${title} | T&F Picks`,
+      description,
+      url: `/category/${category.slug}`,
+      type: "website",
+    },
   };
 }
 
@@ -45,6 +54,21 @@ async function CategoryContent({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: category.nameEn, path: `/category/${category.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={itemListLd(
+          products.map((product) => ({
+            name: product.title,
+            path: `/product/${product.asin}`,
+          })),
+          `Best Amazon ${category.nameEn} picks`,
+        )}
+      />
       <PageBanner
         image={visual.image}
         eyebrow={visual.tagline}

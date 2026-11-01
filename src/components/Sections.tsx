@@ -99,7 +99,7 @@ export function TrustStrip() {
   );
 }
 
-const FAQS = [
+export const FAQS = [
   {
     q: "How does T&F Picks make money?",
     a: "We are part of the Amazon Associates program. When you buy through a link on this site, Amazon pays us a small commission at no extra cost to you. That is how we keep the research free.",

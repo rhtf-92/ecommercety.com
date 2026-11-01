@@ -9,6 +9,9 @@ import { getShowProductImages } from "@/modules/settings/site";
 import { webAffiliateUrl } from "@/components/ProductCard";
 import TrackedAffiliateButton from "@/components/TrackedAffiliateButton";
 import PriceBlock, { freshPrice, UpdatedStamp } from "@/components/PriceBlock";
+import type { Metadata } from "next";
+import JsonLd from "@/components/JsonLd";
+import { breadcrumbLd, productLd } from "@/modules/seo/jsonld";
 import {
   IconCheck,
   IconExternal,
@@ -19,8 +22,34 @@ import {
 
 type Props = { params: Promise<{ asin: string }> };
 
-// Sin generateMetadata por ahora: el título usa la plantilla del layout.
-// Los metadatos por producto llegarán con la capa de caché de datos.
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { asin } = await params;
+  const product = await getProductByAsin(asin).catch(() => null);
+  if (!product) return {};
+  const title = `${product.title} — Review & Amazon Deal`;
+  const description = (
+    product.shortDescription ??
+    `Our honest take on the ${product.title}: why it made the T&F Picks list, who it is for, and the live price on Amazon.`
+  ).slice(0, 300);
+  return {
+    title,
+    description,
+    alternates: { canonical: `/product/${product.asin}` },
+    openGraph: {
+      title: `${title} | T&F Picks`,
+      description,
+      url: `/product/${product.asin}`,
+      type: "website",
+      ...(product.imageUrl ? { images: [{ url: product.imageUrl }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | T&F Picks`,
+      description,
+      ...(product.imageUrl ? { images: [product.imageUrl] } : {}),
+    },
+  };
+}
 
 const BUY_BOX_POINTS = [
   { icon: <IconShieldCheck className="h-4 w-4" />, text: "Sold and shipped on Amazon.com" },
@@ -40,6 +69,31 @@ async function ProductContent({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          {
+            name: product.category.nameEn,
+            path: `/category/${product.category.slug}`,
+          },
+          { name: product.title, path: `/product/${product.asin}` },
+        ])}
+      />
+      <JsonLd
+        data={productLd({
+          asin: product.asin,
+          title: product.title,
+          brand: product.brand,
+          description: product.shortDescription,
+          imageUrl: product.imageUrl,
+          categoryName: product.category.nameEn,
+          amazonUrl: product.amazonUrl,
+          freshOffer:
+            price && price.amount !== null
+              ? { amount: price.amount, currency: price.currency ?? "USD" }
+              : null,
+        })}
+      />
       <PageBanner
         image={visual.image}
         eyebrow={product.category.nameEn}

@@ -1,6 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import {
+  SITE_DESCRIPTION,
+  SITE_KEYWORDS,
+  SITE_NAME,
+  SITE_TITLE_DEFAULT,
+  SITE_URL,
+} from "@/modules/seo/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,9 +19,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://ecommercety.com";
-
 // Viewport explícito: escala correcta en todo dispositivo, uso del
 // área segura en pantallas con notch y color de tema de marca.
 export const viewport: Viewport = {
@@ -24,27 +28,71 @@ export const viewport: Viewport = {
   themeColor: "#0d1220",
 };
 
+// Verificación de propiedad para buscadores (Search Console y Bing
+// Webmaster) por meta tag, como alternativa al TXT en DNS. Se activa
+// definiendo las variables en el entorno de producción.
+const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
+const bingVerification = process.env.BING_SITE_VERIFICATION;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "T&F Picks — by E-Commerce T&F",
+    default: SITE_TITLE_DEFAULT,
     template: "%s | T&F Picks",
   },
-  description:
-    "Hand-picked Amazon products, honest guides and comparisons from T&F Picks, by E-Commerce T&F.",
+  description: SITE_DESCRIPTION,
+  keywords: SITE_KEYWORDS,
+  applicationName: SITE_NAME,
+  authors: [{ name: "E-Commerce T&F", url: SITE_URL }],
+  creator: "E-Commerce T&F",
+  publisher: "E-Commerce T&F",
+  category: "shopping",
+  alternates: {
+    canonical: "/",
+    languages: { "en-US": "/" },
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  ...(googleVerification || bingVerification
+    ? {
+        verification: {
+          ...(googleVerification ? { google: googleVerification } : {}),
+          ...(bingVerification
+            ? { other: { "msvalidate.01": bingVerification } }
+            : {}),
+        },
+      }
+    : {}),
   openGraph: {
     type: "website",
-    siteName: "T&F Picks",
-    title: "T&F Picks — Great products. Zero guesswork.",
-    description:
-      "Curated Amazon finds, verified on a 5-hour cycle, with honest buying guides.",
+    locale: "en_US",
+    siteName: SITE_NAME,
+    title: SITE_TITLE_DEFAULT,
+    description: SITE_DESCRIPTION,
     url: SITE_URL,
+    images: [
+      {
+        url: "/slides/brand.jpg",
+        width: 2048,
+        height: 1152,
+        alt: "T&F Picks — curated Amazon deals and trending products",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
-    title: "T&F Picks — Great products. Zero guesswork.",
-    description:
-      "Curated Amazon finds, verified on a 5-hour cycle, with honest buying guides.",
+    card: "summary_large_image",
+    title: SITE_TITLE_DEFAULT,
+    description: SITE_DESCRIPTION,
+    images: ["/slides/brand.jpg"],
   },
 };
 

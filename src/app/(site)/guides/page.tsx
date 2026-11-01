@@ -5,9 +5,10 @@ import { IconArrowRight } from "@/components/icons";
 import PageBanner from "@/components/PageBanner";
 
 export const metadata: Metadata = {
-  title: "Buying Guides",
+  title: "Amazon Buying Guides & Comparisons",
   description:
-    "Honest buying guides and comparisons from T&F Picks: decide in minutes, not hours.",
+    "Honest Amazon buying guides and comparisons from T&F Picks: decide in minutes, not hours.",
+  alternates: { canonical: "/guides" },
 };
 
 const GUIDES = [

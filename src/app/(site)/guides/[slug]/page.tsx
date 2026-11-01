@@ -8,6 +8,8 @@ import ProductCard from "@/components/ProductCard";
 import { getShowProductImages } from "@/modules/settings/site";
 import { IconArrowRight } from "@/components/icons";
 import PageBanner from "@/components/PageBanner";
+import JsonLd from "@/components/JsonLd";
+import { articleLd, breadcrumbLd } from "@/modules/seo/jsonld";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -16,7 +18,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const guide = getGuideBySlug(slug);
   if (!guide) return {};
-  return { title: guide.title, description: guide.description };
+  return {
+    title: guide.title,
+    description: guide.description,
+    alternates: { canonical: `/guides/${guide.slug}` },
+    openGraph: {
+      title: `${guide.title} | T&F Picks`,
+      description: guide.description,
+      url: `/guides/${guide.slug}`,
+      type: "article",
+    },
+  };
 }
 
 async function GuideContent({ params }: Props) {
@@ -33,6 +45,20 @@ async function GuideContent({ params }: Props) {
   const visual = CATEGORY_VISUALS[guide.categorySlug] ?? DEFAULT_VISUAL;
   return (
     <>
+      <JsonLd
+        data={articleLd({
+          slug: guide.slug,
+          title: guide.title,
+          description: guide.description,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbLd([
+          { name: "Home", path: "/" },
+          { name: "Guides", path: "/guides" },
+          { name: guide.title, path: `/guides/${guide.slug}` },
+        ])}
+      />
       <PageBanner
         image={visual.image}
         eyebrow={`${guide.categoryLabel} · ${guide.readingMinutes} min read`}

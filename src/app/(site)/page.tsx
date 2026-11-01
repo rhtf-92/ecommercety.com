@@ -7,7 +7,9 @@ import CategoryIcon from "@/components/CategoryIcon";
 import ProductCard from "@/components/ProductCard";
 import Hero from "@/components/Hero";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
-import { Faq, HowWePick, SectionHeading, TrustStrip } from "@/components/Sections";
+import { Faq, FAQS, HowWePick, SectionHeading, TrustStrip } from "@/components/Sections";
+import JsonLd from "@/components/JsonLd";
+import { faqLd, organizationLd, websiteLd } from "@/modules/seo/jsonld";
 import { IconArrowRight, IconBook } from "@/components/icons";
 
 async function CategoryTiles() {
@@ -150,6 +152,9 @@ async function HomeBanner() {
 export default function Home() {
   return (
     <main className="flex flex-1 flex-col">
+      <JsonLd data={organizationLd()} />
+      <JsonLd data={websiteLd()} />
+      <JsonLd data={faqLd(FAQS)} />
       <Suspense fallback={<Hero />}>
         <HomeBanner />
       </Suspense>

@@ -1,43 +1,59 @@
 # Despliegue en producción — runbook
 
-Arquitectura de producción (niveles gratuitos): **Vercel** (Next.js) +
-**Neon** (PostgreSQL) + **Cloudflare Registrar** (dominio
-ecommercety.com). Todo el código ya está listo; estos pasos son de
-cuentas y configuración, en orden.
+Arquitectura de producción decidida el 2026-11-01: **Railway**
+(servidor Node, desde US$5/mes) para la aplicación + **Neon**
+(PostgreSQL, nivel gratuito) como base desde el día uno +
+**Cloudflare Registrar** (dominio ecommercety.com). La base nace en
+Neon a propósito: migrar luego a **Vercel Pro** será mover solo la
+app (repo + variables + DNS), sin tocar los datos. Todo el código ya
+está listo; estos pasos son de cuentas y configuración, en orden.
 
-## 1. Dominio (Renato, en Cloudflare)
+## 1. Base de datos de producción (Neon)
 
-1. Comprar `ecommercety.com` en Cloudflare Registrar.
+1. Crear proyecto en neon.tech (región US East, la más cercana al
+   público de EE. UU.).
+2. Copiar el connection string (con `?sslmode=require`).
+
+## 2. Aplicación en Railway (verificación previa al dominio)
+
+1. En railway.com: New Project → Deploy from GitHub repo →
+   `rhtf-92/ecommercety.com`. El archivo `railway.json` del repo ya
+   define build (`npm run build`), arranque con migración automática
+   (`npx prisma migrate deploy && npm run start`) y healthcheck en
+   `/api/health`.
+2. Variables del servicio:
+   - `DATABASE_URL` = connection string de Neon
+   - `NEXT_PUBLIC_SITE_URL` = la URL `*.up.railway.app` por ahora;
+     al conectar el dominio pasa a `https://ecommercety.com`
+   - `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `SESSION_SECRET` (valores
+     NUEVOS, distintos de los de desarrollo)
+   - `CREATORS_API_CREDENTIAL_ID/SECRET` solo cuando Amazon los emita.
+3. Cargar datos desde la PC, apuntando el `.env` a Neon:
+   `npm run db:seed` y `npm run db:import` (lote 001 y siguientes).
+   Las migraciones las aplica el propio arranque en Railway.
+4. Verificar en la URL de Railway: `/api/health` responde
+   `{"status":"ok", ...}`, la portada carga el catálogo y `/admin`
+   entra con las credenciales de producción. Esta fase es de
+   verificación interna: todavía sin dominio ni promoción.
+
+## 3. Dominio (Renato, en Cloudflare)
+
+1. Comprar `ecommercety.com` en Cloudflare Registrar (renovación
+   automática y verificación en dos pasos activadas).
 2. Crear el buzón/redirección `contact@ecommercety.com` (la página de
    contacto ya lo anuncia).
+3. En Railway: Settings → Networking → Custom Domain →
+   `ecommercety.com` y `www.ecommercety.com`; Railway indica los
+   registros y se crean en el DNS de Cloudflare (modo proxied es
+   válido aquí). Actualizar `NEXT_PUBLIC_SITE_URL` a
+   `https://ecommercety.com` y redesplegar.
 
-## 2. Declarar el sitio en Associates Central (obligatorio)
+## 4. Declarar el sitio en Associates Central (obligatorio)
 
 1. Associates Central → Configuración de la cuenta → Editar lista de
    sitios web y aplicaciones móviles → agregar `ecommercety.com`.
-2. Sin este paso, las comisiones del dominio no se atribuyen.
-
-## 3. Base de datos de producción (Neon)
-
-1. Crear proyecto en neon.tech (región US East).
-2. Copiar el connection string (con `?sslmode=require`).
-3. Desde la PC, apuntando a esa URL:
-   `npx prisma migrate deploy`, `npm run db:seed`,
-   `npm run db:import` (lote 001 y siguientes).
-
-## 4. Vercel
-
-1. Importar el repo `rhtf-92/ecommercety.com` en Vercel.
-2. Variables de entorno (Production):
-   - `DATABASE_URL` = connection string de Neon
-   - `NEXT_PUBLIC_SITE_URL` = `https://ecommercety.com`
-   - `ADMIN_EMAIL`, `ADMIN_PASSWORD`, `SESSION_SECRET` (valores nuevos,
-     distintos de los de desarrollo)
-   - `CREATORS_API_CREDENTIAL_ID/SECRET` solo cuando Amazon los emita.
-3. Conectar el dominio `ecommercety.com` (Vercel indica los DNS;
-   Cloudflare en modo DNS only para ese registro).
-4. Verificar: `https://ecommercety.com/api/health` debe dar
-   `{"status":"ok", ...}`.
+2. Sin este paso, las comisiones del dominio no se atribuyen. No se
+   promociona el sitio antes de completar este paso.
 
 ## 5. Verificación post-lanzamiento
 
@@ -51,10 +67,19 @@ cuentas y configuración, en orden.
 - [ ] Activar con Dayana los ciclos: verificación + sincronización
       cada 5 horas y descubrimiento de tendencias en la hora 3.
 
-## 6. Cuando Amazon apruebe la Creators API
+## 6. Migración futura a Vercel Pro (cuando el tráfico lo justifique)
+
+1. Importar el mismo repo en Vercel Pro y copiar las variables
+   (el `DATABASE_URL` de Neon NO cambia: la base no se mueve).
+2. Conectar el dominio en Vercel y pasar el registro de Cloudflare
+   a modo DNS only para ese dominio.
+3. Verificar `/api/health` en Vercel y dar de baja el servicio de
+   Railway. Sin cambios de código.
+
+## 7. Cuando Amazon apruebe la Creators API
 
 Requisito: 10 ventas calificadas en 30 días. Entonces: Associates
 Central → Herramientas → Creators API → crear aplicación → pegar las
-credenciales en Vercel → `npm run db:sync-amazon` (o el botón del
+credenciales en Railway → `npm run db:sync-amazon` (o el botón del
 panel) → precios, ofertas e imágenes oficiales aparecen con su sello
 de hora. Ver `docs/amazon-data.md`.

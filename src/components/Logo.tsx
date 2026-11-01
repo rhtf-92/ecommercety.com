@@ -12,7 +12,7 @@ export const LOGO_VARIANTS: { id: LogoVariantId; name: string; concept: string }
   { id: "wordmark", name: "Tipográfico", concept: "Solo texto con estrella ámbar: minimalista, editorial, premium." },
 ];
 
-function Mark({ variant }: { variant: LogoVariantId }) {
+export function LogoMark({ variant }: { variant: LogoVariantId }) {
   switch (variant) {
     case "tag":
       return (
@@ -74,7 +74,7 @@ export default function Logo({
   if (variant === "wordmark") {
     return (
       <span className="flex items-center gap-2.5">
-        <Mark variant={variant} />
+        <LogoMark variant={variant} />
         {!compact ? (
           <span className="leading-tight">
             <span className={`block text-base font-black tracking-tight ${nameCls}`}>
@@ -91,7 +91,7 @@ export default function Logo({
   }
   return (
     <span className="flex items-center gap-2.5">
-      <Mark variant={variant} />
+      <LogoMark variant={variant} />
       {!compact ? (
         <span className="leading-tight">
           <span className={`block text-base font-extrabold tracking-tight ${nameCls}`}>

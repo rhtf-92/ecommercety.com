@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { requireAdmin } from "@/lib/auth";
+import { SiteLogoMark } from "@/components/SiteLogo";
 import { logoutAction } from "./actions";
 
 async function Shell({ children }: { children: React.ReactNode }) {
@@ -13,8 +14,8 @@ async function Shell({ children }: { children: React.ReactNode }) {
       <aside className="sticky top-0 hidden h-dvh w-60 shrink-0 flex-col bg-ink-900 text-white md:flex lg:w-64">
         <div className="shrink-0 p-6 pb-0">
           <Link href="/admin" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-brand-700 text-sm font-black">
-              T&amp;F
+            <span className="shrink-0">
+              <SiteLogoMark />
             </span>
             <span className="min-w-0 leading-tight">
               <span className="block truncate font-extrabold">T&amp;F Picks</span>

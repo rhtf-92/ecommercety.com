@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Logo from "@/components/Logo";
+import { SiteLogoMark } from "@/components/SiteLogo";
 
 // 404 raíz: las URL completamente desconocidas no entran al grupo
 // (site), así que esta página trae su propia mini-chrome de marca.
@@ -11,7 +11,12 @@ export default function RootNotFound() {
       <header className="border-b border-zinc-100 bg-white/85">
         <div className="container-x flex h-16 items-center">
           <Link href="/" aria-label="T&F Picks — home">
-            <Logo variant="badge" />
+            <span className="flex items-center gap-2.5">
+              <SiteLogoMark />
+              <span className="text-base font-extrabold tracking-tight text-zinc-900">
+                T&amp;F Picks
+              </span>
+            </span>
           </Link>
         </div>
       </header>

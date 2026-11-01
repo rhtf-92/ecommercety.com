@@ -373,7 +373,7 @@ export const BATCH_WAVE2_B: BatchProduct[] = [
   },
   {
     asin: "B0F68QZC1L",
-    brand: "Freeze Dried Candy Co.",
+    brand: "Yum Yum Candy Shop",
     title: "Freeze Dried Candy Variety Pack, Crunchy Assorted Sweets",
     categorySlug: "grocery-gourmet",
     affiliateUrl:

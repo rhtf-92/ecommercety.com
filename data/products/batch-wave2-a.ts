@@ -374,7 +374,7 @@ export const BATCH_WAVE2_A: BatchProduct[] = [
   },
   {
     asin: "B0C7GCGHJF",
-    brand: "Generic",
+    brand: "We Fleece",
     title: "Women's Fleece-Lined Leggings with Pockets — High-Waisted Winter Tights, 3-Pack",
     categorySlug: "fashion-accessories",
     affiliateUrl:

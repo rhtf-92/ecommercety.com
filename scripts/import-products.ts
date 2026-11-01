@@ -14,9 +14,13 @@ try {
 
 import { PrismaClient } from "@prisma/client";
 import { BATCH_001, type BatchProduct } from "../data/products/batch-001";
+import { BATCH_TRENDING_2026 } from "../data/products/batch-trending-2026";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
-const BATCHES: BatchProduct[][] = [BATCH_001];
+const BATCHES: { id: string; items: BatchProduct[] }[] = [
+  { id: "batch-001", items: BATCH_001 },
+  { id: "batch-trending-2026", items: BATCH_TRENDING_2026 },
+];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 const OFFICIAL_TAGS = Object.values(TRACKING_IDS);
 
@@ -36,11 +40,13 @@ function validate(product: BatchProduct): string[] {
 
 async function main() {
   const dryRun = process.argv.includes("--dry-run");
-  const all = BATCHES.flat();
+  const all = BATCHES.flatMap((batch) =>
+    batch.items.map((product) => ({ batchId: batch.id, product })),
+  );
   const seen = new Set<string>();
   let invalid = 0;
 
-  for (const product of all) {
+  for (const { product } of all) {
     const errors = validate(product);
     if (seen.has(product.asin)) errors.push("ASIN duplicado dentro del lote");
     seen.add(product.asin);
@@ -69,7 +75,7 @@ async function main() {
   let created = 0;
   let updated = 0;
   try {
-    for (const product of all) {
+    for (const { batchId, product } of all) {
       const category = await prisma.category.findUnique({
         where: { slug: product.categorySlug },
         select: { id: true },
@@ -132,7 +138,7 @@ async function main() {
           entityType: "Product",
           entityId: saved.id,
           action: existing ? "IMPORT_UPDATE" : "IMPORT_CREATE",
-          after: { asin: product.asin, status: "PUBLISHED", batch: "batch-001" },
+          after: { asin: product.asin, status: "PUBLISHED", batch: batchId },
           actor: "dayana-import",
         },
       });

@@ -14,6 +14,18 @@ van en las fichas públicas por cumplimiento (solo Creators API).
 Dayana escribe la ficha editorial completa de cada uno y crea el
 archivo del lote, igual que con el lote 001.
 
+**Estado (2026-11-01):** Renato generó 22 de 24 enlaces; Dayana los
+resolvió y verificó uno a uno (destino correcto y
+`tag=ecommercety00-20` en los 22) y creó
+`data/products/batch-trending-2026.ts` con las 22 fichas. Pendientes:
+
+- **Bowflex SelectTech 552 — B001ARYU58: LISTING CAÍDO.** Amazon
+  devuelve 404 (confirmado por Renato y por Dayana). El listing
+  vigente del mismo producto es el "Results Series":
+  https://www.amazon.com/dp/B0FRNG2N5H — generar el SiteStripe de
+  ESE enlace en su lugar.
+- **Apple AirTag 4-Pack — B0GJTXVN9Z:** sin enlace generado aún.
+
 ## Hogar y Cocina (home-kitchen)
 
 1. **Ninja Air Fryer Pro 4-in-1, 5 QT (AF141)** — `B0CSZ7WBYW`

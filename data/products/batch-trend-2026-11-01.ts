@@ -20,7 +20,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Apple",
     title: "Apple AirPods 5 Wireless Earbuds — The Newest Generation, First Holiday Season",
     categorySlug: "tech-smart-home",
-    affiliateUrl: "https://www.amazon.com/dp/B0HJB69GJL?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B0HJB69GJL?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=6af4ea25d49d03748f731ecc3dbd9cff&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-0ed9878060f2f4b2&btn_type=ss&btn_ref=srctok-0ed9878060f2f4b2",
     imageUrl: null,
     shortDescription:
       "The newest generation of Apple's everyday wireless earbuds, made for calls, music and podcasts on the move, with the simple pairing Apple users expect.",
@@ -32,7 +32,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Amazon",
     title: "Amazon Fire TV Stick 4K Select — Essential 4K Streaming, Fast App Launches",
     categorySlug: "tech-smart-home",
-    affiliateUrl: "https://www.amazon.com/dp/B0C6W3D4RM?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B0C6W3D4RM?linkCode=sl2&tag=ecommercety00-20&linkId=72847165d7d2218497c485e37c6a64b5&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-3bf17588922fc56a&btn_type=ss&btn_ref=srctok-3bf17588922fc56a",
     imageUrl: null,
     shortDescription:
       "An easy way to turn almost any TV into a 4K streaming hub, with fast access to the apps and shows the household already watches.",
@@ -44,7 +44,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Stanley",
     title: "Stanley Quencher H2.0 FlowState Tumbler, 40 oz — The Default Gift Tumbler",
     categorySlug: "home-kitchen",
-    affiliateUrl: "https://www.amazon.com/dp/B0CRMY498M?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B0CRMY498M?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=4767fac0a876a0160670ff3398ee47d0&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-65c69afbc70a8469&btn_type=ss&btn_ref=srctok-65c69afbc70a8469",
     imageUrl: null,
     shortDescription:
       "The big, everyday tumbler that became the default gift: built for long days, car cup holders and desks, with a lid made for sipping on the go.",
@@ -56,7 +56,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Instant Pot",
     title: "Instant Pot RIO 7-in-1 Multi-Cooker, 6 Qt — Holiday Cooking, One Pot",
     categorySlug: "home-kitchen",
-    affiliateUrl: "https://www.amazon.com/dp/B0FBK1XHXR?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B0FBK1XHXR?linkCode=sl2&tag=ecommercety00-20&linkId=d19d4bc7715be1dfc23d793309f96fba&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-35531bc62b412bff&btn_type=ss&btn_ref=srctok-35531bc62b412bff",
     imageUrl: null,
     shortDescription:
       "Seven cooking jobs in one pot, sized for family dinners and holiday hosting, from weeknight pressure cooking to slow weekend meals.",
@@ -68,7 +68,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "O'Keeffe's",
     title: "O'Keeffe's Working Hands Hand Cream — Winter Care for Hard-Working Hands",
     categorySlug: "beauty-personal-care",
-    affiliateUrl: "https://www.amazon.com/dp/B00121UVU0?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B00121UVU0?linkCode=sl2&tag=ecommercety00-20&linkId=ad634d4b87765ffd3fa2fc0b7a8902c8&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-044a3b0ec739b27f&btn_type=ss&btn_ref=srctok-044a3b0ec739b27f",
     imageUrl: null,
     shortDescription:
       "A concentrated hand cream made for dry, hard-working hands, built for the months when cold air and frequent washing take their toll.",
@@ -80,7 +80,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Owala",
     title: "Owala FreeSip Insulated Stainless Steel Water Bottle, 24 oz — Sip Two Ways",
     categorySlug: "sports-outdoors",
-    affiliateUrl: "https://www.amazon.com/dp/B085DVHQ57?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B085DVHQ57?linkCode=sl2&tag=ecommercety00-20&linkId=67635924327cc7e0bdd4b520b327a8c4&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-6b8f6a8a0691b043&btn_type=ss&btn_ref=srctok-6b8f6a8a0691b043",
     imageUrl: null,
     shortDescription:
       "An insulated bottle with a clever two-way spout: sip through the straw or tilt it back, made for gym bags, desks and trail days alike.",
@@ -92,7 +92,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Mattel",
     title: "UNO Card Game — The Family Classic for Game Night",
     categorySlug: "toys-games",
-    affiliateUrl: "https://www.amazon.com/dp/B00004TZY8?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B00004TZY8?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=b9370970b191adee8fe7eba29311052e&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-13cf12bfd7cc4cea&btn_type=ss&btn_ref=srctok-13cf12bfd7cc4cea",
     imageUrl: null,
     shortDescription:
       "The card game every family already knows how to play: fast rounds, easy rules and the kind of table that keeps everyone one more game.",
@@ -104,7 +104,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Vicks",
     title: "Vicks Warm Mist Humidifier — Soothing Moisture for Dry Winter Air",
     categorySlug: "health-household",
-    affiliateUrl: "https://www.amazon.com/dp/B001FWXKTA?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B001FWXKTA?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=2be4a0ce122dd838b6e9f4ac458ee8c4&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-61000f4568904482&btn_type=ss&btn_ref=srctok-61000f4568904482",
     imageUrl: null,
     shortDescription:
       "Warm, soothing moisture for dry indoor air, made for bedrooms through the cold months when heating dries everything out.",
@@ -116,7 +116,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "HotHands",
     title: "HotHands Hand Warmers, 40 Pair — A Whole Winter of Warmth",
     categorySlug: "sports-outdoors",
-    affiliateUrl: "https://www.amazon.com/dp/B0007ZF4OA?tag=ecommercety00-20",
+    affiliateUrl: "https://www.amazon.com/dp/B0007ZF4OA?linkCode=sl2&tag=ecommercety00-20&linkId=95daf496d3559ad41a4e1a0382a96f1d&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-2ba4bdc1ad7b5e39&btn_type=ss&btn_ref=srctok-2ba4bdc1ad7b5e39",
     imageUrl: null,
     shortDescription:
       "Air-activated warmth for gloves, pockets and outdoor days, in a multipack that covers a whole winter of cold mornings.",

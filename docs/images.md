@@ -56,3 +56,32 @@ Disclosure y Privacidad mantienen el banner compacto de marca
 (`/slides/brand.jpg`) por sobriedad legal, y Búsqueda también.
 Categoría, ficha de producto y guía individual siguen con la foto de su
 categoría (`public/slides/`).
+
+## `public/favicons/` — favicon dinámico por variante de logo
+
+El icono de la pestaña sigue la variante de logo elegida en el panel
+(`SiteSetting.logoVariant`): el layout del sitio público
+(`src/app/(site)/layout.tsx`, `generateMetadata`) declara los iconos de
+la variante activa con la misma fuente y el mismo fallback (`badge`)
+que usa `SiteLogo` para el logo visible. Assets por variante,
+generados **desde los vectores exactos de `LogoMark`**
+(`src/components/Logo.tsx`):
+
+| Archivo | Formato | Uso |
+| --- | --- | --- |
+| `<variante>.svg` | SVG (viewBox 48×48) | Icono principal de la pestaña |
+| `<variante>-32.png` | PNG 32×32 | Fallback PNG y `shortcut icon` |
+| `<variante>-180.png` | PNG 180×180 | `apple-touch-icon` |
+
+Variantes: `badge`, `tag`, `arrow`, `seal`, `wordmark` (15 archivos).
+
+Además, `src/app/favicon.ico` es el ICO clásico multiformato
+(16/32/48 con entradas PNG) generado desde la variante `badge`: es el
+icono del panel `/admin` y el respaldo cuando la base no responde.
+
+**Regenerar todo** (tras cualquier cambio de paths o colores en
+`Logo.tsx`, reflejándolo en la tabla del script):
+
+```bash
+node scripts/generate-favicons.mjs
+```

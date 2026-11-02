@@ -117,6 +117,14 @@ svg {
        la página y otro al pasar el cursor o enfocar — nunca cíclico.
    (d) Micro-interacciones: hover se eleva 1px y escala 1.02 con
        easing elástico suave; active baja a 0.98.
+   (e) Spotlight que sigue al cursor dentro de la píldora
+       (::before, variables --pill-glow-x/y que escribe el Header;
+       patrón "cursor glow" de Codrops/MicroKit).
+   (f) Clic con efecto según el contexto, vía canvas-confetti
+       sobre un canvas global (src/components/fx/promoBursts.ts):
+       Holiday Gifts estalla en estrellas, copos y nieve residual;
+       Today's Deals en brasas ascendentes con rayos y etiquetas.
+       Con prefers-reduced-motion no hay spotlight ni estallidos.
    Solo se animan background-position, opacity, transform y
    box-shadow (GPU-friendly, sin repaints de layout); la píldora no
    cambia de tamaño (cero layout shift) y el texto blanco se mantiene
@@ -206,9 +214,37 @@ svg {
   overflow: hidden;
   color: #ffffff;
   text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
   transition:
     transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
     filter 0.3s ease;
+}
+/* Spotlight que sigue al cursor DENTRO de la píldora (patrón
+   "cursor glow" de Codrops/MicroKit): el Header escribe
+   --pill-glow-x / --pill-glow-y al mover el puntero y esta capa
+   radial se ilumina bajo el texto (es ::before: pinta sobre el
+   fondo y bajo el contenido). Solo aparece con puntero fino y
+   hover real; en táctil no estorba y con movimiento reducido se
+   apaga por completo. */
+.nav-pill-promo::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    92px 64px at var(--pill-glow-x, 50%) var(--pill-glow-y, 50%),
+    rgb(255 255 255 / 0.32),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nav-pill-promo:hover::before,
+  .nav-pill-promo:focus-visible::before {
+    opacity: 1;
+  }
 }
 .nav-pill-promo::after {
   content: "";
@@ -299,6 +335,9 @@ svg {
   .nav-pill-promo,
   .nav-pill-promo::after {
     animation: none !important;
+  }
+  .nav-pill-promo::before {
+    display: none;
   }
   .nav-pill-promo:hover,
   .nav-pill-promo:active {

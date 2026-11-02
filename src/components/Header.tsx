@@ -1,7 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type MouseEvent as ReactMouseEvent,
+  type PointerEvent as ReactPointerEvent,
+  type ReactNode,
+} from "react";
+import {
+  firePromoBurst,
+  preloadPromoBursts,
+  type PromoBurstKind,
+} from "@/components/fx/promoBursts";
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
@@ -57,6 +69,42 @@ export default function Header({ logo }: { logo: ReactNode }) {
     setMegaOpen(false);
     setMobileOpen(false);
   };
+
+  // Píldoras promocionales: clic con efecto según el contexto
+  // (nieve/destellos en Holiday Gifts, brasas en Today's Deals) que
+  // NO bloquea la navegación — el disparo es fire-and-forget sobre un
+  // canvas global y la cola se ve ya en la página destino. La
+  // librería se precarga al primer hover/foco para que el clic no
+  // espere red. El spotlight (::before en globals.css) sigue al
+  // cursor solo con puntero fino; el handler escribe las variables
+  // CSS de posición sobre la propia píldora.
+  const handlePillClick =
+    (kind: PromoBurstKind) =>
+    (event: ReactMouseEvent<HTMLElement>): void => {
+      firePromoBurst(kind, event.currentTarget);
+    };
+
+  const handlePillGlow = (event: ReactPointerEvent<HTMLElement>): void => {
+    if (event.pointerType !== "mouse" && event.pointerType !== "pen") return;
+    const el = event.currentTarget;
+    const rect = el.getBoundingClientRect();
+    if (rect.width === 0 || rect.height === 0) return;
+    el.style.setProperty(
+      "--pill-glow-x",
+      `${(((event.clientX - rect.left) / rect.width) * 100).toFixed(1)}%`,
+    );
+    el.style.setProperty(
+      "--pill-glow-y",
+      `${(((event.clientY - rect.top) / rect.height) * 100).toFixed(1)}%`,
+    );
+  };
+
+  const pillFxProps = (kind: PromoBurstKind) => ({
+    onClick: handlePillClick(kind),
+    onPointerEnter: preloadPromoBursts,
+    onPointerMove: handlePillGlow,
+    onFocus: preloadPromoBursts,
+  });
 
   // Cierre al hacer clic fuera del header y con la tecla Escape
   // (devolviendo el foco al botón que abrió el panel).
@@ -139,6 +187,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
               de oferta; ambas enlazan a páginas reales del sitio. */}
           <Link
             href="/guides/holiday-gift-guide-2026"
+            {...pillFxProps("holiday")}
             className={`nav-pill-promo nav-pill-holiday ml-1 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold whitespace-nowrap ${FOCUS_RING}`}
           >
             <IconSparkles className="h-4 w-4 shrink-0" />
@@ -146,6 +195,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
           </Link>
           <Link
             href="/todays-deals"
+            {...pillFxProps("deals")}
             className={`nav-pill-promo nav-pill-deals inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold whitespace-nowrap ${FOCUS_RING}`}
           >
             <IconTrending className="h-4 w-4 shrink-0" />
@@ -263,7 +313,11 @@ export default function Header({ logo }: { logo: ReactNode }) {
           <div className="mt-2 grid grid-cols-2 gap-2">
             <Link
               href="/guides/holiday-gift-guide-2026"
-              onClick={closeAll}
+              {...pillFxProps("holiday")}
+              onClick={(event) => {
+                firePromoBurst("holiday", event.currentTarget);
+                closeAll();
+              }}
               className={`nav-pill-promo nav-pill-holiday inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-sm font-bold ${FOCUS_RING}`}
             >
               <IconSparkles className="h-4 w-4 shrink-0" />
@@ -271,7 +325,11 @@ export default function Header({ logo }: { logo: ReactNode }) {
             </Link>
             <Link
               href="/todays-deals"
-              onClick={closeAll}
+              {...pillFxProps("deals")}
+              onClick={(event) => {
+                firePromoBurst("deals", event.currentTarget);
+                closeAll();
+              }}
               className={`nav-pill-promo nav-pill-deals inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-sm font-bold ${FOCUS_RING}`}
             >
               <IconTrending className="h-4 w-4 shrink-0" />

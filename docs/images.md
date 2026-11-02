@@ -60,10 +60,11 @@ categoría (`public/slides/`).
 ## `public/favicons/` — favicon dinámico por variante de logo
 
 El icono de la pestaña sigue la variante de logo elegida en el panel
-(`SiteSetting.logoVariant`): el layout del sitio público
-(`src/app/(site)/layout.tsx`, `generateMetadata`) declara los iconos de
-la variante activa con la misma fuente y el mismo fallback (`badge`)
-que usa `SiteLogo` para el logo visible. Assets por variante,
+(`SiteSetting.logoVariant`): el layout RAÍZ (`src/app/layout.tsx`,
+`generateMetadata`) declara los iconos de la variante activa para
+todo el dominio (sitio público, `/admin`, `/admin/login` y 404), con
+la misma fuente y el mismo fallback (`badge`) que usa `SiteLogo` para
+el logo visible. Assets por variante,
 generados **desde los vectores exactos de `LogoMark`**
 (`src/components/Logo.tsx`):
 
@@ -76,8 +77,10 @@ generados **desde los vectores exactos de `LogoMark`**
 Variantes: `badge`, `tag`, `arrow`, `seal`, `wordmark` (15 archivos).
 
 Además, `src/app/favicon.ico` es el ICO clásico multiformato
-(16/32/48 con entradas PNG) generado desde la variante `badge`: es el
-icono del panel `/admin` y el respaldo cuando la base no responde.
+(16/32/48 con entradas PNG) generado desde la variante `badge`: queda
+como respaldo para peticiones directas a `/favicon.ico` y para cuando
+la base no responde (en la pestaña manda la declaración del layout
+raíz).
 
 **Regenerar todo** (tras cualquier cambio de paths o colores en
 `Logo.tsx`, reflejándolo en la tabla del script):

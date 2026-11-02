@@ -102,7 +102,13 @@ export type SettingsHealth = {
   appliedMigrations: number;
 };
 
-export const EXPECTED_MIGRATIONS = 5;
+// Total de migraciones que la base debe tener aplicadas: debe
+// coincidir con el número de carpetas de prisma/migrations. Se deja
+// como constante manual (y no contando carpetas en runtime) porque en
+// el despliegue serverless el filesystem del bundle no garantiza la
+// presencia de prisma/migrations junto a la función; al agregar una
+// migración nueva, incrementa este número en el mismo commit.
+export const EXPECTED_MIGRATIONS = 6;
 
 export async function getSettingsHealth(): Promise<SettingsHealth> {
   const down: SettingsHealth = {

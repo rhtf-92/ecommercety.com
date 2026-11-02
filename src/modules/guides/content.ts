@@ -3,6 +3,10 @@
 // está publicado en la base, la guía simplemente no muestra su tarjeta.
 
 export type GuideSection = { heading: string; paragraphs: string[] };
+// Variante de hub orientada a productos (p. ej. Holiday Gifts): en vez
+// de secciones de prosa, la página muestra primero los productos
+// agrupados por tema, cada grupo con una sola línea editorial corta.
+export type GuideGroup = { heading: string; line: string; asins: string[] };
 export type Guide = {
   slug: string;
   title: string;
@@ -12,6 +16,7 @@ export type Guide = {
   readingMinutes: number;
   intro: string;
   sections: GuideSection[];
+  groups?: GuideGroup[];
   asins: string[];
   verdict: string;
 };
@@ -88,9 +93,9 @@ export const GUIDES: Guide[] = [
       "Our seasonal hub for holiday gifting: home cooks, tech lovers, cozy homes, game nights and stocking stuffers, all from picks we research and keep verified.",
     categorySlug: "home-kitchen",
     categoryLabel: "Home & Kitchen",
-    readingMinutes: 8,
+    readingMinutes: 3,
     intro:
-      "Good gifting is not about spending more; it is about matching the gift to the way someone actually lives. This hub gathers the strongest picks in our catalog by the person you are shopping for, so you can decide in minutes and order with time to spare. Every product below is one we research, write about in our own words and keep verified through the season.",
+      "Good gifting is matching the gift to the way someone actually lives. The strongest picks in our catalog, grouped by the person you are shopping for — decide in minutes and order with time to spare.",
     sections: [
       {
         heading: "For the home cook",
@@ -146,8 +151,38 @@ export const GUIDES: Guide[] = [
       "B07XXPHQZK",
       "B085DVHQ57",
     ],
+    // Hub de compra: los mismos 16 productos de las secciones, agrupados
+    // por tema con una línea editorial destilada de cada sección. La
+    // prosa larga vive en las guías dedicadas enlazadas al final.
+    groups: [
+      {
+        heading: "For the home cook",
+        line: "Fewer weeknight problems, more small luxuries: the one-pot hero, the dessert machine and the frother that makes lattes feel café-made.",
+        asins: ["B0FBK1XHXR", "B08QXB9BH5", "B0DGZQ7L35"],
+      },
+      {
+        heading: "For tech lovers",
+        line: "The earbuds they will use every day, 4K streaming for any TV, and the tracker pack that makes keys, bags and luggage findable.",
+        asins: ["B0HJB69GJL", "B0C6W3D4RM", "B0GJTXVN9Z"],
+      },
+      {
+        heading: "For the cozy home",
+        line: "The tumbler that lives in every cup holder, soothing moisture for dry winter air, and a whole bed refresh in one box.",
+        asins: ["B0CRMY498M", "B001FWXKTA", "B07NYR18X4"],
+      },
+      {
+        heading: "For game night",
+        line: "Two minutes to teach, endless rematches: the family classic, its louder modern cousin, and the strategy game rebuilt every time you play.",
+        asins: ["B00004TZY8", "B077Z1R28P", "B00U26V4VQ"],
+      },
+      {
+        heading: "Stocking stuffers",
+        line: "Small, useful and a little delightful: winter warmers, hard-working hand care, an overnight lip treat and the bottle that becomes a daily carry.",
+        asins: ["B0007ZF4OA", "B00121UVU0", "B07XXPHQZK", "B085DVHQ57"],
+      },
+    ],
     verdict:
-      "Start with the person, not the product: one gift matched to a daily habit beats three guesses. Any pick above is a safe, researched answer; the cards under each section link straight to the full review.",
+      "Start with the person, not the product: one gift matched to a daily habit beats three guesses, and every pick above is researched and kept verified through the season.",
   },
   {
     slug: "best-stocking-stuffers-2026",

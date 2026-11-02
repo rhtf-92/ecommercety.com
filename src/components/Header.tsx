@@ -132,8 +132,9 @@ export default function Header({ logo }: { logo: ReactNode }) {
             Guides
           </Link>
           {/* Píldoras promocionales animadas (directiva de Renato,
-              2026-11-02): degradado de colores que fluye + shimmer,
-              definidos en globals.css (.nav-pill-promo). Holiday
+              2026-11-02): sistema de capas en globals.css
+              (.nav-pill-promo) — aurora que respira, halo pulsante,
+              destello especular único al cargar y al hover. Holiday
               Gifts lleva la paleta festiva y Today's Deals la cálida
               de oferta; ambas enlazan a páginas reales del sitio. */}
           <Link

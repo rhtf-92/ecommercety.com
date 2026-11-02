@@ -107,82 +107,216 @@ svg {
 }
 
 /* ===== Píldoras promocionales del header (2026-11-02) =====
-   "Holiday Gifts" y "Today's Deals": degradado de colores que fluye
-   (solo background-position: cero costo de layout), brillo shimmer
-   periódico y hover que intensifica. Texto blanco con sombra suave;
-   las paradas del degradado son tonos 700 para mantener contraste
-   legible en todo el recorrido. Tamaño lo fija el contenido: la
-   animación nunca mueve el layout. */
-@keyframes nav-pill-flow {
-  0% {
-    background-position: 0% 50%;
+   "Holiday Gifts" y "Today's Deals": sistema de capas premium.
+   (a) Degradado "aurora" que respira: desplazamiento muy lento
+       (14–16 s, ease-in-out, alternate) solo de background-position,
+       con capas de viñeta/resplandor que derivan a otro ritmo.
+   (b) Halo exterior del color de cada píldora que pulsa con
+       respiración lenta y baja amplitud (box-shadow animado).
+   (c) Destello especular diagonal ÚNICO: un barrido breve al cargar
+       la página y otro al pasar el cursor o enfocar — nunca cíclico.
+   (d) Micro-interacciones: hover se eleva 1px y escala 1.02 con
+       easing elástico suave; active baja a 0.98.
+   Solo se animan background-position, opacity, transform y
+   box-shadow (GPU-friendly, sin repaints de layout); la píldora no
+   cambia de tamaño (cero layout shift) y el texto blanco se mantiene
+   legible en la fase más clara del degradado: paradas profundas,
+   viñetas en las esquinas y sombra de texto. */
+@keyframes nav-aurora-holiday {
+  from {
+    background-position:
+      0px 0px,
+      20px 34px,
+      82% -10%,
+      0% 50%;
   }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
+  to {
+    background-position:
+      56px 30px,
+      6px 8px,
+      64% 6%,
+      100% 50%;
   }
 }
-@keyframes nav-pill-shimmer {
-  0% {
-    transform: translateX(-160%) skewX(-18deg);
+@keyframes nav-aurora-deals {
+  from {
+    background-position:
+      50% 108%,
+      0% 50%;
   }
-  22% {
-    transform: translateX(260%) skewX(-18deg);
+  to {
+    background-position:
+      38% 88%,
+      100% 50%;
+  }
+}
+@keyframes nav-halo-holiday {
+  from {
+    box-shadow: 0 3px 12px -2px rgb(185 28 28 / 0.3);
+  }
+  to {
+    box-shadow: 0 5px 20px -2px rgb(217 119 6 / 0.42);
+  }
+}
+@keyframes nav-halo-deals {
+  from {
+    box-shadow: 0 3px 12px -2px rgb(234 88 12 / 0.3);
+  }
+  to {
+    box-shadow: 0 5px 20px -2px rgb(220 38 38 / 0.4);
+  }
+}
+@keyframes nav-specular {
+  0% {
+    opacity: 0;
+    transform: translateX(-240%) skewX(-18deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
   }
   100% {
-    transform: translateX(260%) skewX(-18deg);
+    opacity: 0;
+    transform: translateX(360%) skewX(-18deg);
+  }
+}
+/* Mismos fotogramas que nav-specular con otro nombre: al entrar en
+   :hover/:focus-visible el valor calculado de `animation` cambia y
+   el barrido se reproduce una sola vez. */
+@keyframes nav-specular-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-240%) skewX(-18deg);
+  }
+  18% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(360%) skewX(-18deg);
   }
 }
 .nav-pill-promo {
   position: relative;
   overflow: hidden;
   color: #ffffff;
-  text-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
-  background-size: 300% 100%;
-  animation: nav-pill-flow 10s ease-in-out infinite;
-  transition: filter 0.25s ease;
+  text-shadow: 0 1px 3px rgb(0 0 0 / 0.45);
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 0.3s ease;
 }
 .nav-pill-promo::after {
   content: "";
   position: absolute;
-  inset: 0;
+  top: -10%;
+  bottom: -10%;
+  left: 0;
+  width: 42%;
   background: linear-gradient(
     100deg,
-    transparent 30%,
-    rgb(255 255 255 / 0.35) 50%,
-    transparent 70%
+    transparent,
+    rgb(255 255 255 / 0.5) 50%,
+    transparent
   );
-  transform: translateX(-160%) skewX(-18deg);
-  animation: nav-pill-shimmer 5.5s ease-in-out infinite;
+  opacity: 0;
+  transform: translateX(-240%) skewX(-18deg);
+  animation: nav-specular 1.15s cubic-bezier(0.22, 0.61, 0.36, 1) 0.7s 1 both;
   pointer-events: none;
 }
+.nav-pill-promo:hover::after,
+.nav-pill-promo:focus-visible::after {
+  animation: nav-specular-sweep 0.95s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
 .nav-pill-promo:hover {
-  filter: brightness(1.13) saturate(1.15);
+  transform: translateY(-1px) scale(1.02);
+  filter: brightness(1.1) saturate(1.12);
 }
+.nav-pill-promo:active {
+  transform: scale(0.98);
+  transition-duration: 0.12s;
+}
+/* Holiday Gifts: pino profundo → borgoña, viñeta dorada cálida en la
+   esquina superior y chispas doradas mínimas en dos rejillas que
+   derivan despacio. */
 .nav-pill-holiday {
-  background-image: linear-gradient(
-    110deg,
-    #b91c1c,
-    #b45309,
-    #15803d,
-    #b91c1c
-  );
+  background-color: #571d1d;
+  background-image:
+    radial-gradient(circle, rgb(253 224 71 / 0.18) 1.2px, transparent 1.9px),
+    radial-gradient(circle, rgb(254 240 138 / 0.12) 1px, transparent 1.6px),
+    radial-gradient(130% 170% at 85% -20%, rgb(250 204 21 / 0.32), transparent 55%),
+    linear-gradient(
+      112deg,
+      #14532d 0%,
+      #166534 26%,
+      #7f1d1d 58%,
+      #991b1b 82%,
+      #14532d 100%
+    );
+  background-size:
+    110px 110px,
+    74px 74px,
+    170% 200%,
+    280% 100%;
+  background-position:
+    0px 0px,
+    20px 34px,
+    82% -10%,
+    0% 50%;
+  animation:
+    nav-aurora-holiday 16s ease-in-out infinite alternate,
+    nav-halo-holiday 7.5s ease-in-out infinite alternate;
 }
+/* Today's Deals: ámbar quemado → coral con resplandor cálido
+   inferior, tipo glow de oferta. */
 .nav-pill-deals {
-  background-image: linear-gradient(
-    110deg,
-    #b45309,
-    #c2410c,
-    #b91c1c,
-    #b45309
-  );
+  background-color: #7c2d12;
+  background-image:
+    radial-gradient(150% 130% at 50% 118%, rgb(251 191 36 / 0.36), transparent 62%),
+    linear-gradient(
+      112deg,
+      #92400e 0%,
+      #c2410c 34%,
+      #ea580c 62%,
+      #dc2626 88%,
+      #92400e 100%
+    );
+  background-size:
+    180% 200%,
+    280% 100%;
+  background-position:
+    50% 108%,
+    0% 50%;
+  animation:
+    nav-aurora-deals 14s ease-in-out infinite alternate,
+    nav-halo-deals 7s ease-in-out infinite alternate;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-pill-promo,
   .nav-pill-promo::after {
     animation: none !important;
+  }
+  .nav-pill-promo:hover,
+  .nav-pill-promo:active {
+    transform: none;
+  }
+  /* Sin movimiento: degradado estático rico, en el punto medio del
+     recorrido aurora, y sin halo pulsante. */
+  .nav-pill-holiday {
+    background-position:
+      28px 15px,
+      13px 21px,
+      73% -2%,
+      50% 50%;
+  }
+  .nav-pill-deals {
+    background-position:
+      44% 98%,
+      50% 50%;
   }
 }
 

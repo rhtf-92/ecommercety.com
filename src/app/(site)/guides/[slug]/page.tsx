@@ -2,9 +2,10 @@ import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getGuideBySlug } from "@/modules/guides/content";
+import { getGuideBySlug, GUIDES } from "@/modules/guides/content";
 import { getProductByAsin } from "@/modules/catalog/data";
 import ProductCard from "@/components/ProductCard";
+import SubscribeForm from "@/components/SubscribeForm";
 import { getShowProductImages } from "@/modules/settings/site";
 import { IconArrowRight } from "@/components/icons";
 import PageBanner from "@/components/PageBanner";
@@ -102,6 +103,45 @@ async function GuideContent({ params }: Props) {
             </div>
           </>
         ) : null}
+
+        {guide.slug === "holiday-gift-guide-2026" ? (
+          <div className="mt-14 max-w-3xl rounded-3xl bg-brand-50 p-6 ring-1 ring-brand-100 sm:p-8">
+            <h2 className="text-2xl font-extrabold tracking-tight text-zinc-900">
+              Get the Holiday Gift List
+            </h2>
+            <p className="mt-2 leading-relaxed text-zinc-600">
+              One thoughtful email a week with our newest gift finds and
+              seasonal guides, all season long.
+            </p>
+            <div className="mt-5">
+              <SubscribeForm source="guide-holiday" />
+            </div>
+          </div>
+        ) : null}
+
+        <h2 className="mt-14 text-2xl font-extrabold tracking-tight text-zinc-900">
+          Keep reading
+        </h2>
+        <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {GUIDES.filter((other) => other.slug !== guide.slug).map((other) => (
+            <Link
+              key={other.slug}
+              href={`/guides/${other.slug}`}
+              className="group rounded-3xl border border-zinc-200 bg-white p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-zinc-900/10"
+            >
+              <p className="text-xs font-bold tracking-wide text-brand-700 uppercase">
+                {other.categoryLabel} · {other.readingMinutes} min read
+              </p>
+              <h3 className="mt-2 leading-snug font-bold text-zinc-900">
+                {other.title}
+              </h3>
+              <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
+                Read the guide
+                <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+              </span>
+            </Link>
+          ))}
+        </div>
 
         <Link
           href={`/category/${guide.categorySlug}`}

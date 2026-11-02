@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import AffiliateDisclosure from "@/components/AffiliateDisclosure";
 import SiteLogo from "@/components/SiteLogo";
+import SubscribeForm from "@/components/SubscribeForm";
 
 export default function Footer() {
   return (
@@ -14,6 +15,14 @@ export default function Footer() {
             the research and keep every pick verified, so you can buy with
             confidence on Amazon.com.
           </p>
+          <div className="mt-6 max-w-sm">
+            <h3 className="text-sm font-bold tracking-wide text-white uppercase">
+              The Holiday Gift List
+            </h3>
+            <div className="mt-3">
+              <SubscribeForm source="footer" tone="dark" />
+            </div>
+          </div>
         </div>
 
         <div>

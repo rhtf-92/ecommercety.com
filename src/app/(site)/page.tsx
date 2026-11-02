@@ -6,6 +6,7 @@ import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
 import ProductCard from "@/components/ProductCard";
 import Hero from "@/components/Hero";
+import SubscribeForm from "@/components/SubscribeForm";
 import HeroCarousel, { type HeroSlide } from "@/components/HeroCarousel";
 import { Faq, FAQS, HowWePick, SectionHeading, TrustStrip } from "@/components/Sections";
 import JsonLd from "@/components/JsonLd";
@@ -83,19 +84,19 @@ async function FeaturedPicks() {
 
 const GUIDE_TEASERS = [
   {
-    title: "Small kitchen, big upgrades: the 10 essentials that earn their space",
+    title: "The 2026 holiday gift guide: thoughtful picks for everyone on your list",
+    category: "Holiday 2026",
+    slug: "holiday-gift-guide-2026",
+  },
+  {
+    title: "Best stocking stuffers 2026: small gifts that land big",
+    category: "Stocking Stuffers",
+    slug: "best-stocking-stuffers-2026",
+  },
+  {
+    title: "Gifts for the home cook 2026: upgrades they will actually use",
     category: "Home & Kitchen",
-    slug: "home-kitchen",
-  },
-  {
-    title: "Smart home starter kit: what to buy first (and what to skip)",
-    category: "Tech & Smart Home",
-    slug: "tech-smart-home",
-  },
-  {
-    title: "The honest pet-owner checklist: food, toys and care that last",
-    category: "Pet Supplies",
-    slug: "pet-supplies",
+    slug: "gifts-for-the-home-cook-2026",
   },
 ];
 
@@ -210,8 +211,9 @@ export default function Home() {
                 Decide in minutes, not hours
               </h2>
               <p className="mt-3 max-w-xl text-zinc-400">
-                Side-by-side comparisons and checklists from our editors. In
-                production now, publishing soon.
+                Gift guides, side-by-side comparisons and checklists from our
+                editors: researched, written in our own words and kept up to
+                date through the season.
               </p>
             </div>
             <Link
@@ -226,7 +228,7 @@ export default function Home() {
             {GUIDE_TEASERS.map((guide) => (
               <Link
                 key={guide.title}
-                href={`/category/${guide.slug}`}
+                href={`/guides/${guide.slug}`}
                 className="group rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:bg-white/10"
               >
                 <p className="text-xs font-bold tracking-wide text-amber-300 uppercase">
@@ -234,11 +236,33 @@ export default function Home() {
                 </p>
                 <h3 className="mt-3 leading-snug font-bold">{guide.title}</h3>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
-                  Explore the category
+                  Read the guide
                   <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                 </span>
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="container-x pb-20">
+        <div className="rounded-3xl bg-brand-50 p-8 ring-1 ring-brand-100 sm:p-10">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold tracking-[0.18em] text-brand-700 uppercase">
+              The Holiday Gift List
+            </p>
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-zinc-900">
+              Gift ideas worth opening your inbox for
+            </h2>
+            <p className="mt-3 leading-relaxed text-zinc-600">
+              One thoughtful email a week with our newest gift finds and
+              seasonal guides, written by the same editors who build this
+              catalog. Start with the 2026 Holiday Gift Guide, stay for the
+              good finds.
+            </p>
+            <div className="mt-6">
+              <SubscribeForm source="home" />
+            </div>
           </div>
         </div>
       </section>

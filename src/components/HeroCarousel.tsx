@@ -22,11 +22,25 @@ export type HeroSlide = {
 };
 
 const DURATION = 6000;
+// Render inicial ligero: solo se montan las imágenes de las primeras
+// diapositivas; el resto se incorpora tras el primer pintado (1.5 s,
+// muy por debajo del avance automático de 6 s) para no penalizar el
+// LCP con la galería completa.
+const EAGER_SLIDES = 5;
 
 export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [restReady, setRestReady] = useState(
+    () => slides.length <= EAGER_SLIDES,
+  );
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  useEffect(() => {
+    if (slides.length <= EAGER_SLIDES) return;
+    const t = setTimeout(() => setRestReady(true), 1500);
+    return () => clearTimeout(t);
+  }, [slides.length]);
 
   const go = useCallback(
     (next: number) =>
@@ -54,21 +68,31 @@ export default function HeroCarousel({ slides }: { slides: HeroSlide[] }) {
       aria-roledescription="carousel"
       aria-label="Featured categories"
     >
-      {/* Fondos fotográficos con crossfade + Ken Burns sutil */}
+      {/* Fondos fotográficos con crossfade + Ken Burns sutil.
+          Prioridad SOLO en la primera imagen; las diapositivas más
+          allá de EAGER_SLIDES esperan a restReady (carga perezosa). */}
       {slides.map((item, i) =>
         item.image ? (
-          <Image
-            key={item.id}
-            src={item.image}
-            alt=""
-            fill
-            priority={i === 0}
-            sizes="100vw"
-            aria-hidden={i !== index}
-            className={`-z-10 object-cover transition-opacity duration-1000 ${
-              i === index ? "kenburns opacity-100" : "opacity-0"
-            }`}
-          />
+          i < EAGER_SLIDES || restReady ? (
+            <Image
+              key={item.id}
+              src={item.image}
+              alt=""
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              aria-hidden={i !== index}
+              className={`-z-10 object-cover transition-opacity duration-1000 ${
+                i === index ? "kenburns opacity-100" : "opacity-0"
+              }`}
+            />
+          ) : (
+            <div
+              key={item.id}
+              aria-hidden="true"
+              className={`absolute inset-0 -z-10 ${item.band}`}
+            />
+          )
         ) : null,
       )}
       {/* Velos de legibilidad */}

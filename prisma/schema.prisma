@@ -90,6 +90,16 @@ model Product {
   @@index([categoryId])
 }
 
+// Suscriptores del lead magnet editorial (The Holiday Gift List).
+// Solo email + origen del formulario + fecha: nada más se pide ni se
+// guarda. La baja la gestiona el proveedor de envío cuando se conecte.
+model Subscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String? // home | footer | guide-holiday
+  createdAt DateTime @default(now())
+}
+
 /// Ajustes globales del sitio, editables desde el panel (clave/valor).
 model SiteSetting {
   key       String   @id

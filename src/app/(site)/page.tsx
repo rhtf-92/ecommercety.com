@@ -245,7 +245,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-x pb-20">
+      <section className="container-x py-20">
         <div className="rounded-3xl bg-brand-50 p-8 ring-1 ring-brand-100 sm:p-10">
           <div className="max-w-2xl">
             <p className="text-xs font-bold tracking-[0.18em] text-brand-700 uppercase">

@@ -226,6 +226,30 @@ export function IconExternal(p: P) {
   );
 }
 
+export function IconChevronDown(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="m6 9 6 6 6-6" />
+    </svg>
+  );
+}
+
+export function IconMenu(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M4 7h16M4 12h16M4 17h16" />
+    </svg>
+  );
+}
+
+export function IconX(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M6 6l12 12M18 6 6 18" />
+    </svg>
+  );
+}
+
 export function IconBook(p: P) {
   return (
     <svg {...base(p)}>

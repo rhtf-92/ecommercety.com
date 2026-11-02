@@ -20,6 +20,7 @@ import { BATCH_WAVE1_B } from "../data/products/batch-wave1-b";
 import { BATCH_WAVE2_A } from "../data/products/batch-wave2-a";
 import { BATCH_WAVE2_B } from "../data/products/batch-wave2-b";
 import { BATCH_TREND_2026_11_01 } from "../data/products/batch-trend-2026-11-01";
+import { BATCH_TREND_2026_11_01_H1_5 } from "../data/products/batch-trend-2026-11-01-h1-5";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
 const BATCHES: { id: string; items: BatchProduct[] }[] = [
@@ -30,6 +31,7 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-wave2-a", items: BATCH_WAVE2_A },
   { id: "batch-wave2-b", items: BATCH_WAVE2_B },
   { id: "batch-trend-2026-11-01", items: BATCH_TREND_2026_11_01 },
+  { id: "batch-trend-2026-11-01-h1-5", items: BATCH_TREND_2026_11_01_H1_5 },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 const OFFICIAL_TAGS = Object.values(TRACKING_IDS);

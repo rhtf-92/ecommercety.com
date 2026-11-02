@@ -10,6 +10,8 @@ import {
   IconChevronDown,
   IconMenu,
   IconSearch,
+  IconSparkles,
+  IconTrending,
   IconX,
 } from "@/components/icons";
 // Navegación principal (Sprint de navegación, 2026-11-01): la barra ya no
@@ -129,6 +131,25 @@ export default function Header({ logo }: { logo: ReactNode }) {
           >
             Guides
           </Link>
+          {/* Píldoras promocionales animadas (directiva de Renato,
+              2026-11-02): degradado de colores que fluye + shimmer,
+              definidos en globals.css (.nav-pill-promo). Holiday
+              Gifts lleva la paleta festiva y Today's Deals la cálida
+              de oferta; ambas enlazan a páginas reales del sitio. */}
+          <Link
+            href="/guides/holiday-gift-guide-2026"
+            className={`nav-pill-promo nav-pill-holiday ml-1 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold whitespace-nowrap ${FOCUS_RING}`}
+          >
+            <IconSparkles className="h-4 w-4 shrink-0" />
+            Holiday Gifts
+          </Link>
+          <Link
+            href="/todays-deals"
+            className={`nav-pill-promo nav-pill-deals inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-bold whitespace-nowrap ${FOCUS_RING}`}
+          >
+            <IconTrending className="h-4 w-4 shrink-0" />
+            Today&apos;s Deals
+          </Link>
         </nav>
 
         <SearchForm className="ml-auto hidden max-w-xs flex-1 sm:block" />
@@ -236,6 +257,26 @@ export default function Header({ logo }: { logo: ReactNode }) {
               Decide in minutes, not hours
             </span>
           </Link>
+          {/* Las mismas píldoras animadas del escritorio, en la zona
+              de accesos del panel móvil. */}
+          <div className="mt-2 grid grid-cols-2 gap-2">
+            <Link
+              href="/guides/holiday-gift-guide-2026"
+              onClick={closeAll}
+              className={`nav-pill-promo nav-pill-holiday inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-sm font-bold ${FOCUS_RING}`}
+            >
+              <IconSparkles className="h-4 w-4 shrink-0" />
+              Holiday Gifts
+            </Link>
+            <Link
+              href="/todays-deals"
+              onClick={closeAll}
+              className={`nav-pill-promo nav-pill-deals inline-flex items-center justify-center gap-1.5 rounded-xl px-3 py-3 text-sm font-bold ${FOCUS_RING}`}
+            >
+              <IconTrending className="h-4 w-4 shrink-0" />
+              Today&apos;s Deals
+            </Link>
+          </div>
           <p className="mt-5 text-xs font-bold tracking-[0.18em] text-zinc-400 uppercase">
             Categories
           </p>

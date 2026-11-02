@@ -118,6 +118,33 @@ export async function getFeaturedProducts(
   return attachPrices(fromDb ?? []);
 }
 
+/**
+ * Hallazgos del radar de tendencias (página /todays-deals): productos
+ * publicados cuyo discoveredVia marca "Radar de tendencias" (las tandas
+ * de las cazas de los ciclos de 5 horas), del más reciente al más
+ * antiguo por fecha de alta. Si el radar aún no hubiera traído nada
+ * (no es el caso en producción), se respalda con los destacados. La
+ * página NO afirma precios ni descuentos: la señal de oferta es
+ * interna y el precio vivo se confirma siempre en Amazon.
+ */
+export async function getTrendRadarProducts(
+  limit = 24,
+): Promise<ProductWithLinks[]> {
+  const fromDb = await dbOrNull((client) =>
+    client.product.findMany({
+      where: {
+        status: "PUBLISHED",
+        discoveredVia: { contains: "Radar de tendencias", mode: "insensitive" },
+      },
+      include: { links: { where: { isActive: true } } },
+      orderBy: { createdAt: "desc" },
+      take: limit,
+    }),
+  );
+  if (fromDb && fromDb.length > 0) return attachPrices(fromDb);
+  return getFeaturedProducts(limit);
+}
+
 export async function searchProducts(
   query: string,
 ): Promise<ProductWithLinks[]> {

@@ -106,6 +106,86 @@ svg {
   max-width: 100%;
 }
 
+/* ===== Píldoras promocionales del header (2026-11-02) =====
+   "Holiday Gifts" y "Today's Deals": degradado de colores que fluye
+   (solo background-position: cero costo de layout), brillo shimmer
+   periódico y hover que intensifica. Texto blanco con sombra suave;
+   las paradas del degradado son tonos 700 para mantener contraste
+   legible en todo el recorrido. Tamaño lo fija el contenido: la
+   animación nunca mueve el layout. */
+@keyframes nav-pill-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes nav-pill-shimmer {
+  0% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+  22% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+}
+.nav-pill-promo {
+  position: relative;
+  overflow: hidden;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 0.35);
+  background-size: 300% 100%;
+  animation: nav-pill-flow 10s ease-in-out infinite;
+  transition: filter 0.25s ease;
+}
+.nav-pill-promo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgb(255 255 255 / 0.35) 50%,
+    transparent 70%
+  );
+  transform: translateX(-160%) skewX(-18deg);
+  animation: nav-pill-shimmer 5.5s ease-in-out infinite;
+  pointer-events: none;
+}
+.nav-pill-promo:hover {
+  filter: brightness(1.13) saturate(1.15);
+}
+.nav-pill-holiday {
+  background-image: linear-gradient(
+    110deg,
+    #b91c1c,
+    #b45309,
+    #15803d,
+    #b91c1c
+  );
+}
+.nav-pill-deals {
+  background-image: linear-gradient(
+    110deg,
+    #b45309,
+    #c2410c,
+    #b91c1c,
+    #b45309
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-pill-promo,
+  .nav-pill-promo::after {
+    animation: none !important;
+  }
+}
+
 /* Movimiento reducido: se apagan las animaciones del slide y las
    transiciones decorativas para quien lo pide en su sistema. */
 @media (prefers-reduced-motion: reduce) {

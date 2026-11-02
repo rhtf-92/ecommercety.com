@@ -12,7 +12,7 @@ export default function PrivacyPage() {
     <StaticPage
       eyebrow="Privacy"
       title="Privacy policy"
-      intro="Last updated: October 31, 2026. T&F Picks is a catalog and guide site: there are no user accounts, no checkout and no payments here."
+      intro="Last updated: November 1, 2026. T&F Picks is a catalog and guide site: there are no user accounts, no checkout and no payments here."
     >
       <h2>What we collect</h2>
       <ul>
@@ -25,6 +25,12 @@ export default function PrivacyPage() {
           <strong>Basic technical logs:</strong> standard server data such
           as browser type and pages visited, used to keep the site working
           and secure.
+        </li>
+        <li>
+          <strong>Email subscriptions:</strong> if you join The Holiday
+          Gift List, we store the email address you give us and use it only
+          to send that list. Ask us through the contact page at any time
+          and we will remove it.
         </li>
       </ul>
       <h2>What we do not collect</h2>

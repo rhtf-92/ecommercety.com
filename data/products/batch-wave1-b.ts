@@ -191,14 +191,14 @@ export const BATCH_WAVE1_B: BatchProduct[] = [
   {
     asin: "B0BLMQ8BXB",
     brand: "HOTO",
-    title: "HOTO Electric Precision Screwdriver Kit with 25 Magnetic Bits",
+    title: "HOTO 25-Piece Upgraded Electric Screwdriver Kit — Cordless Power for Assembly & Home Repair",
     categorySlug: "tools-home-improvement",
     affiliateUrl:
-      "https://www.amazon.com/dp/B0BLMQ8BXB?linkCode=sl2&tag=ecommercety00-20&linkId=5fd72d8ba93d6d49ddb488ad207e00fc&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-0b57db640c1c7f65&btn_type=ss&btn_ref=srctok-0b57db640c1c7f65",
+      "https://www.amazon.com/dp/B0BLMQ8BXB?&linkCode=ll2&tag=ecommercety00-20&linkId=c457bb98649b5b2c03582ab071cf4e34&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
-      "For the small screws that run modern life: this slim electric driver and its 25 magnetic bits handle phones, laptops, glasses, game controllers and toys without stripping or straining your wrist. The minimalist case looks as good on a desk as it works in a drawer.",
-    highlights: ["25 magnetic bits for electronics and more", "Electric drive saves your wrist", "Slim pen-style body, precise control", "Desk-worthy minimalist storage case"],
+      "The upgrade from hand-cranking every flat-pack screw: this cordless electric screwdriver and its 25 quarter-inch hex bits power through furniture assembly, appliance fixes and around-the-house repairs, while the magnetic-lid case keeps every bit accounted for between jobs. A 1500mAh rechargeable battery keeps it ready whenever the to-do list calls.",
+    highlights: ["25 bits with 1/4-inch hex shank for assembly and repair", "Cordless electric drive for faster flat-pack builds", "Magnetic lid case keeps bits from going missing", "1500mAh rechargeable battery for job after job"],
     discoveredVia: "Ola 1 — tendencias verificadas (SiteStripe, 2026-11-01)",
   },
   {

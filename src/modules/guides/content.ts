@@ -129,7 +129,7 @@ export const GUIDES: Guide[] = [
         heading: "Stocking stuffers",
         paragraphs: [
           "The best stocking stuffers are small, useful and a little bit delightful. HotHands hand warmers (a 40-pair pack) turn cold mornings, outdoor games and winter commutes into non-events. O'Keeffe's Working Hands cream is the winter staple for anyone whose hands actually work for a living, and the LANEIGE Lip Sleeping Mask is the little luxury that makes an overnight difference.",
-          "The Owala FreeSip 24 oz bottle, with its sip-or-swig spout, is the bigger stuffer that becomes a daily carry within a week. For the complete list of small gifts, see our guide to the Best Stocking Stuffers of 2026.",
+          "The Owala FreeSip 32 oz bottle, with its sip-or-swig spout, is the bigger stuffer that becomes a daily carry within a week. For the complete list of small gifts, see our guide to the Best Stocking Stuffers of 2026.",
         ],
       },
     ],
@@ -542,7 +542,7 @@ export const GUIDES: Guide[] = [
         heading: "Track it, and hydrate like it matters",
         paragraphs: [
           "The Fitbit Charge 6 closes the loop: heart rate, sleep and workout tracking on the wrist turns vague effort into a visible streak, and visible streaks are famously hard to break. It is the cheapest personal trainer in this guide.",
-          "And the smallest pick does real work: the Owala FreeSip 24 oz bottle, with its sip-or-swig spout, lives where the workouts happen and removes the petty friction of hydration. Minimum kit, maximum consistency: bands, mat, one adjustable weight, one low-impact option, one tracker, one bottle.",
+          "And the simplest pick does real work: the Owala FreeSip 32 oz bottle, with its sip-or-swig spout, lives where the workouts happen and removes the petty friction of hydration. Minimum kit, maximum consistency: bands, mat, one adjustable weight, one low-impact option, one tracker, one bottle.",
         ],
       },
     ],

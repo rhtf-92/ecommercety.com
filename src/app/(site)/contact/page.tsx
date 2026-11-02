@@ -9,6 +9,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <StaticPage
+      image="/pages/contact.jpg"
       eyebrow="Contact"
       title="Talk to a human"
       intro="Corrections, product suggestions, business inquiries or a pick you think we got wrong: we read everything."

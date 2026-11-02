@@ -54,7 +54,7 @@ export default function GuidesPage() {
   return (
     <main className="flex flex-1 flex-col">
       <PageBanner
-        image="/slides/brand.jpg"
+        image="/pages/guides.jpg"
         eyebrow="Buying guides"
         title="Decide in minutes, not hours"
         subtitle="Side-by-side thinking, honest trade-offs and a clear winner for every budget. The first guides are live below; more are in production, and every guide is built from picks you can browse in its category today."

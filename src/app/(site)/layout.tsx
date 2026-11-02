@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import Header from "@/components/Header";
+import SiteLogo from "@/components/SiteLogo";
 import Footer from "@/components/Footer";
 import ViewBeacon from "@/components/ViewBeacon";
 
@@ -14,7 +15,7 @@ export default function SiteLayout({
 }) {
   return (
     <>
-      <Header />
+      <Header logo={<SiteLogo />} />
       <div className="flex flex-1 flex-col">{children}</div>
       <Footer />
       {/* usePathname es dinámico: frontera Suspense (Cache Components). */}

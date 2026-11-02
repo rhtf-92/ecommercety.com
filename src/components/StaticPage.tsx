@@ -4,17 +4,19 @@ export default function StaticPage({
   eyebrow,
   title,
   intro,
+  image = "/slides/brand.jpg",
   children,
 }: {
   eyebrow: string;
   title: string;
   intro?: string;
+  image?: string;
   children: React.ReactNode;
 }) {
   return (
     <main className="flex flex-1 flex-col">
       <PageBanner
-        image="/slides/brand.jpg"
+        image={image}
         eyebrow={eyebrow}
         title={title}
         subtitle={intro}

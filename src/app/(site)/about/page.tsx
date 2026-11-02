@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <StaticPage
+      image="/pages/about.jpg"
       eyebrow="About"
       title="Great products, zero guesswork. That is the whole idea."
       intro="T&F Picks is the storefront of E-Commerce T&F. We research Amazon so you do not have to scroll through thousands of near-identical listings to find the one worth buying."

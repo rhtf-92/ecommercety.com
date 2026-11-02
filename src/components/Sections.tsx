@@ -27,7 +27,13 @@ export function SectionHeading({
   );
 }
 
-export function HowWePick() {
+export function HowWePick({
+  stacked = false,
+  dark = false,
+}: {
+  stacked?: boolean;
+  dark?: boolean;
+}) {
   const steps = [
     {
       icon: <IconSearch className="h-6 w-6" />,
@@ -46,17 +52,31 @@ export function HowWePick() {
     },
   ];
   return (
-    <div className="grid gap-4 md:grid-cols-3">
+    <div className={stacked ? "grid gap-4" : "grid gap-4 md:grid-cols-3"}>
       {steps.map((step) => (
         <article
           key={step.title}
-          className="rounded-3xl border border-zinc-200 bg-white p-6"
+          className={
+            dark
+              ? "rounded-3xl bg-white/5 p-6 ring-1 ring-white/10"
+              : "rounded-3xl border border-zinc-200 bg-white p-6"
+          }
         >
-          <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-50 text-brand-600">
+          <span
+            className={`flex h-12 w-12 items-center justify-center rounded-2xl ${
+              dark ? "bg-white/10 text-amber-300" : "bg-brand-50 text-brand-600"
+            }`}
+          >
             {step.icon}
           </span>
-          <h3 className="mt-4 font-bold text-zinc-900">{step.title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+          <h3 className={`mt-4 font-bold ${dark ? "text-white" : "text-zinc-900"}`}>
+            {step.title}
+          </h3>
+          <p
+            className={`mt-2 text-sm leading-relaxed ${
+              dark ? "text-zinc-400" : "text-zinc-600"
+            }`}
+          >
             {step.text}
           </p>
         </article>

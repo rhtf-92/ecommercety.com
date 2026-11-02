@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
@@ -12,8 +12,6 @@ import {
   IconSearch,
   IconX,
 } from "@/components/icons";
-import SiteLogo from "@/components/SiteLogo";
-
 // Navegación principal (Sprint de navegación, 2026-11-01): la barra ya no
 // intenta comprimir las 14 categorías en enlaces sueltos. En escritorio un
 // disparador "Shop by Category" abre un mega-menú con las 14 categorías en
@@ -42,7 +40,11 @@ function SearchForm({ className = "" }: { className?: string }) {
   );
 }
 
-export default function Header() {
+// El logo llega como prop desde el layout de servidor: SiteLogo es un
+// componente async (resuelve la variante del panel con Prisma) y NO debe
+// importarse dentro de este componente cliente; el patrón soportado en
+// App Router es componerlo en el servidor y pasarlo como hijo.
+export default function Header({ logo }: { logo: ReactNode }) {
   const [megaOpen, setMegaOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -94,7 +96,7 @@ export default function Header() {
     >
       <div className="container-x flex h-16 items-center gap-4">
         <Link href="/" aria-label="T&F Picks — home">
-          <SiteLogo />
+          {logo}
         </Link>
 
         <nav aria-label="Primary" className="ml-6 hidden items-center gap-1 lg:flex">

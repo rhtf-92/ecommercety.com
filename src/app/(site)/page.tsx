@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { getCategories, getFeaturedProducts } from "@/modules/catalog/data";
 import { getBannerVariant, getShowProductImages } from "@/modules/settings/site";
@@ -188,92 +189,139 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="container-x py-20">
-        <SectionHeading
-          eyebrow="Our method"
-          title="How T&F Picks works"
-          sub="A simple promise: research like a friend who reads the fine print, and keep every pick honest and up to date."
-        />
-        <div className="mt-10">
-          <HowWePick />
-        </div>
-      </section>
-
+      {/* Par 1: guías y método comparten la banda oscura, en columnas
+          paralelas en escritorio (7/5) y apiladas en móvil. */}
       <section className="bg-ink-900 py-20 text-white">
-        <div className="container-x">
-          <div className="flex items-end justify-between gap-6">
-            <div>
-              <p className="text-xs font-bold tracking-[0.18em] text-amber-300 uppercase">
-                <IconBook className="mr-2 inline h-4 w-4" />
-                Buying guides
-              </p>
-              <h2 className="mt-2 text-3xl font-extrabold tracking-tight">
-                Decide in minutes, not hours
-              </h2>
-              <p className="mt-3 max-w-xl text-zinc-400">
-                Gift guides, side-by-side comparisons and checklists from our
-                editors: researched, written in our own words and kept up to
-                date through the season.
-              </p>
+        <div className="container-x grid gap-14 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-7">
+            <p className="text-xs font-bold tracking-[0.18em] text-amber-300 uppercase">
+              <IconBook className="mr-2 inline h-4 w-4" />
+              Buying guides
+            </p>
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight">
+              Decide in minutes, not hours
+            </h2>
+            <p className="mt-3 max-w-xl text-zinc-400">
+              Gift guides, side-by-side comparisons and checklists from our
+              editors: researched, written in our own words and kept up to
+              date through the season.
+            </p>
+            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl ring-1 ring-white/10">
+              <Image
+                src="/sections/buying-guides.jpg"
+                alt="Editorial desk with an open notebook, laptop and coffee, set up for product research"
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="mt-6 grid gap-4">
+              {GUIDE_TEASERS.map((guide) => (
+                <Link
+                  key={guide.title}
+                  href={`/guides/${guide.slug}`}
+                  className="group rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:bg-white/10"
+                >
+                  <p className="text-xs font-bold tracking-wide text-amber-300 uppercase">
+                    {guide.category}
+                  </p>
+                  <h3 className="mt-3 leading-snug font-bold">{guide.title}</h3>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
+                    Read the guide
+                    <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+                  </span>
+                </Link>
+              ))}
             </div>
             <Link
               href="/guides"
-              className="hidden shrink-0 items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-zinc-900 transition hover:bg-zinc-200 sm:inline-flex"
+              className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-zinc-900 transition hover:bg-zinc-200"
             >
               All guides
               <IconArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
-            {GUIDE_TEASERS.map((guide) => (
-              <Link
-                key={guide.title}
-                href={`/guides/${guide.slug}`}
-                className="group rounded-3xl bg-white/5 p-6 ring-1 ring-white/10 transition hover:bg-white/10"
-              >
-                <p className="text-xs font-bold tracking-wide text-amber-300 uppercase">
-                  {guide.category}
-                </p>
-                <h3 className="mt-3 leading-snug font-bold">{guide.title}</h3>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-white">
-                  Read the guide
-                  <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      <section className="container-x py-20">
-        <div className="rounded-3xl bg-brand-50 p-8 ring-1 ring-brand-100 sm:p-10">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold tracking-[0.18em] text-brand-700 uppercase">
-              The Holiday Gift List
+          <div className="lg:col-span-5">
+            <p className="text-xs font-bold tracking-[0.18em] text-amber-300 uppercase">
+              Our method
             </p>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-zinc-900">
-              Gift ideas worth opening your inbox for
+            <h2 className="mt-2 text-3xl font-extrabold tracking-tight">
+              How T&F Picks works
             </h2>
-            <p className="mt-3 leading-relaxed text-zinc-600">
-              One thoughtful email a week with our newest gift finds and
-              seasonal guides, written by the same editors who build this
-              catalog. Start with the 2026 Holiday Gift Guide, stay for the
-              good finds.
+            <p className="mt-3 text-zinc-400">
+              A simple promise: research like a friend who reads the fine
+              print, and keep every pick honest and up to date.
             </p>
+            <div className="relative mt-8 aspect-[16/9] overflow-hidden rounded-3xl ring-1 ring-white/10">
+              <Image
+                src="/sections/our-method.jpg"
+                alt="Hands carefully checking a plain product box against a blank checklist, with a magnifying glass nearby"
+                fill
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="object-cover"
+              />
+            </div>
             <div className="mt-6">
-              <SubscribeForm source="home" />
+              <HowWePick stacked dark />
             </div>
           </div>
         </div>
       </section>
 
+      {/* Par 2: FAQ a la izquierda y suscripción a la derecha (sticky en
+          escritorio); en móvil se apilan en ese mismo orden del DOM. */}
       <section className="container-x py-20">
-        <SectionHeading
-          eyebrow="Good to know"
-          title="Questions, answered straight"
-        />
-        <div className="mt-10 max-w-3xl">
-          <Faq />
+        <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-7">
+            <SectionHeading
+              eyebrow="Good to know"
+              title="Questions, answered straight"
+            />
+            <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-3xl">
+              <Image
+                src="/sections/good-to-know.jpg"
+                alt="Reader relaxing on a cozy sofa with a tablet and a cup of coffee"
+                fill
+                sizes="(min-width: 1024px) 55vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <div className="mt-8">
+              <Faq />
+            </div>
+          </div>
+
+          <div className="lg:col-span-5 lg:sticky lg:top-24">
+            <div className="overflow-hidden rounded-3xl bg-brand-50 ring-1 ring-brand-100">
+              <div className="relative aspect-[16/9]">
+                <Image
+                  src="/sections/gift-list.jpg"
+                  alt="Flat lay of gifts wrapped in cream and deep navy paper with linen ribbons"
+                  fill
+                  sizes="(min-width: 1024px) 40vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-8 sm:p-10">
+                <p className="text-xs font-bold tracking-[0.18em] text-brand-700 uppercase">
+                  The Holiday Gift List
+                </p>
+                <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-zinc-900">
+                  Gift ideas worth opening your inbox for
+                </h2>
+                <p className="mt-3 leading-relaxed text-zinc-600">
+                  One thoughtful email a week with our newest gift finds and
+                  seasonal guides, written by the same editors who build this
+                  catalog. Start with the 2026 Holiday Gift Guide, stay for the
+                  good finds.
+                </p>
+                <div className="mt-6">
+                  <SubscribeForm source="home" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </main>

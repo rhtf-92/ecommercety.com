@@ -4,6 +4,7 @@ import { searchProducts } from "@/modules/catalog/data";
 import { getShowProductImages } from "@/modules/settings/site";
 import ProductCard from "@/components/ProductCard";
 import PageBanner from "@/components/PageBanner";
+import SearchPageForm from "@/components/SearchPageForm";
 
 export const metadata: Metadata = {
   title: "Search picks",
@@ -15,6 +16,28 @@ export const metadata: Metadata = {
 };
 
 type Props = { searchParams: Promise<{ q?: string }> };
+
+// Respaldo visual mientras llega la consulta: el mismo formulario en
+// su forma clásica (action="/search"), para que la página nunca se
+// vea sin buscador.
+function FormFallback() {
+  return (
+    <form action="/search" className="max-w-xl">
+      <input
+        type="search"
+        name="q"
+        placeholder="Try “air fryer”, “dog toy”, “LED strip”…"
+        aria-label="Search the catalog"
+        className="w-full rounded-full border border-zinc-300 px-5 py-3 text-sm outline-none transition placeholder:text-zinc-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+      />
+    </form>
+  );
+}
+
+async function FormSection({ searchParams }: Props) {
+  const { q } = await searchParams;
+  return <SearchPageForm initialQuery={(q ?? "").trim()} />;
+}
 
 async function Results({ searchParams }: Props) {
   const { q } = await searchParams;
@@ -63,14 +86,14 @@ export default function SearchPage({ searchParams }: Props) {
         size="sm"
       />
       <div className="container-x py-10">
-        <form action="/search" className="max-w-xl">
-          <input
-            type="search"
-            name="q"
-            placeholder="Try “air fryer”, “dog toy”, “LED strip”…"
-            className="w-full rounded-full border border-zinc-300 px-5 py-3 text-sm outline-none transition placeholder:text-zinc-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
-          />
-        </form>
+        {/* El campo responde en vivo (SearchPageForm): escribir
+            actualiza ?q= en modo suave y los resultados se
+            re-renderizan sin recargar la página. La promesa de
+            searchParams se resuelve dentro de <Suspense>, como pide
+            el prerender de Next. */}
+        <Suspense fallback={<FormFallback />}>
+          <FormSection searchParams={searchParams} />
+        </Suspense>
         <div className="mt-10">
           <Suspense fallback={<p className="text-zinc-500">Searching…</p>}>
             <Results searchParams={searchParams} />

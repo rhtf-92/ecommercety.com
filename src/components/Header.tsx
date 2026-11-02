@@ -17,11 +17,11 @@ import {
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 import CategoryIcon from "@/components/CategoryIcon";
+import LiveSearchBox from "@/components/LiveSearchBox";
 import {
   IconArrowRight,
   IconChevronDown,
   IconMenu,
-  IconSearch,
   IconSparkles,
   IconTrending,
   IconX,
@@ -38,21 +38,11 @@ import {
 const FOCUS_RING =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-400";
 
-function SearchForm({ className = "" }: { className?: string }) {
-  return (
-    <form action="/search" className={className}>
-      <label className="relative block">
-        <IconSearch className="pointer-events-none absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-zinc-400" />
-        <input
-          type="search"
-          name="q"
-          placeholder="Search picks…"
-          className="w-full rounded-full border border-zinc-200 bg-zinc-50 py-2 pr-3 pl-9 text-sm outline-none transition placeholder:text-zinc-400 focus:border-brand-400 focus:bg-white focus:ring-2 focus:ring-brand-100"
-        />
-      </label>
-    </form>
-  );
-}
+// El buscador del header es LiveSearchBox (componente compartido):
+// responde en tiempo real con un desplegable de coincidencias contra
+// los productos publicados (endpoint /api/search). La misma pieza
+// sirve el escritorio y el panel móvil; en móvil, `onNavigate`
+// cierra el panel al navegar desde el desplegable.
 
 // El logo llega como prop desde el layout de servidor: SiteLogo es un
 // componente async (resuelve la variante del panel con Prisma) y NO debe
@@ -206,7 +196,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
           </Link>
         </nav>
 
-        <SearchForm className="ml-auto hidden max-w-xs flex-1 sm:block" />
+        <LiveSearchBox className="ml-auto hidden max-w-xs flex-1 sm:block" />
 
         <button
           ref={mobileButtonRef}
@@ -300,7 +290,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
         }`}
       >
         <div className="container-x py-4">
-          <SearchForm className="sm:hidden" />
+          <LiveSearchBox className="sm:hidden" onNavigate={closeAll} />
           {/* Las mismas píldoras animadas del escritorio, en la zona
               de accesos del panel móvil. El acceso a las guías cierra
               la zona, después de las píldoras (directiva de Renato,

@@ -7,6 +7,7 @@ import type {
 } from "@prisma/client";
 
 import type { ProductPrice } from "@prisma/client";
+import { searchCatalog } from "@/modules/search/match";
 
 export type ProductWithLinks = Product & {
   links: AffiliateLink[];
@@ -199,6 +200,13 @@ export async function getCategoryStandouts(): Promise<ProductWithCategory[]> {
   return attachPrices(found) as Promise<ProductWithCategory[]>;
 }
 
+/**
+ * Búsqueda de la página /search: mismo criterio por tokens que el
+ * buscador en tiempo real (modules/search/match), sobre el catálogo
+ * publicado completo — el catálogo es pequeño y la coincidencia con
+ * acentos y relevancia no la puede hacer la consulta SQL. Sin base de
+ * datos devuelve vacío, como el resto de la capa pública.
+ */
 export async function searchProducts(
   query: string,
 ): Promise<ProductWithLinks[]> {
@@ -206,20 +214,151 @@ export async function searchProducts(
   if (!q) return [];
   const fromDb = await dbOrNull((client) =>
     client.product.findMany({
-      where: {
-        status: "PUBLISHED",
-        OR: [
-          { title: { contains: q, mode: "insensitive" } },
-          { brand: { contains: q, mode: "insensitive" } },
-          { shortDescription: { contains: q, mode: "insensitive" } },
-        ],
+      where: { status: "PUBLISHED" },
+      include: {
+        links: { where: { isActive: true } },
+        category: { select: { nameEn: true, slug: true } },
       },
-      include: { links: { where: { isActive: true } } },
       orderBy: { publishedAt: "desc" },
-      take: 24,
     }),
   );
-  return attachPrices(fromDb ?? []);
+  if (!fromDb) return [];
+  const byAsin = new Map(fromDb.map((product) => [product.asin, product]));
+  const { results } = searchCatalog(
+    fromDb.map((product) => ({
+      asin: product.asin,
+      title: product.title,
+      brand: product.brand,
+      categoryName: product.category.nameEn,
+      shortDescription: product.shortDescription,
+    })),
+    q,
+    120,
+  );
+  return attachPrices(
+    results
+      .map((hit) => byAsin.get(hit.asin))
+      .filter((product) => product !== undefined),
+  );
+}
+
+export type LiveSearchHit = {
+  asin: string;
+  title: string;
+  brand: string | null;
+  categoryName: string;
+  categorySlug: string;
+};
+
+export type LiveSearchResult = {
+  /** Coincidencias totales entre los productos publicados. */
+  total: number;
+  /** Primeras coincidencias por relevancia (para el desplegable). */
+  results: LiveSearchHit[];
+};
+
+/**
+ * Buscador en tiempo real del sitio público (endpoint /api/search):
+ * solo productos PUBLICADOS y solo campos ligeros — el desplegable
+ * del header no necesita enlaces ni precios. Sin base de datos
+ * degrada a cero resultados, igual que el resto del sitio público.
+ */
+export async function searchProductsLive(
+  query: string,
+  limit = 8,
+): Promise<LiveSearchResult> {
+  const q = query.trim();
+  if (!q) return { total: 0, results: [] };
+  const rows = await dbOrNull((client) =>
+    client.product.findMany({
+      where: { status: "PUBLISHED" },
+      select: {
+        asin: true,
+        title: true,
+        brand: true,
+        shortDescription: true,
+        category: { select: { nameEn: true, slug: true } },
+      },
+      orderBy: { publishedAt: "desc" },
+    }),
+  );
+  if (!rows) return { total: 0, results: [] };
+  const { total, results } = searchCatalog(
+    rows.map((row) => ({ ...row, categoryName: row.category.nameEn })),
+    q,
+    limit,
+  );
+  return {
+    total,
+    results: results.map((row) => ({
+      asin: row.asin,
+      title: row.title,
+      brand: row.brand,
+      categoryName: row.category.nameEn,
+      categorySlug: row.category.slug,
+    })),
+  };
+}
+
+export type AdminSearchHit = {
+  id: string;
+  asin: string;
+  title: string;
+  brand: string | null;
+  status: string;
+  categoryName: string;
+};
+
+export type AdminSearchResult = {
+  total: number;
+  results: AdminSearchHit[];
+};
+
+/**
+ * Buscador en tiempo real del panel (endpoint /api/admin/search, tras
+ * sesión): busca en TODOS los estados — el panel gestiona también
+ * borradores y degradados — y devuelve lo justo para saltar a la
+ * ficha de edición. El filtrado de la tabla de /admin/productos sigue
+ * siendo por searchParams en el servidor (conteos facetados y
+ * paginación correctos); este endpoint es el atajo de localización.
+ */
+export async function searchProductsAdmin(
+  query: string,
+  limit = 8,
+): Promise<AdminSearchResult> {
+  const q = query.trim();
+  if (!q) return { total: 0, results: [] };
+  const rows = await dbOrNull((client) =>
+    client.product.findMany({
+      select: {
+        id: true,
+        asin: true,
+        title: true,
+        brand: true,
+        status: true,
+        shortDescription: true,
+        category: { select: { nameEn: true } },
+      },
+      orderBy: { updatedAt: "desc" },
+    }),
+  );
+  if (!rows) return { total: 0, results: [] };
+  const { total, results } = searchCatalog(
+    rows.map((row) => ({ ...row, categoryName: row.category.nameEn })),
+    q,
+    limit,
+  );
+  return {
+    total,
+    results: results.map((row) => ({
+      id: row.id,
+      asin: row.asin,
+      title: row.title,
+      brand: row.brand,
+      status: String(row.status),
+      categoryName: row.category.nameEn,
+    })),
+  };
 }
 
 export async function getProductByAsin(

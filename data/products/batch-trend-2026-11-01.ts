@@ -2,15 +2,17 @@
 // por Renato con SiteStripe el 2026-11-01 (llegaron como enlaces
 // cortos link.amazon por WhatsApp; aquí se guardan resueltos a su
 // destino completo, todos con tag=ecommercety00-20, canal WEB,
-// verificados uno a uno por resolución + HTTP 200: 9/9).
+// verificados uno a uno por resolución + HTTP 200: 11/11).
 // Títulos y descripciones: redacción PROPIA de T&F Picks, tomadas
 // de las fichas editoriales del radar (sin precios, sin imágenes
 // de Amazon, en cumplimiento de Associates).
-// DESCARTADOS de la tanda original de 11 por link caído al generar
+// De la tanda original de 11, dos ASIN llegaron caídos al generar
 // (reportado por Renato y confirmado): Ninja Creami B08PVWZYD6 y
-// Taco Cat Goat Cheese Pizza B07F3DTSH4. Sus reemplazos verificados
-// (Creami NC301 B08QXB9BH5 y Taco Cat original B077Z1R28P) quedan
-// pendientes del SiteStripe de Renato y entrarán en un lote posterior.
+// Taco Cat Goat Cheese Pizza B07F3DTSH4. Ambos se reemplazaron el
+// mismo día por sus listings vigentes verificados — Creami NC301
+// Silver B08QXB9BH5 y Taco Cat original B077Z1R28P — cuyos enlaces
+// SiteStripe de Renato también se verificaron (resolución + 200 +
+// tag oficial). LOTE COMPLETO: 11/11.
 
 import type { BatchProduct } from "./batch-001";
 
@@ -122,5 +124,29 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
       "Air-activated warmth for gloves, pockets and outdoor days, in a multipack that covers a whole winter of cold mornings.",
     highlights: ["Air-activated warmth on demand", "Multipack value for the whole season", "Light and easy to carry anywhere", "Made for outdoor work, sport and travel"],
     discoveredVia: "Radar de tendencias hora 3 (SiteStripe, 2026-11-01)",
+  },
+  {
+    asin: "B08QXB9BH5",
+    brand: "Ninja",
+    title: "Ninja CREAMi Ice Cream Maker NC301, Silver — Frozen Treats at Home",
+    categorySlug: "home-kitchen",
+    affiliateUrl: "https://www.amazon.com/dp/B08QXB9BH5?ie=UTF8&linkCode=sl2&ascsubtag=srctok-78059750f3718d42&btn_type=ss&linkId=8f1b4a8027aac56b98222268c7e35b9f&gaOptInStatus=true&th=1&ASIN=B08QXB9BH5&ref_=as_li_ss_tl&language=en_US&tag=ecommercety00-20&ie=UTF8&btn_ref=srctok-78059750f3718d42",
+    imageUrl: null,
+    shortDescription:
+      "Turn frozen bases into ice cream, sorbet and frozen treats at home, with room to experiment with flavors the store never stocks. The NC301 is the original CREAMi: seven one-touch programs and two pint containers with lids.",
+    highlights: ["Homemade ice cream, sorbet and frozen treats", "7 one-touch programs, with (2) pint containers & lids", "Lets you control flavors and ingredients", "A standout gift appliance"],
+    discoveredVia: "Radar de tendencias hora 3 — reemplazo verificado (SiteStripe, 2026-11-01)",
+  },
+  {
+    asin: "B077Z1R28P",
+    brand: "Dolphin Hat Games",
+    title: "Taco Cat Goat Cheese Pizza Card Game — Fast, Loud, Impossible to Put Down",
+    categorySlug: "toys-games",
+    affiliateUrl: "https://www.amazon.com/dp/B077Z1R28P?linkCode=sl2&tag=ecommercety00-20&linkId=1a80aa5b5edcf0a9f8e428c4bdadc4c5&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-11eb413725a7c791&btn_type=ss&btn_ref=srctok-11eb413725a7c791",
+    imageUrl: null,
+    shortDescription:
+      "A fast, loud party card game where one wrong slap changes everything: simple rules, quick rounds and instant rematches. The original edition for 2-8 players, ages 8 and up.",
+    highlights: ["Fast-paced party card game", "Simple rules anyone can learn in minutes", "Great for family gatherings and parties", "A fun stocking-sized gift"],
+    discoveredVia: "Radar de tendencias hora 3 — reemplazo verificado (SiteStripe, 2026-11-01)",
   },
 ];

@@ -145,6 +145,60 @@ export async function getTrendRadarProducts(
   return getFeaturedProducts(limit);
 }
 
+export type ProductWithCategory = ProductWithLinks & {
+  category: Pick<Category, "nameEn" | "slug">;
+};
+
+/**
+ * Destacados de portada, UNO por categoría (las 14): la portada dejó
+ * de mostrar la parrilla de categorías (redundante con el mega-menú)
+ * y en su lugar resalta el producto más interesante de cada una.
+ * Criterio por categoría, en orden: (1) el hallazgo más reciente del
+ * radar de tendencias en esa categoría; (2) el publicado más
+ * reciente. El modelo no tiene marca editorial de "destacado", así
+ * que la frescura del radar es el primer criterio. La representación
+ * de las 14 queda garantizada por construcción (una consulta por
+ * categoría de getCategories); sin base, devuelve vacío como el
+ * resto de la capa (la portada muestra su estado vacío).
+ */
+export async function getCategoryStandouts(): Promise<ProductWithCategory[]> {
+  const categories = await getCategories();
+  const include = {
+    links: { where: { isActive: true } },
+    category: { select: { nameEn: true, slug: true } },
+  } as const;
+  const standouts = await Promise.all(
+    categories.map(async (category) => {
+      const radar = await dbOrNull((client) =>
+        client.product.findFirst({
+          where: {
+            categoryId: category.id,
+            status: "PUBLISHED",
+            discoveredVia: {
+              contains: "Radar de tendencias",
+              mode: "insensitive",
+            },
+          },
+          include,
+          orderBy: { createdAt: "desc" },
+        }),
+      );
+      if (radar) return radar;
+      return dbOrNull((client) =>
+        client.product.findFirst({
+          where: { categoryId: category.id, status: "PUBLISHED" },
+          include,
+          orderBy: [{ publishedAt: "desc" }, { createdAt: "desc" }],
+        }),
+      );
+    }),
+  );
+  const found = standouts.filter(
+    (product): product is NonNullable<typeof product> => product !== null,
+  );
+  return attachPrices(found) as Promise<ProductWithCategory[]>;
+}
+
 export async function searchProducts(
   query: string,
 ): Promise<ProductWithLinks[]> {

@@ -1,10 +1,13 @@
 import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { getCategories, getFeaturedProducts } from "@/modules/catalog/data";
+import {
+  getCategories,
+  getCategoryStandouts,
+  getFeaturedProducts,
+} from "@/modules/catalog/data";
 import { getBannerVariant, getShowProductImages } from "@/modules/settings/site";
 import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
-import CategoryIcon from "@/components/CategoryIcon";
 import ProductCard from "@/components/ProductCard";
 import Hero from "@/components/Hero";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -14,44 +17,38 @@ import JsonLd from "@/components/JsonLd";
 import { faqLd, organizationLd, websiteLd } from "@/modules/seo/jsonld";
 import { IconArrowRight, IconBook } from "@/components/icons";
 
-async function CategoryTiles() {
-  const categories = await getCategories();
+// Destacados por categoría (2026-11-02): la parrilla de tarjetas de
+// categorías salió de la portada (redundante con el mega-menú del
+// header) y en su lugar va UN producto sobresaliente por cada una de
+// las 14 categorías, con su etiqueta de categoría en la tarjeta.
+async function CategoryStandouts() {
+  const [products, showImages] = await Promise.all([
+    getCategoryStandouts(),
+    getShowProductImages(),
+  ]);
+  if (products.length === 0) {
+    return (
+      <div className="mt-10 rounded-3xl border border-dashed border-zinc-300 bg-zinc-50 px-6 py-12 text-center">
+        <p className="font-semibold text-zinc-800">
+          The first picks are being curated right now
+        </p>
+        <p className="mx-auto mt-2 max-w-md text-sm text-zinc-500">
+          Our launch catalog is on its way. Meanwhile, explore the guides
+          below and check back very soon.
+        </p>
+      </div>
+    );
+  }
   return (
-    <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {categories.map((category) => {
-        const visual = CATEGORY_VISUALS[category.slug] ?? DEFAULT_VISUAL;
-        return (
-          <Link
-            key={category.slug}
-            href={`/category/${category.slug}`}
-            className="group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-900/10"
-          >
-            <span
-              className={`absolute inset-x-0 top-0 h-1.5 ${visual.bar}`}
-            />
-            <span
-              className={`flex h-12 w-12 items-center justify-center rounded-2xl ${visual.chip}`}
-            >
-              <CategoryIcon slug={category.slug} />
-            </span>
-            <h3 className="mt-4 text-lg font-bold text-zinc-900">
-              {category.nameEn}
-            </h3>
-            <p className="mt-1 text-sm font-medium text-brand-600">
-              {visual.tagline}
-            </p>
-            {category.descriptionEn ? (
-              <p className="mt-2 line-clamp-2 text-sm text-zinc-600">
-                {category.descriptionEn}
-              </p>
-            ) : null}
-            <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
-              Explore picks
-              <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-            </span>
-          </Link>
-        );
-      })}
+    <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      {products.map((product) => (
+        <ProductCard
+          key={product.id}
+          product={product}
+          showImages={showImages}
+          category={product.category}
+        />
+      ))}
     </div>
   );
 }
@@ -68,7 +65,7 @@ async function FeaturedPicks() {
           The first picks are being curated right now
         </p>
         <p className="mx-auto mt-2 max-w-md text-sm text-zinc-500">
-          Our launch catalog is on its way. Meanwhile, browse the categories
+          Our launch catalog is on its way. Meanwhile, browse the standouts
           above and check back very soon.
         </p>
       </div>
@@ -107,8 +104,8 @@ const BRAND_SLIDE: HeroSlide = {
   title: "Great products. Zero guesswork.",
   subtitle:
     "We research, compare and keep verifying the best Amazon finds, so every pick you see here is one we would buy ourselves.",
-  href: "#categories",
-  cta: "Browse categories",
+  href: "#standouts",
+  cta: "See the standouts",
   image: "/slides/brand.jpg",
   band: "bg-ink-900",
 };
@@ -165,14 +162,14 @@ export default function Home() {
         <TrustStrip />
       </section>
 
-      <section id="categories" className="container-x pb-20">
+      <section id="standouts" className="container-x pb-20">
         <SectionHeading
           eyebrow="Start here"
-          title="Shop by category"
-          sub="Fourteen focused categories, each one curated by hand and kept verified. No endless aisles, no filler products."
+          title="Standouts from every category"
+          sub="The most interesting pick from each of our fourteen categories — the freshest trend-radar find or the newest standout our editors chose. One per category, no filler."
         />
         <Suspense fallback={<p className="mt-10 text-zinc-500">Loading…</p>}>
-          <CategoryTiles />
+          <CategoryStandouts />
         </Suspense>
       </section>
 

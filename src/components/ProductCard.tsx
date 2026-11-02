@@ -13,9 +13,13 @@ export function webAffiliateUrl(product: ProductWithLinks): string {
 export default function ProductCard({
   product,
   showImages = true,
+  category,
 }: {
   product: ProductWithLinks;
   showImages?: boolean;
+  /** Etiqueta visible de la categoría (portada: un destacado por
+      categoría). Opcional: el resto de listados no la pasa. */
+  category?: { nameEn: string; slug: string };
 }) {
   const price = freshPrice(product.price);
   // Sin imagen (o interruptor apagado): NO se dibuja bloque vacío.
@@ -46,6 +50,14 @@ export default function ProductCard({
       ) : null}
 
       <div className="flex flex-1 flex-col p-5">
+        {category ? (
+          <Link
+            href={`/category/${category.slug}`}
+            className="mb-3 inline-flex w-fit items-center rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-bold tracking-wide text-brand-700 uppercase transition hover:bg-brand-100"
+          >
+            {category.nameEn}
+          </Link>
+        ) : null}
         {!renderImage ? (
           <div className="mb-3 flex items-center gap-2">
             <span className="rounded-full bg-ink-900 px-2.5 py-1 text-[11px] font-bold tracking-wide text-white uppercase">

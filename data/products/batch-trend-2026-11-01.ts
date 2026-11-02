@@ -46,7 +46,7 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
     brand: "Stanley",
     title: "Stanley Quencher H2.0 FlowState Tumbler, 40 oz — The Default Gift Tumbler",
     categorySlug: "home-kitchen",
-    affiliateUrl: "https://www.amazon.com/dp/B0CRMY498M?th=1&linkCode=sl2&tag=ecommercety00-20&linkId=4767fac0a876a0160670ff3398ee47d0&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-65c69afbc70a8469&btn_type=ss&btn_ref=srctok-65c69afbc70a8469",
+    affiliateUrl: "https://www.amazon.com/dp/B0CRMY498M?th=1&linkCode=ll2&tag=ecommercety00-20&linkId=bbc1374a0dee7267dd0408fe6830acc7&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
       "The big, everyday tumbler that became the default gift: built for long days, car cup holders and desks, with a lid made for sipping on the go.",
@@ -80,9 +80,9 @@ export const BATCH_TREND_2026_11_01: BatchProduct[] = [
   {
     asin: "B085DVHQ57",
     brand: "Owala",
-    title: "Owala FreeSip Insulated Stainless Steel Water Bottle, 24 oz — Sip Two Ways",
+    title: "Owala FreeSip Insulated Stainless Steel Water Bottle, 32 oz — Sip Two Ways",
     categorySlug: "sports-outdoors",
-    affiliateUrl: "https://www.amazon.com/dp/B085DVHQ57?linkCode=sl2&tag=ecommercety00-20&linkId=67635924327cc7e0bdd4b520b327a8c4&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-6b8f6a8a0691b043&btn_type=ss&btn_ref=srctok-6b8f6a8a0691b043",
+    affiliateUrl: "https://www.amazon.com/dp/B085DVHQ57?&linkCode=ll2&tag=ecommercety00-20&linkId=0826651c0b58199db20d4f0fb8a44545&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
       "An insulated bottle with a clever two-way spout: sip through the straw or tilt it back, made for gym bags, desks and trail days alike.",

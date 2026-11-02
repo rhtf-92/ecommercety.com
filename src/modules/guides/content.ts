@@ -263,6 +263,317 @@ export const GUIDES: Guide[] = [
     verdict:
       "If they cook three nights a week, the Instant Pot RIO is the gift. If they host, make it the CREAMi. And if you are not sure, the small tools section has never once been returned.",
   },
+  {
+    slug: "small-kitchen-big-upgrades",
+    title: "Small kitchen, big upgrades: the essentials that earn their space",
+    description:
+      "Counter-space math for small kitchens: the multi-use appliances and storage-first tools that earn their footprint, and the single-use gadgets to skip.",
+    categorySlug: "home-kitchen",
+    categoryLabel: "Home & Kitchen",
+    readingMinutes: 6,
+    intro:
+      "In a small kitchen, every appliance pays rent in counter space, and most gadgets are bad tenants. The test we apply in this guide is unforgiving: a product earns its space only if it does several jobs, stores smaller than it works, or replaces something bigger. Six picks pass. A whole category of single-use gadgets does not.",
+    sections: [
+      {
+        heading: "The counter-space math",
+        paragraphs: [
+          "Measure your counter in jobs, not inches. A typical small kitchen has room for two, maybe three appliances living out permanently. Everything else must either earn a cabinet spot by being genuinely multi-use, or it becomes the thing you move around to make toast. Before buying anything, ask what it replaces: the best small-kitchen purchase deletes two older tools.",
+          "The second rule is vertical. Drawers, walls and the insides of cabinet doors are free space that most kitchens waste. Storage tools that organize what you already own often upgrade a small kitchen more than any new appliance can.",
+        ],
+      },
+      {
+        heading: "Multi-use winners that anchor a small kitchen",
+        paragraphs: [
+          "The Instant Pot RIO 7-in-1 (6 Qt) is the anchor: pressure cooker, slow cooker, steamer and more in one pot, which means several single-purpose appliances never need to exist. It lives in a cabinet between uses and takes over weeknight cooking when it comes out.",
+          "The Ninja Air Fryer Pro 4-in-1 (5 QT) is the second anchor, because it quietly replaces the oven for most small meals: faster, no preheat marathon, and sized for real dinners instead of snack portions. Between the two, most of what a small kitchen cooks is covered.",
+          "The Ninja Professional Blender BL610 (1000W) earns the third spot because its job list keeps growing: smoothies, frozen drinks, soups, sauces and crushed ice. A blender that only does smoothies is a luxury; one that works like this is infrastructure.",
+        ],
+      },
+      {
+        heading: "Storage is a feature, not an afterthought",
+        paragraphs: [
+          "The CAROTE 27-piece cookware set is built for exactly this problem: the handles detach, so the pots and pans stack inside each other instead of colonizing a whole cabinet. One set, a fraction of the storage footprint, and the stovetop looks like an adult lives there.",
+          "Two small tools finish the job. The Etekcity food scale (EK6015) is nearly flat, slides into a drawer, and makes baking and meal prep measurably better. The Kitchen Gizmo Snap N Strain clips onto the pot you are already using, which means the bulky colander, the small kitchen's most awkward resident, can retire.",
+        ],
+      },
+      {
+        heading: "The gadgets to skip",
+        paragraphs: [
+          "Skip anything that does one narrow job a knife or a fork already does: dedicated slicers, dicers and shapers for single ingredients are the classic small-kitchen regret. If a gadget's only talent is preparing one food in one shape, it will be donated within a year.",
+          "Also skip duplicate appliances in disguise. If your multi-cooker already slow-cooks, steams and sautés, a separate machine for each of those jobs is not a collection, it is clutter with plugs. Buy depth in a few tools, not breadth in many.",
+        ],
+      },
+    ],
+    asins: [
+      "B0FBK1XHXR",
+      "B0CSZ7WBYW",
+      "B00NGV4506",
+      "B0DPKB987C",
+      "B0113UZJE2",
+      "B01MZ14LJV",
+    ],
+    verdict:
+      "Start with the Instant Pot RIO and the CAROTE set: one deletes appliances, the other deletes a cabinet problem. Add the scale and the Snap N Strain for almost no space at all, and let every future gadget argue its way past the same test.",
+  },
+  {
+    slug: "smart-home-starter-kit",
+    title: "Smart home starter kit: what to buy first (and what to skip)",
+    description:
+      "A sane order of purchase for a first smart home: network first, then control, then security, and the ecosystem trap to avoid from day one.",
+    categorySlug: "tech-smart-home",
+    categoryLabel: "Tech, Accessories & Smart Home",
+    readingMinutes: 6,
+    intro:
+      "Most smart homes fail in the same order: someone buys a gadget, then another gadget from a different app, then a third that needs a hub nobody owns. This guide is the opposite approach, a purchase order. Each step makes the next one work better, and nothing here locks you into a single ecosystem's walled garden.",
+    sections: [
+      {
+        heading: "Step 1: Fix the network before buying anything smart",
+        paragraphs: [
+          "Every smart device is only as reliable as your Wi-Fi, and most 'this camera is junk' reviews are really 'my router is in a closet two rooms away' reviews. The Amazon eero 6+ mesh system (3-pack) replaces the single-router gamble with coverage that reaches the doorbell, the garage and the back bedroom.",
+          "Do this first even though it is the least glamorous purchase on the list. A mesh network is the foundation the rest of the house stands on, and it improves the devices you already own on day one.",
+        ],
+      },
+      {
+        heading: "Step 2: One place to control it all",
+        paragraphs: [
+          "With the network solid, add the control point. The Amazon Echo Show 11 is the kitchen-counter hub that earns it: a smart display for timers, video calls, camera views and voice control of everything that comes after. A hub you can see beats an app you have to hunt for.",
+          "Add the Echo Dot Max as the second room's speaker and voice point once the first proves itself. Resist buying speakers for every room up front; two rooms done well teach you what your household actually uses voice control for.",
+        ],
+      },
+      {
+        heading: "Step 3: Security that watches the doors, not your life",
+        paragraphs: [
+          "Security comes third, and it starts at the perimeter. The Ring Battery Doorbell 2K needs no wiring, gives a head-to-toe view of the doorstep and covers the spot where packages, visitors and problems all arrive first.",
+          "Inside, the Blink Mini 2 (2-pack) covers the rooms that matter, a nursery, a pet's favorite spot, the back door, with a feed you check from your phone. Start with the doors and one or two key rooms; a camera in every corner is a hobby, not a security plan.",
+        ],
+      },
+      {
+        heading: "What to skip (for now)",
+        paragraphs: [
+          "Skip the ecosystem trap: committing every purchase to one brand's app before you know what you actually use. The picks above play well through common standards and a shared hub, which keeps your options open as the house grows.",
+          "Skip specialty gadgets until the basics run for a month without attention: no smart locks, sensors or automations layered on a house that still confuses you. And when you do add lighting or anything else, add it to the working system, in the order your household feels the friction, not the order a sale page suggests. One last everyday win while you build: the Apple AirTag 4-pack makes keys, bags and luggage findable, the smallest smart purchase with the most immediate payoff.",
+        ],
+      },
+    ],
+    asins: [
+      "B08ZK2BHP2",
+      "B0DC96PPZK",
+      "B0D6SX8VLQ",
+      "B0G2D1R15Q",
+      "B0BWX1D2DW",
+      "B0GJTXVN9Z",
+    ],
+    verdict:
+      "Network, hub, doors, then taste. Follow that order and your smart home feels like one system instead of a drawer of experiments; every pick above is a step in that order, and none of them has to be undone later.",
+  },
+  {
+    slug: "luxury-beauty-value-first",
+    title: "Luxury beauty without the markup blindness: a value-first guide",
+    description:
+      "Where premium beauty actually pays off, and where the affordable twin wins: a value-first way to build a routine without paying for packaging.",
+    categorySlug: "beauty-personal-care",
+    categoryLabel: "Beauty & Personal Care",
+    readingMinutes: 6,
+    intro:
+      "Beauty pricing runs on a simple trick: the jar looks expensive, so the formula must be. Sometimes that is true, concentrated actives and overnight treatments can be worth real money. Often it is not, and a pharmacy-shelf staple does the same job. This guide separates the two, using our own catalog as the test case.",
+    sections: [
+      {
+        heading: "Where premium actually pays off",
+        paragraphs: [
+          "Premium earns its price when the product is a treatment, not a decoration: something concentrated that stays on skin and works for hours. The COSRX Advanced Snail 96 Mucin Power Essence is the textbook case, a focused hydration and texture treatment that a few drops of cover the whole face, so the bottle lasts.",
+          "Overnight products are the second place premium makes sense, because time is an ingredient. The LANEIGE Lip Sleeping Mask works while you sleep and is used in tiny amounts, and the BIODANCE Bio-Collagen Real Deep Mask turns a few hours into a full treatment session. Cost per use, not cost per jar, is the honest math.",
+        ],
+      },
+      {
+        heading: "Where the affordable twin wins",
+        paragraphs: [
+          "Single-ingredient serums are where markup blindness hits hardest. The Ordinary Niacinamide 10% + Zinc 1% (pack of 2) is the industry proof: a clear formula, a clear job for blemish-prone skin, and no budget spent on fragrance or glass. When the ingredient list is the whole product, buy the ingredient, not the brand story.",
+          "Glow and mascara belong to the value shelf too. The e.l.f. Halo Glow Liquid Filter delivers the dewy, lit-from-within finish that prestige glow products charge multiples for, and Maybelline's Lash Sensational Sky High mascara is the drugstore tube that keeps embarrassing far pricier wands. Makeup you replace every few months should never be the expensive line in the routine.",
+        ],
+      },
+      {
+        heading: "Tools: the one-time purchases",
+        paragraphs: [
+          "The exception to daily-product math is tools, which you buy once and use for years. The REVLON One-Step Volumizer is the classic example: dryer and styler in one pass, replacing both a separate tool and the salon blowout habit for a lot of people.",
+          "Judge tools by cost per year, not per box. A tool used three times a week for three years is cheaper, in every honest sense, than a budget version replaced twice, and it is the one category where stepping up usually pays.",
+        ],
+      },
+      {
+        heading: "The value-first routine, assembled",
+        paragraphs: [
+          "Put it together and the pattern is clear: spend on what stays on your skin and works over time (essence, overnight care), save on what is single-ingredient or short-lived (serums, glow, mascara), and invest once in the tool you will use for years.",
+          "That split, not a brand loyalty, is what a value-first routine looks like. Every pick in this guide sits on the correct side of it.",
+        ],
+      },
+    ],
+    asins: [
+      "B00PBX3L7K",
+      "B07XXPHQZK",
+      "B0B879FZBZ",
+      "B0DDQ4MSXS",
+      "B0B5MGBDHZ",
+      "B0F5BWVK9R",
+      "B01LSUQSB0",
+    ],
+    verdict:
+      "Premium for treatments, value for staples, once-and-done for tools. Run every beauty purchase through those three buckets and the markup blindness disappears, no matter whose logo is on the jar.",
+  },
+  {
+    slug: "honest-pet-owner-checklist",
+    title: "The honest pet-owner checklist: food, toys and care that last",
+    description:
+      "A durability-first checklist for dogs and cats: hydration, teeth, treats, play and the unglamorous supplies that a pet household actually runs on.",
+    categorySlug: "pet-supplies",
+    categoryLabel: "Pet Supplies",
+    readingMinutes: 6,
+    intro:
+      "Pet products fail in a specific way: they are bought for the pet we imagine, not the one drooling on the rug. This checklist is built the other way, around what pet households actually consume, replace and rely on: water, teeth, treats, play, cleanup and the quiet war against pet hair. Everything here is chosen to be reordered or still in service a year from now.",
+    sections: [
+      {
+        heading: "Water and food: the daily infrastructure",
+        paragraphs: [
+          "Cats are famously indifferent to still water, which is why the Veken Stainless Steel Cat Water Fountain (108 oz) matters: moving water encourages drinking, the stainless build is easier to keep clean than plastic, and the capacity means refills stop being a daily chore.",
+          "For teeth, Greenies Dental Dog Treats (Teenie size) are the rare product that is both a treat and a routine: a daily chew sized for small dogs that supports dental care without a wrestling match with a toothbrush. The best pet care product is the one that actually happens every day.",
+        ],
+      },
+      {
+        heading: "Treats: the training currency",
+        paragraphs: [
+          "Treats are not snacks, they are communication. Temptations MixUps Cat Treats (Catnip Fever, 30 oz tub) work as the high-value reward cats actually respond to, and the big tub format suits households that train, lure and occasionally bribe on a daily basis.",
+          "The honest rule for treats: buy the format your household finishes while it is fresh, and keep one reliable favorite instead of a rotating cast of experiments nobody's pet asked for.",
+        ],
+      },
+      {
+        heading: "Toys that survive the week",
+        paragraphs: [
+          "Judge a toy by its second week, not its first photo. The Potaroma Flopping Fish is the cat toy that keeps working after the novelty fades: motion-activated flopping, catnip inside and USB recharging, so it does not die the way battery toys do.",
+          "For dogs, the Multipet Lamb Chop plush with squeaker is the nostalgic classic that has been claimed within minutes in dog households for decades. Plush toys are comfort objects as much as playthings; the honest expectation is supervised joy, and a spare in the closet is just good planning.",
+        ],
+      },
+      {
+        heading: "The unglamorous supplies that run the house",
+        paragraphs: [
+          "Every pet household runs on refills and cleanup, so buy them like infrastructure. Earth Rated leak-proof dog poop bags (lavender-scented, 120 count) are the daily essential nobody photographs and everybody needs to never run out of.",
+          "Rocco & Roxie Professional Strength Stain & Odor Eliminator, in the gallon size, is the accident insurance: enzyme cleaners are the difference between a spot that is cleaned and a spot your pet can still find. And for the hair that ends up everywhere else, the ChomChom Roller removes it from furniture and clothes with no sticky refills to buy, ever, which is why it is the last item on this checklist and the first one most owners end up recommending.",
+        ],
+      },
+    ],
+    asins: [
+      "B0FPFZ3C5K",
+      "B00T7R7HLC",
+      "B09NF5NBB3",
+      "B083S3ZXDF",
+      "B003XVYKVI",
+      "B0088LIINY",
+      "B00J9MYM5O",
+      "B00BAGTNAQ",
+    ],
+    verdict:
+      "Water, teeth, one great treat, toys judged by week two, and cleanup bought in bulk: cover those five and your pet household runs itself. Everything else is a bonus, not a basics gap.",
+  },
+  {
+    slug: "home-gym-on-a-budget",
+    title: "Home gym on a budget: the minimum kit for maximum consistency",
+    description:
+      "The smallest home gym that actually gets used: adjustable weight, bands, a joint-friendly base and the tracking that keeps the habit alive.",
+    categorySlug: "sports-outdoors",
+    categoryLabel: "Sports, Fitness & Outdoors",
+    readingMinutes: 6,
+    intro:
+      "Home gyms do not fail on equipment, they fail on consistency: the treadmill becomes a clothes rack because the routine never became a habit. This guide builds the minimum kit backwards from the habit, small-space gear that removes every excuse (no commute, no setup, kind to joints) and covers a real full-body week.",
+    sections: [
+      {
+        heading: "Start with the kit that fits in a drawer",
+        paragraphs: [
+          "The Fit Simplify Resistance Loop Bands (set of 5, with carry bag) are the correct first purchase: five resistance levels that cover warm-ups, glutes, shoulders, rehab-style work and travel workouts, in less space than a paperback. If the habit does not survive a month with bands, it was never going to survive a rack.",
+          "Under everything goes the Gaiam Premium Yoga Mat (extra thick 6mm). The extra thickness is the joint-friendly part: knees, elbows and hips meet the floor kindly, which quietly decides whether floor work stays in the routine or gets skipped by week three.",
+        ],
+      },
+      {
+        heading: "One real weight, every weight",
+        paragraphs: [
+          "When the habit sticks, add exactly one serious strength tool: the Bowflex SelectTech 552 Adjustable Dumbbells. One pair dials across 15 weight settings, replacing a whole rack's footprint with two dumbbells that live in a corner. For small spaces this is not a compromise, it is the entire point.",
+          "A pair of adjustable dumbbells plus bands covers presses, rows, squats, hinges and carries, which is to say nearly every movement pattern a home routine needs. Buy the pair before any single-purpose machine; versatility is what survives changing goals.",
+        ],
+      },
+      {
+        heading: "Low impact is not low value",
+        paragraphs: [
+          "The LifePro Waver Vibration Plate is the joint-friendly wildcard: a low-impact platform used for warm-ups, circulation work, balance and gentle sessions on days when joints vote against anything harder. Recovery-friendly gear earns its space precisely on the days motivation is lowest.",
+          "Consistency math again: the best workout in a home gym is the one that happens on a tired Tuesday. Equipment that offers a low-barrier session protects the streak, and the streak is the whole game.",
+        ],
+      },
+      {
+        heading: "Track it, and hydrate like it matters",
+        paragraphs: [
+          "The Fitbit Charge 6 closes the loop: heart rate, sleep and workout tracking on the wrist turns vague effort into a visible streak, and visible streaks are famously hard to break. It is the cheapest personal trainer in this guide.",
+          "And the smallest pick does real work: the Owala FreeSip 24 oz bottle, with its sip-or-swig spout, lives where the workouts happen and removes the petty friction of hydration. Minimum kit, maximum consistency: bands, mat, one adjustable weight, one low-impact option, one tracker, one bottle.",
+        ],
+      },
+    ],
+    asins: [
+      "B01AVDVHTI",
+      "B086BSKM92",
+      "B0FRNG2N5H",
+      "B0794BXVY4",
+      "B0CC62ZG1M",
+      "B085DVHQ57",
+    ],
+    verdict:
+      "Buy in this order and stop early if the habit has not formed: bands and mat first, the Bowflex pair when week four arrives, tracking to lock it in. A small gym used daily beats a big one used in January.",
+  },
+  {
+    slug: "weekend-diy-starter-toolbox",
+    title: "Weekend DIY starter toolbox: buy once, cry once",
+    description:
+      "The core hand tools every home needs, the order to add the rest, and why the cheapest version of a tool is usually the expensive one.",
+    categorySlug: "tools-home-improvement",
+    categoryLabel: "Tools & Home Improvement",
+    readingMinutes: 6,
+    intro:
+      "'Buy once, cry once' is the oldest tool advice there is: pay for the good version a single time, or pay for the cheap version repeatedly and cry each time it fails mid-job. This guide builds a starter toolbox on that rule, one anchor set, the specialists worth their steel, and a sane order for everything after.",
+    sections: [
+      {
+        heading: "The anchor: one real hand-tool set",
+        paragraphs: [
+          "Start with a comprehensive mechanic's set instead of a drawer of singles. The CRAFTSMAN 262-Piece Mechanic Tool Set, in its 3-drawer VERSASTACK box, covers sockets, ratchets, wrenches and drivers for the car, the bike, flat-pack furniture and most of what a house can throw at you, in one organized case where every piece has a home.",
+          "On a tighter start, the Crescent 170-Piece General Purpose Set is the honest alternative: the same one-box logic with fewer pieces. Either way, the rule is one anchor set, bought once, instead of a decade of emergency single-tool purchases.",
+        ],
+      },
+      {
+        heading: "The specialists worth their steel",
+        paragraphs: [
+          "Pliers are where cheap tools fail loudest, which is why the KNIPEX Cobra Pliers Set (7, 10 and 12 in.) is the buy-once exemplar: the jaws grip pipe and fittings without slipping or rounding them, and three sizes cover plumbing surprises from faucet to trap. This is the set DIYers hand down, not replace.",
+          "The Leatherman Wingman is the other permanent resident: 14 tools in a pocket format that handles the ten small jobs a week (packages, loose screws, stubborn packaging, quick cuts) that never justify a trip to the toolbox. Between the anchor set and these two, most household tasks are already covered.",
+        ],
+      },
+      {
+        heading: "Precision and power, in the right order",
+        paragraphs: [
+          "Add precision before power. The HOTO Electric Precision Screwdriver Kit, with 25 magnetic bits, owns the modern household's real workload: electronics, toys, glasses, battery covers and every tiny screw the big set cannot touch.",
+          "When one power tool joins, make it the DEWALT 20V MAX XR Oscillating Multi-Tool (DCS356). Cutting, sanding, scraping and trimming in tight corners is the widest job list any single power tool offers, which is exactly what a starter toolbox needs from its first motor.",
+        ],
+      },
+      {
+        heading: "The finishing tool, and the order for the rest",
+        paragraphs: [
+          "The Huepar 4x360° Self-Leveling Laser Level is the finisher: shelves, pictures, tile lines and curtain rods come out level the first time, and it replaces the helper-holding-a-bubble-level ritual entirely. It is the tool that makes weekend results look professional.",
+          "The order after this core: a cordless drill/driver when projects start weekly, then task tools as real jobs demand them, never before. A toolbox built by need stays lean and excellent; a toolbox built by aisle-wandering becomes expensive storage. Buy once, in this order, and cry once.",
+        ],
+      },
+    ],
+    asins: [
+      "B0CNKXHGZT",
+      "B00F4AVRGW",
+      "B000X4KNTG",
+      "B005DI0XM4",
+      "B0BLMQ8BXB",
+      "B085B253MD",
+      "B0D9V7TL9S",
+    ],
+    verdict:
+      "One anchor set, KNIPEX pliers, a Wingman, precision driver, one multi-tool, one laser level. That is a toolbox that handles a decade of weekends, and every piece in it was bought exactly once.",
+  },
 ];
 
 export function getGuideBySlug(slug: string): Guide | undefined {

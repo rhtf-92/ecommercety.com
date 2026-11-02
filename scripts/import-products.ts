@@ -24,6 +24,7 @@ import { BATCH_TREND_2026_11_01_H1_5 } from "../data/products/batch-trend-2026-1
 import { BATCH_TREND_2026_11_01_H3_5 } from "../data/products/batch-trend-2026-11-01-h3-5";
 import { BATCH_TREND_2026_11_02_H1_5 } from "../data/products/batch-trend-2026-11-02-h1-5";
 import { BATCH_TREND_2026_11_02_H3_5 } from "../data/products/batch-trend-2026-11-02-h3-5";
+import { BATCH_TREND_2026_11_02_H1_5_C2 } from "../data/products/batch-trend-2026-11-02-h1-5-c2";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
 const BATCHES: { id: string; items: BatchProduct[] }[] = [
@@ -38,6 +39,7 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-trend-2026-11-01-h3-5", items: BATCH_TREND_2026_11_01_H3_5 },
   { id: "batch-trend-2026-11-02-h1-5", items: BATCH_TREND_2026_11_02_H1_5 },
   { id: "batch-trend-2026-11-02-h3-5", items: BATCH_TREND_2026_11_02_H3_5 },
+  { id: "batch-trend-2026-11-02-h1-5-c2", items: BATCH_TREND_2026_11_02_H1_5_C2 },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 const OFFICIAL_TAGS = Object.values(TRACKING_IDS);

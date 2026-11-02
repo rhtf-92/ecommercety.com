@@ -173,18 +173,15 @@ export default function Header({ logo }: { logo: ReactNode }) {
               }`}
             />
           </button>
-          <Link
-            href="/guides"
-            className={`rounded-full px-3 py-1.5 text-sm font-semibold text-brand-600 transition hover:bg-brand-50 ${FOCUS_RING}`}
-          >
-            Guides
-          </Link>
           {/* Píldoras promocionales animadas (directiva de Renato,
               2026-11-02): sistema de capas en globals.css
               (.nav-pill-promo) — aurora que respira, halo pulsante,
               destello especular único al cargar y al hover. Holiday
               Gifts lleva la paleta festiva y Today's Deals la cálida
-              de oferta; ambas enlazan a páginas reales del sitio. */}
+              de oferta; ambas enlazan a páginas reales del sitio. El
+              enlace «Guides» cierra la fila, después de las píldoras
+              (directiva de Renato, 2026-11-02: la navegación no lleva
+              enlaces sueltos en el medio). */}
           <Link
             href="/guides/holiday-gift-guide-2026"
             {...pillFxProps("holiday")}
@@ -200,6 +197,12 @@ export default function Header({ logo }: { logo: ReactNode }) {
           >
             <IconTrending className="h-4 w-4 shrink-0" />
             Today&apos;s Deals
+          </Link>
+          <Link
+            href="/guides"
+            className={`rounded-full px-3 py-1.5 text-sm font-semibold text-brand-600 transition hover:bg-brand-50 ${FOCUS_RING}`}
+          >
+            Guides
           </Link>
         </nav>
 
@@ -298,18 +301,10 @@ export default function Header({ logo }: { logo: ReactNode }) {
       >
         <div className="container-x py-4">
           <SearchForm className="sm:hidden" />
-          <Link
-            href="/guides"
-            onClick={closeAll}
-            className={`mt-1 block rounded-xl bg-brand-50 px-4 py-3 text-sm font-semibold text-brand-700 ${FOCUS_RING}`}
-          >
-            Buying guides
-            <span className="block text-xs font-medium text-brand-600">
-              Decide in minutes, not hours
-            </span>
-          </Link>
           {/* Las mismas píldoras animadas del escritorio, en la zona
-              de accesos del panel móvil. */}
+              de accesos del panel móvil. El acceso a las guías cierra
+              la zona, después de las píldoras (directiva de Renato,
+              2026-11-02: «Guides» siempre al final). */}
           <div className="mt-2 grid grid-cols-2 gap-2">
             <Link
               href="/guides/holiday-gift-guide-2026"
@@ -336,6 +331,16 @@ export default function Header({ logo }: { logo: ReactNode }) {
               Today&apos;s Deals
             </Link>
           </div>
+          <Link
+            href="/guides"
+            onClick={closeAll}
+            className={`mt-2 block rounded-xl bg-brand-50 px-4 py-3 text-sm font-semibold text-brand-700 ${FOCUS_RING}`}
+          >
+            Buying guides
+            <span className="block text-xs font-medium text-brand-600">
+              Decide in minutes, not hours
+            </span>
+          </Link>
           <p className="mt-5 text-xs font-bold tracking-[0.18em] text-zinc-400 uppercase">
             Categories
           </p>

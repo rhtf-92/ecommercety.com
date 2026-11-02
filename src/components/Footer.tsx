@@ -49,11 +49,6 @@ export default function Footer() {
           </h3>
           <ul className="mt-4 space-y-2 text-sm">
             <li>
-              <Link href="/guides" className="transition hover:text-white">
-                Buying guides
-              </Link>
-            </li>
-            <li>
               <Link href="/search" className="transition hover:text-white">
                 Search picks
               </Link>
@@ -61,6 +56,13 @@ export default function Footer() {
             <li>
               <Link href="/" className="transition hover:text-white">
                 Today&apos;s categories
+              </Link>
+            </li>
+            {/* «Buying guides» cierra el grupo (directiva de Renato,
+                2026-11-02: «Guides» siempre al final). */}
+            <li>
+              <Link href="/guides" className="transition hover:text-white">
+                Buying guides
               </Link>
             </li>
           </ul>

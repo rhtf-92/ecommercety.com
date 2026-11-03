@@ -70,9 +70,9 @@ export const GUIDES: Guide[] = [
         ],
       },
       {
-        heading: "2. One charger, every device: MOKiN foldable station",
+        heading: "2. One wall outlet, three charging ports: MOKiN LumiNext C11",
         paragraphs: [
-          "The cable nest is the most fixable annoyance in travel. A foldable multi-device charging station replaces the phone cable, the watch puck and the spare brick with one flat object that lives in the bag permanently. One outlet at the airport or the hotel desk becomes enough.",
+          "The LumiNext C11 is a 70W GaN wall charger with two USB-C ports, one USB-A port and a folding plug. It can replace several wall adapters in your bag. Pack the cable for each device, including your watch's charging puck if you use one. The screen shows charging power, and the available output is shared across connected devices.",
         ],
       },
       {
@@ -121,8 +121,8 @@ export const GUIDES: Guide[] = [
       {
         heading: "For game night",
         paragraphs: [
-          "UNO is the family classic for a reason: two minutes to teach, endless rematches, and it works across every age at the table. Taco Cat Goat Cheese Pizza is its louder modern cousin, a fast slap-happy card game where one wrong move changes everything and nobody stays a spectator for long.",
-          "When the group wants a real board game, CATAN is the original strategy game of trading and settling: deep enough for adults, welcoming enough for first-timers, and endlessly replayable because the island is rebuilt every game.",
+          "UNO Flip adds a two-sided deck that changes the rules when a Flip card is played. Taco Cat Goat Cheese Pizza is its louder modern cousin, a fast slap-happy card game where one wrong move changes everything and nobody stays a spectator for long.",
+          "When the group wants a real board game, CATAN (6th Edition) is a strategy game of trading and settling: deep enough for adults, welcoming enough for first-timers, and endlessly replayable because the island is rebuilt every game.",
         ],
       },
       {
@@ -140,12 +140,12 @@ export const GUIDES: Guide[] = [
       "B0HJB69GJL",
       "B0C6W3D4RM",
       "B0GJTXVN9Z",
-      "B0CRMY498M",
+      "B0CP9Y3152",
       "B001FWXKTA",
       "B07NYR18X4",
-      "B00004TZY8",
+      "B07JKB2H59",
       "B077Z1R28P",
-      "B00U26V4VQ",
+      "B0DYK1ZH2D",
       "B0007ZF4OA",
       "B00121UVU0",
       "B07XXPHQZK",
@@ -168,12 +168,12 @@ export const GUIDES: Guide[] = [
       {
         heading: "For the cozy home",
         line: "The tumbler that lives in every cup holder, soothing moisture for dry winter air, and a whole bed refresh in one box.",
-        asins: ["B0CRMY498M", "B001FWXKTA", "B07NYR18X4"],
+        asins: ["B0CP9Y3152", "B001FWXKTA", "B07NYR18X4"],
       },
       {
         heading: "For game night",
         line: "Two minutes to teach, endless rematches: the family classic, its louder modern cousin, and the strategy game rebuilt every time you play.",
-        asins: ["B00004TZY8", "B077Z1R28P", "B00U26V4VQ"],
+        asins: ["B07JKB2H59", "B077Z1R28P", "B0DYK1ZH2D"],
       },
       {
         heading: "Stocking stuffers",
@@ -198,7 +198,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Games that fit in a pocket",
         paragraphs: [
-          "UNO is the safest small gift in America: everyone knows it, every age can play it, and a deck lives happily in a glove box or travel bag long after the holidays. Taco Cat Goat Cheese Pizza is the louder option, a fast and funny card game for 2 to 8 players where rounds take minutes and rematches are instant.",
+          "UNO Flip is a compact gift for family game nights, with light and dark sides that change play mid-round. Taco Cat Goat Cheese Pizza is the louder option, a fast and funny card game for 2 to 8 players where rounds take minutes and rematches are instant.",
           "Either one turns the quiet hour after dinner into the loudest part of the day. If you are building the full holiday table, our 2026 Holiday Gift Guide has a whole game-night section.",
         ],
       },
@@ -212,7 +212,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "The sweet and the practical",
         paragraphs: [
-          "Freeze dried candy is the wildcard stuffer: familiar sweets turned crunchy, light and strangely addictive, and a variety pack means there is something in it for every taste at the table.",
+          "SKITTLES POP’d Original turns familiar fruit-flavored candy into a crunchy stocking stuffer for someone who likes trying a new texture.",
           "On the practical side, the Anker Nano power bank is the small charger with a built-in USB-C cable that ends the dead-phone moment for good. It is the stuffer people borrow once and then ask where it came from.",
         ],
       },
@@ -225,12 +225,12 @@ export const GUIDES: Guide[] = [
       },
     ],
     asins: [
-      "B00004TZY8",
+      "B07JKB2H59",
       "B077Z1R28P",
       "B0007ZF4OA",
       "B00121UVU0",
       "B07XXPHQZK",
-      "B0F68QZC1L",
+      "B0DLLFVYZW",
       "B0FKN5RCV7",
       "B0088LIINY",
       "B003XVYKVI",
@@ -379,7 +379,7 @@ export const GUIDES: Guide[] = [
         heading: "Step 3: Security that watches the doors, not your life",
         paragraphs: [
           "Security comes third, and it starts at the perimeter. The Ring Battery Doorbell 2K needs no wiring, gives a head-to-toe view of the doorstep and covers the spot where packages, visitors and problems all arrive first.",
-          "Inside, the Blink Mini 2 (2-pack) covers the rooms that matter, a nursery, a pet's favorite spot, the back door, with a feed you check from your phone. Start with the doors and one or two key rooms; a camera in every corner is a hobby, not a security plan.",
+          "Inside, the single Blink Mini 2K+ gives you a phone-viewable feed for one room, such as a pet’s favorite spot. Start with the doors and one or two key rooms; a camera in every corner is a hobby, not a security plan.",
         ],
       },
       {
@@ -395,7 +395,7 @@ export const GUIDES: Guide[] = [
       "B0DC96PPZK",
       "B0D6SX8VLQ",
       "B0G2D1R15Q",
-      "B0BWX1D2DW",
+      "B0F3BB8D37",
       "B0GJTXVN9Z",
     ],
     verdict:
@@ -481,7 +481,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Toys that survive the week",
         paragraphs: [
-          "Judge a toy by its second week, not its first photo. The Potaroma Flopping Fish is the cat toy that keeps working after the novelty fades: motion-activated flopping, catnip inside and USB recharging, so it does not die the way battery toys do.",
+          "The rechargeable Potaroma 3-in-1 combines a moving feather wand, a fluttering butterfly and a ball track for indoor play.",
           "For dogs, the Multipet Lamb Chop plush with squeaker is the nostalgic classic that has been claimed within minutes in dog households for decades. Plush toys are comfort objects as much as playthings; the honest expectation is supervised joy, and a spare in the closet is just good planning.",
         ],
       },
@@ -497,7 +497,7 @@ export const GUIDES: Guide[] = [
       "B0FPFZ3C5K",
       "B00T7R7HLC",
       "B09NF5NBB3",
-      "B083S3ZXDF",
+      "B0BX9L7F47",
       "B003XVYKVI",
       "B0088LIINY",
       "B00J9MYM5O",
@@ -572,7 +572,6 @@ export const GUIDES: Guide[] = [
         heading: "The anchor: one real hand-tool set",
         paragraphs: [
           "Start with a comprehensive mechanic's set instead of a drawer of singles. The CRAFTSMAN 262-Piece Mechanic Tool Set, in its 3-drawer VERSASTACK box, covers sockets, ratchets, wrenches and drivers for the car, the bike, flat-pack furniture and most of what a house can throw at you, in one organized case where every piece has a home.",
-          "On a tighter start, the Crescent 170-Piece General Purpose Set is the honest alternative: the same one-box logic with fewer pieces. Either way, the rule is one anchor set, bought once, instead of a decade of emergency single-tool purchases.",
         ],
       },
       {
@@ -599,7 +598,6 @@ export const GUIDES: Guide[] = [
     ],
     asins: [
       "B0CNKXHGZT",
-      "B00F4AVRGW",
       "B000X4KNTG",
       "B005DI0XM4",
       "B0BLMQ8BXB",

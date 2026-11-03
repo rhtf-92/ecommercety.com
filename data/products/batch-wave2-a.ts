@@ -388,14 +388,14 @@ export const BATCH_WAVE2_A: BatchProduct[] = [
   {
     asin: "B0D3SH3TFS",
     brand: "Levi's",
-    title: "Levi's Women's Ribcage Straight Ankle Jeans — Highest Rise Fit",
+    title: "Levi's Women's Ribcage Straight Full-Length Jeans, All Alone, Size 26",
     categorySlug: "fashion-accessories",
     affiliateUrl:
       "https://www.amazon.com/dp/B0D3SH3TFS?th=1&psc=1&linkCode=sl2&tag=ecommercety00-20&linkId=58acf5a1c1c89a014d49de5a05a15f3b&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-22319bc23d5bb139&btn_type=ss&btn_ref=srctok-22319bc23d5bb139",
     imageUrl: null,
     shortDescription:
-      "Levi's highest rise ever, in a straight ankle cut that defines the waist and lengthens the leg — the fit vintage hunters chase, in current washes. Ribcage jeans anchor everything from cropped sweaters to tucked-in tees, which is why they keep cycling back onto best-seller lists.",
-    highlights: ["Levi's highest-rise fit defines the waist", "Straight leg with ankle-length cut", "Classic five-pocket styling, button fly", "Pairs with cropped tops, tees and sweaters"],
+      "High-rise Ribcage jeans with a full-length straight leg. This listing is for the All Alone wash in size 26, an easy pairing with tucked-in tees or cropped sweaters.",
+    highlights: ["High-rise Ribcage waist", "Full-length straight leg", "All Alone wash", "Size 26"],
     discoveredVia: "Ola 2 — categorías nuevas (SiteStripe, 2026-11-01)",
   },
 ];

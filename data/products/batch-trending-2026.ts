@@ -276,7 +276,7 @@ export const BATCH_TRENDING_2026: BatchProduct[] = [
     title: "CRAFTSMAN 262-Piece Mechanic Tool Set with 3-Drawer VERSASTACK Box",
     categorySlug: "tools-home-improvement",
     affiliateUrl:
-      "https://www.amazon.com/dp/B0CNKXHGZT?linkCode=sl2&tag=ecommercety00-20&linkId=a7f5a460c64e37152ba96c45278c32ba&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl&ascsubtag=srctok-28fab4c6efd777f6&btn_type=ss&btn_ref=srctok-28fab4c6efd777f6",
+      "https://www.amazon.com/dp/B0CNKXHGZT?&linkCode=ll2&tag=ecommercety00-20&linkId=1608f63d81ee6bb7bc5a7e2a141fb3df&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
       "A serious mechanic's arsenal — 262 sockets, ratchets, wrenches and hex keys in a three-drawer VERSASTACK case that clicks into the wider system. The set that anchors a garage, and one of this week's most-covered tool deals.",

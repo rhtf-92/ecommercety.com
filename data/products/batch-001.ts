@@ -33,14 +33,14 @@ export const BATCH_001: BatchProduct[] = [
   {
     asin: "B0GYXT61F8",
     brand: "MOKiN",
-    title: "MOKiN 70W USB-C GaN Fast Charger with Smart Display (3-Port)",
+    title: "MOKiN LumiNext C11 70W GaN Wall Charger with Smart Display, 3 Ports",
     categorySlug: "tech-smart-home",
     affiliateUrl:
       "https://www.amazon.com/dp/B0GYXT61F8?&linkCode=ll2&tag=ecommercety00-20&linkId=1d603dfc5d2e23ce5f87e3860ee1fa35&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
-      "A pocket-size GaN brick with a brain: 70W across three ports for your laptop, phone and earbuds at once, and a smart display that shows exactly what each port is pulling, so you always know whether the cable or the charger is the bottleneck. The travel charger that ends the multi-brick era.",
-    highlights: ["70W GaN power for laptop, phone and earbuds at once", "Smart display shows live watts per port", "Three ports: 2 USB-C + 1 USB-A", "Mini size made for travel bags"],
+      "A compact wall charger with a folding plug and a screen that shows charging power. Connect a compatible laptop, phone or other device with its cable. Output is shared when several devices charge together.",
+    highlights: ["Up to 70W output", "Two USB-C ports and one USB-A port", "Smart charging display", "Foldable wall plug"],
     discoveredVia: "Curaduría manual de Renato (SiteStripe, 2026-10-31)",
   },
   {

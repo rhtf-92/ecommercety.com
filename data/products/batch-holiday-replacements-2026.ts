@@ -35,12 +35,12 @@ export const BATCH_HOLIDAY_REPLACEMENTS: BatchProduct[] = [
     "discoveredVia": "Curaduría navideña (SiteStripe, 2026-11-02)"
   },
   {
-    "asin": "B07JKB2H59",
-    "affiliateUrl": "https://www.amazon.com/dp/B07JKB2H59?&linkCode=ll2&tag=ecommercety00-20&linkId=a393bf82deee93e1b39740702c305fec&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    "asin": "B07P8WVZ5D",
+    "affiliateUrl": "https://www.amazon.com/dp/B07P8WVZ5D?&linkCode=ll2&tag=ecommercety00-20&linkId=e2415e04ac45823e63264a3fb6096481&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     "brand": "Mattel",
-    "title": "Mattel UNO Flip Card Game",
+    "title": "Mattel UNO Flip Card Game in Storage Tin",
     "categorySlug": "toys-games",
-    "shortDescription": "A double-sided UNO deck that switches between light and dark sides when a Flip card is played.",
+    "shortDescription": "A double-sided UNO deck that switches between light and dark sides when a Flip card is played. The cards come in a storage tin.",
     "imageUrl": null,
     "highlights": [],
     "discoveredVia": "Curaduría navideña (SiteStripe, 2026-11-02)"

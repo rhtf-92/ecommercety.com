@@ -121,7 +121,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "For game night",
         paragraphs: [
-          "UNO Flip adds a two-sided deck that changes the rules when a Flip card is played. Taco Cat Goat Cheese Pizza is its louder modern cousin, a fast slap-happy card game where one wrong move changes everything and nobody stays a spectator for long.",
+          "UNO Flip in its storage tin adds a two-sided deck that changes the rules when a Flip card is played. Taco Cat Goat Cheese Pizza is its louder modern cousin, a fast slap-happy card game where one wrong move changes everything and nobody stays a spectator for long.",
           "When the group wants a real board game, CATAN (6th Edition) is a strategy game of trading and settling: deep enough for adults, welcoming enough for first-timers, and endlessly replayable because the island is rebuilt every game.",
         ],
       },
@@ -143,7 +143,7 @@ export const GUIDES: Guide[] = [
       "B0CP9Y3152",
       "B001FWXKTA",
       "B07NYR18X4",
-      "B07JKB2H59",
+      "B07P8WVZ5D",
       "B077Z1R28P",
       "B0DYK1ZH2D",
       "B0007ZF4OA",
@@ -173,7 +173,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "For game night",
         line: "Two minutes to teach, endless rematches: the family classic, its louder modern cousin, and the strategy game rebuilt every time you play.",
-        asins: ["B07JKB2H59", "B077Z1R28P", "B0DYK1ZH2D"],
+        asins: ["B07P8WVZ5D", "B077Z1R28P", "B0DYK1ZH2D"],
       },
       {
         heading: "Stocking stuffers",
@@ -198,7 +198,7 @@ export const GUIDES: Guide[] = [
       {
         heading: "Games that fit in a pocket",
         paragraphs: [
-          "UNO Flip is a compact gift for family game nights, with light and dark sides that change play mid-round. Taco Cat Goat Cheese Pizza is the louder option, a fast and funny card game for 2 to 8 players where rounds take minutes and rematches are instant.",
+          "UNO Flip in a storage tin is a compact gift for family game nights, with light and dark sides that change play mid-round. Taco Cat Goat Cheese Pizza is the louder option, a fast and funny card game for 2 to 8 players where rounds take minutes and rematches are instant.",
           "Either one turns the quiet hour after dinner into the loudest part of the day. If you are building the full holiday table, our 2026 Holiday Gift Guide has a whole game-night section.",
         ],
       },
@@ -225,7 +225,7 @@ export const GUIDES: Guide[] = [
       },
     ],
     asins: [
-      "B07JKB2H59",
+      "B07P8WVZ5D",
       "B077Z1R28P",
       "B0007ZF4OA",
       "B00121UVU0",

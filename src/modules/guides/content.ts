@@ -482,6 +482,7 @@ export const GUIDES: Guide[] = [
         heading: "Toys that survive the week",
         paragraphs: [
           "The rechargeable Potaroma 3-in-1 combines a moving feather wand, a fluttering butterfly and a ball track for indoor play.",
+          "The Cheerble Wicked Ball Rolly moves on its own for supervised play with medium and large dogs. The large KONG Wobbler dispenses kibble or small treats as your dog pushes it, making it a good fit for food-motivated play.",
           "For dogs, the Multipet Lamb Chop plush with squeaker is the nostalgic classic that has been claimed within minutes in dog households for decades. Plush toys are comfort objects as much as playthings; the honest expectation is supervised joy, and a spare in the closet is just good planning.",
         ],
       },
@@ -498,6 +499,8 @@ export const GUIDES: Guide[] = [
       "B00T7R7HLC",
       "B09NF5NBB3",
       "B0BX9L7F47",
+      "B0HHMMF19X",
+      "B003ALMW0M",
       "B003XVYKVI",
       "B0088LIINY",
       "B00J9MYM5O",

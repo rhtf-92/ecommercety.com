@@ -55,5 +55,27 @@ export const BATCH_HOLIDAY_REPLACEMENTS: BatchProduct[] = [
     "imageUrl": null,
     "highlights": [],
     "discoveredVia": "Curaduría navideña (SiteStripe, 2026-11-02)"
+  },
+  {
+    asin: "B0HHMMF19X",
+    affiliateUrl: "https://www.amazon.com/dp/B0HHMMF19X?&linkCode=ll2&tag=ecommercety00-20&linkId=4a564fde6f4bb21ab44ee2bd4bf83457&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "Cheerble",
+    title: "Cheerble Wicked Ball Rolly for Medium and Large Dogs",
+    categorySlug: "pet-supplies",
+    shortDescription: "A motorized ball that rolls, bounces and rotates for supervised play with medium and large dogs.",
+    imageUrl: null,
+    highlights: ["Automatic movement", "Sized for medium and large dogs"],
+    discoveredVia: "Curaduría navideña (SiteStripe, 2026-11-02)",
+  },
+  {
+    asin: "B003ALMW0M",
+    affiliateUrl: "https://www.amazon.com/dp/B003ALMW0M?th=1&linkCode=ll2&tag=ecommercety00-20&linkId=73cef3d521ad02a9c4a5788884efd9d3&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "KONG",
+    title: "KONG Wobbler Treat-Dispensing Dog Toy, Large",
+    categorySlug: "pet-supplies",
+    shortDescription: "Fill the large Wobbler with kibble or small treats. It rocks and releases food as your dog nudges it.",
+    imageUrl: null,
+    highlights: ["Large size for medium and large dogs", "Dispenses kibble or small treats"],
+    discoveredVia: "Curaduría navideña (SiteStripe, 2026-11-02)",
   }
 ];

@@ -1,0 +1,49 @@
+name: Cron sync (5h)
+
+# Dispara el ciclo de sincronización cada 5 horas sin usar Vercel
+# Cron. Motivo: el equipo de Vercel del proyecto está en el plan
+# Hobby, y Hobby rechaza en el despliegue cualquier cron más
+# frecuente que una vez al día ("Hobby accounts are limited to
+# daily cron jobs"). Con el cron en vercel.json, los despliegues
+# de Preview y Production del PR #1 fallaron. Este workflow llama
+# directamente a la ruta, que sigue protegida con CRON_SECRET
+# (fail-closed: sin secreto 503, secreto incorrecto 401), así que
+# el ciclo cada 5 horas se conserva sin subir el plan a Pro.
+#
+# Secretos necesarios (mismo valor en ambos sitios):
+# - Vercel → Settings → Environment Variables (Production):
+#   CRON_SECRET, cadena larga y aleatoria (32+ caracteres).
+#   Solo aplica en un despliegue nuevo, así que hay que
+#   redesplegar tras añadirlo.
+# - GitHub → repo → Settings → Secrets and variables → Actions:
+#   CRON_SECRET, con el mismo valor.
+#
+# Notas de operación:
+# - Los horarios de GitHub Actions son UTC y pueden arrancar con
+#   algunos minutos de retraso en horas punta; el ciclo no exige
+#   precisión de minuto.
+# - Si el repositorio quedara inactivo 60 días, GitHub desactiva
+#   los workflows programados; el repo está activo a diario, y el
+#   botón manual del panel y workflow_dispatch quedan como respaldo.
+# - La ruta no se reintenta sola: si un ciclo falla, queda
+#   registrado en VerificationRun y el siguiente ciclo lo retoma.
+
+on:
+  schedule:
+    - cron: "0 */5 * * *"
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disparar /api/cron/sync
+        env:
+          CRON_SECRET: ${{ secrets.CRON_SECRET }}
+        run: |
+          if [ -z "$CRON_SECRET" ]; then
+            echo "CRON_SECRET no está configurado en GitHub Secrets." >&2
+            exit 1
+          fi
+          curl -fsS -X GET "https://ecommercety.com/api/cron/sync" \
+            -H "Authorization: Bearer $CRON_SECRET"

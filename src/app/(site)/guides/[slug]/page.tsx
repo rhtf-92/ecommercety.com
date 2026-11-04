@@ -1,10 +1,8 @@
 import { Suspense } from "react";
-import { getGuideBySlug as getGuideBySlugFromCode } from "@/modules/guides/content";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getGuideBySlug, getGuides } from "@/modules/guides/data";
-import type { Guide } from "@/modules/guides/content";
+import { getGuideBySlug, getGuides, type Guide } from "@/modules/guides/data";
 import { getProductByAsin } from "@/modules/catalog/data";
 import ProductCard from "@/components/ProductCard";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -18,12 +16,11 @@ import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  // Metadatos desde el código, no desde la base: el seed copia
-  // título y descripción byte a byte, así que el metadato es
-  // idéntico en ambos casos, y esto mantiene la ruta prerenderizable
-  // sin acceso a datos fuera de <Suspense> (ver GuideContent).
+  // Metadatos desde la base, la única fuente desde la limpieza
+  // posterior al PR #7. El contenido sembrado es byte a byte el
+  // del código retirado, así que el metadato no cambia.
   const { slug } = await params;
-  const guide = getGuideBySlugFromCode(slug);
+  const guide = await getGuideBySlug(slug);
   if (!guide) return {};
   return {
     title: guide.title,

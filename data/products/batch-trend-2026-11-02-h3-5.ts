@@ -89,7 +89,7 @@ export const BATCH_TREND_2026_11_02_H3_5: BatchProduct[] = [
     brand: "Blink",
     title: "Blink Mini 2K+ Plug-in Home and Pet Indoor Security Camera, 1 Camera, Black",
     categorySlug: "tech-smart-home",
-    affiliateUrl: "https://www.amazon.com/dp/B0F3BB8D37?th=1&linkCode=ll2&tag=ecommercety00-20&linkId=e6a80f09f7d314ff363c4367590e5f08&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    affiliateUrl: "https://www.amazon.com/dp/B0F3BB8D37?th=1&linkCode=ll2&tag=ecommercety00-20&linkId=055a65a09e41b5885cdb3dbefcb8c5bc&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     imageUrl: null,
     shortDescription:
       "A small plug-in indoor camera with sharp 2K video, night vision and two-way audio, made to check on home and pets from the Blink app and Alexa.",

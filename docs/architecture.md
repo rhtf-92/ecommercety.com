@@ -27,7 +27,9 @@
 
 ## Entornos
 - Local: `npm run dev` + PostgreSQL local o en la nube (`.env`).
-- Producción: despliegue en Vercel (plan Pro) + PostgreSQL en Neon,
-  dominio ecommercety.com vía Cloudflare. (Lanzamiento inicial en
-  Render Starter el 2026-11-01; migrado a Vercel Pro el mismo día
-  por inestabilidad de la instancia única. Ver docs/deployment.md.)
+- Producción: despliegue en Vercel (plan Hobby, región iad1) +
+  PostgreSQL en Neon, dominio ecommercety.com vía Cloudflare.
+  (Lanzamiento inicial en Render Starter el 2026-11-01; migrado a
+  Vercel el mismo día por inestabilidad de la instancia única. Ver
+  docs/deployment.md. El ciclo cada 5 horas lo dispara GitHub
+  Actions, no Vercel Cron; ver docs/automation.md.)

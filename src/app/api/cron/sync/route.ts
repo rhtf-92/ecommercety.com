@@ -2,15 +2,19 @@ import { NextResponse } from "next/server";
 import { syncAmazonData } from "@/modules/amazon/sync";
 import { isCronAuthorized } from "@/modules/automation/cron";
 
-// Ciclo automático cada 5 horas, disparado por Vercel Cron (ver
-// vercel.json). No es scraping: reutiliza exactamente el mismo
-// sincronizador oficial que el botón del panel (Creators API, lotes
-// de 10 ASIN, 1 solicitud/segundo). Sin credenciales de la Creators
-// API, el sincronizador devuelve NOT_CONFIGURED y no escribe nada:
-// el cron queda listo y empieza a trabajar solo cuando Amazon emita
-// las credenciales, sin cambiar código.
+// Ciclo automático cada 5 horas, disparado por GitHub Actions
+// (ver .github/workflows/cron-sync.yml), no por Vercel Cron: el
+// equipo de Vercel está en el plan Hobby y Hobby rechaza en el
+// despliegue crons más frecuentes que una vez al día, así que
+// vercel.json ya no declara ningún cron. No es scraping: reutiliza
+// exactamente el mismo sincronizador oficial que el botón del
+// panel (Creators API, lotes de 10 ASIN, 1 solicitud/segundo).
+// Sin credenciales de la Creators API, el sincronizador devuelve
+// NOT_CONFIGURED y no escribe nada: el ciclo queda listo y
+// empieza a trabajar solo cuando Amazon emita las credenciales,
+// sin cambiar código.
 //
-// Seguridad: solo Vercel Cron con CRON_SECRET. Sin secreto
+// Seguridad: solo el llamador con CRON_SECRET. Sin secreto
 // configurado, 503. Con secreto incorrecto, 401. Nunca se expone el
 // secreto ni el motivo exacto más allá del código de estado.
 // Sin `export const dynamic`: con cacheComponents activado en

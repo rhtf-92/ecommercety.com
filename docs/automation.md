@@ -4,12 +4,28 @@
 
 Antes, el ciclo de 5 horas dependía de que alguien pulsara
 "Sincronizar precios e imágenes ahora" en el panel o corriera
-`npm run db:sync-amazon`. Ahora Vercel Cron dispara
-`GET /api/cron/sync` cada 5 horas (`0 */5 * * *`, ver
-`vercel.json`), y esa ruta reutiliza exactamente el mismo
-sincronizador oficial del panel (`src/modules/amazon/sync.ts`):
-Creators API, lotes de 10 ASIN, 1 solicitud/segundo, registro en
-`VerificationRun` y `AuditLog`.
+`npm run db:sync-amazon`. Ahora GitHub Actions dispara
+`GET /api/cron/sync` cada 5 horas
+(`.github/workflows/cron-sync.yml`, `0 */5 * * *` en UTC), y esa
+ruta reutiliza exactamente el mismo sincronizador oficial del
+panel (`src/modules/amazon/sync.ts`): Creators API, lotes de
+10 ASIN, 1 solicitud/segundo, registro en `VerificationRun` y
+`AuditLog`.
+
+## Por qué no Vercel Cron (plan Hobby)
+
+El equipo de Vercel del proyecto está en el plan **Hobby**, no
+en Pro como indicaba `docs/deployment.md`. En Hobby, Vercel
+rechaza en el despliegue cualquier cron más frecuente que una
+vez al día, y por eso el cron `0 */5 * * *` declarado en
+`vercel.json` hizo fallar los despliegues de Preview y de
+Production tras el merge del PR #1, mientras el sitio seguía
+vivo con el despliegue anterior. La solución, sin subir el plan,
+es no declarar ningún cron en `vercel.json` y disparar la ruta
+desde GitHub Actions, que es gratis y no tiene ese límite. Si
+algún día el equipo sube a Pro, se puede volver a Vercel Cron
+declarando el horario en `vercel.json` y desactivando este
+workflow, sin tocar la ruta: la autenticación es la misma.
 
 Lo que NO automatiza, a propósito:
 
@@ -41,22 +57,27 @@ como "Última verificación/sincronización", con su reporte
 La ruta es fail-closed, probada en `tests/cron-auth.test.ts`
 (`src/modules/automation/cron.ts`):
 
-- Vercel Cron envía `Authorization: Bearer <CRON_SECRET>`.
+- El llamador (GitHub Actions) envía
+  `Authorization: Bearer <CRON_SECRET>`.
 - Sin `CRON_SECRET` configurado en Vercel (entorno Production),
   la ruta responde 503 y nunca ejecuta la sincronización.
 - Con secreto incorrecto, responde 401.
 - El secreto nunca se devuelve en la respuesta ni se registra.
 
-Configuración en Vercel (una vez, en Production):
+Configuración (una vez, mismo valor en ambos sitios):
 
-1. Proyecto → Settings → Environment Variables → añadir
-   `CRON_SECRET` con una cadena larga y aleatoria (32+ caracteres).
-2. Redesplegar (o esperar al siguiente despliegue por push a
-   `main`): `vercel.json` ya declara el cron.
-3. Verificar en Vercel → Cron Jobs que el trabajo
-   `/api/cron/sync` está programado cada 5 horas, y en Logs que
-   responde 200 con `reason: NOT_CONFIGURED` hasta que llegue la
-   Creators API.
+1. Vercel → proyecto → Settings → Environment Variables →
+   añadir `CRON_SECRET` con una cadena larga y aleatoria
+   (32+ caracteres), entorno Production.
+2. GitHub → repositorio → Settings → Secrets and variables →
+   Actions → añadir el secreto `CRON_SECRET` con el mismo valor.
+3. Redesplegar en Vercel (las variables solo aplican en un
+   despliegue nuevo) o esperar al siguiente despliegue por push
+   a `main`.
+4. Verificar en GitHub → Actions → "Cron sync (5h)" que el
+   workflow responde 200 con `reason: NOT_CONFIGURED` hasta que
+   llegue la Creators API, y que la ruta sin secreto sigue
+   respondiendo 503.
 
 ## Límites a vigilar
 

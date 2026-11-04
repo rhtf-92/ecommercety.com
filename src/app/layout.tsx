@@ -32,7 +32,12 @@ export const viewport: Viewport = {
 
 // Verificación de propiedad para buscadores (Search Console y Bing
 // Webmaster) por meta tag, como alternativa al TXT en DNS. Se activa
-// definiendo las variables en el entorno de producción.
+// definiendo las variables en el entorno de producción. La verificación
+// de Pinterest (p:domain_verify) es un token público por diseño: se
+// publica en el HTML para que Pinterest confirme la propiedad del
+// dominio, así que va fija en el código y no en variables de entorno.
+// No quitarla tras reclamar: Pinterest puede revalidar el dominio.
+const PINTEREST_DOMAIN_VERIFY = "e6d3a392e18d61dd064930ab61dd7506";
 const googleVerification = process.env.GOOGLE_SITE_VERIFICATION;
 const bingVerification = process.env.BING_SITE_VERIFICATION;
 
@@ -64,16 +69,15 @@ const baseMetadata: Metadata = {
       "max-video-preview": -1,
     },
   },
-  ...(googleVerification || bingVerification
-    ? {
-        verification: {
-          ...(googleVerification ? { google: googleVerification } : {}),
-          ...(bingVerification
-            ? { other: { "msvalidate.01": bingVerification } }
-            : {}),
-        },
-      }
-    : {}),
+  verification: {
+    ...(googleVerification ? { google: googleVerification } : {}),
+    other: {
+      ...(bingVerification
+        ? { "msvalidate.01": bingVerification }
+        : {}),
+      "p:domain_verify": PINTEREST_DOMAIN_VERIFY,
+    },
+  },
   openGraph: {
     type: "website",
     locale: "en_US",

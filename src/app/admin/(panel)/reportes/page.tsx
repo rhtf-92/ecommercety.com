@@ -7,6 +7,11 @@ import {
   buildProductPerformance,
   findZombies,
 } from "@/modules/analytics/report";
+import {
+  findZeroResultTerms,
+  mergeSearchTermGroups,
+  type SearchTermStat,
+} from "@/modules/search/log";
 import { demoteZombieAction, replaceZombieAction } from "./actions";
 
 export const metadata = { title: "Panel · Reportes" };
@@ -93,6 +98,45 @@ async function loadReport(): Promise<{
   }
 }
 
+async function loadSearchStats(): Promise<{
+  stats: SearchTermStat[];
+  dbError: boolean;
+}> {
+  try {
+    const db = await getDb();
+    const since = new Date(Date.now() - WINDOW_DAYS * 24 * 60 * 60 * 1000);
+    const [totals, zeroTotals] = await Promise.all([
+      db.searchLog.groupBy({
+        by: ["term"],
+        where: { createdAt: { gte: since } },
+        _count: { term: true },
+        _max: { createdAt: true },
+      }),
+      db.searchLog.groupBy({
+        by: ["term"],
+        where: { createdAt: { gte: since }, resultCount: 0 },
+        _count: { term: true },
+      }),
+    ]);
+    return {
+      stats: mergeSearchTermGroups(
+        totals.map((group) => ({
+          term: group.term,
+          searches: group._count.term,
+          lastSearchedAt: group._max.createdAt ?? new Date(0),
+        })),
+        zeroTotals.map((group) => ({
+          term: group.term,
+          searches: group._count.term,
+        })),
+      ),
+      dbError: false,
+    };
+  } catch {
+    return { stats: [], dbError: true };
+  }
+}
+
 export default async function ReportesPage({
   searchParams,
 }: {
@@ -118,6 +162,13 @@ export default async function ReportesPage({
   const zombies = findZombies(rows);
   const totalViews = rows.reduce((sum, row) => sum + row.views, 0);
   const totalClicks = rows.reduce((sum, row) => sum + row.clicks, 0);
+  const { stats: searchStats, dbError: searchDbError } =
+    await loadSearchStats();
+  const totalSearches = searchStats.reduce(
+    (sum, row) => sum + row.searches,
+    0,
+  );
+  const zeroResultTerms = findZeroResultTerms(searchStats);
 
   return (
     <div className="space-y-8">
@@ -301,6 +352,68 @@ export default async function ReportesPage({
               </li>
             ))}
           </ul>
+        )}
+      </section>
+
+      <section className="rounded-3xl bg-white p-6 ring-1 ring-zinc-200">
+        <h2 className="font-bold">
+          Búsquedas internas ({WINDOW_DAYS} días, {totalSearches} búsquedas)
+        </h2>
+        <p className="mt-2 text-sm text-zinc-600">
+          Lo que los visitantes escriben en la página /search, no en el
+          desplegable del header. Sin IP ni usuarios: solo término,
+          nº de resultados y momento. Los términos con 0 resultados
+          son demanda sin oferta: si se repiten, busca el producto en
+          Amazon y añádelo como candidato en Tendencias.
+        </p>
+        {searchDbError ? (
+          <p className="mt-3 text-sm text-zinc-500">
+            Sin datos: la tabla de búsquedas aún no está migrada en
+            esta base de datos.
+          </p>
+        ) : searchStats.length === 0 ? (
+          <p className="mt-3 text-sm text-zinc-500">
+            Ninguna búsqueda registrada en esta ventana.
+          </p>
+        ) : (
+          <>
+            <table className="mt-4 w-full text-sm">
+              <thead>
+                <tr className="text-left text-zinc-500">
+                  <th className="py-2 pr-3">Término</th>
+                  <th className="py-2 pr-3">Búsquedas</th>
+                  <th className="py-2 pr-3">Sin resultados</th>
+                  <th className="py-2">Última vez</th>
+                </tr>
+              </thead>
+              <tbody>
+                {searchStats.slice(0, 20).map((row) => (
+                  <tr key={row.term} className="border-t border-zinc-100">
+                    <td className="py-2 pr-3 font-medium">{row.term}</td>
+                    <td className="py-2 pr-3">{row.searches}</td>
+                    <td className="py-2 pr-3">{row.zeroResultSearches}</td>
+                    <td className="py-2">
+                      {row.lastSearchedAt.toISOString().slice(0, 10)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            {zeroResultTerms.length > 0 ? (
+              <p className="mt-4 text-sm text-zinc-600">
+                Demanda sin oferta:{" "}
+                {zeroResultTerms
+                  .slice(0, 10)
+                  .map((row) => `${row.term} (${row.zeroResultSearches})`)
+                  .join(", ")}
+                .{" "}
+                <Link href="/admin/tendencias" className="underline">
+                  Añadir candidatos en Tendencias
+                </Link>
+                .
+              </p>
+            ) : null}
+          </>
         )}
       </section>
     </div>

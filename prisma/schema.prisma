@@ -117,6 +117,23 @@ model PageView {
   @@index([createdAt])
 }
 
+// Búsquedas internas del sitio público (página /search): solo el
+// término normalizado, el nº de resultados y el momento. Sin IP, sin
+// usuario, sin cookies: es demanda agregada, no perfilado. Alimenta
+// /admin/reportes (demanda sin oferta = términos con 0 resultados) y
+// la caza de tendencias. El buscador en vivo del header NO se
+// registra: solo la página /search, para no contar dos veces la misma
+// búsqueda, y el buscador del panel tampoco (es uso interno).
+model SearchLog {
+  id          String   @id @default(cuid())
+  term        String
+  resultCount Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@index([term, createdAt])
+  @@index([createdAt])
+}
+
 model AffiliateLink {
   id         String   @id @default(cuid())
   product    Product  @relation(fields: [productId], references: [id], onDelete: Cascade)

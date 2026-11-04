@@ -1,7 +1,9 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { searchProducts } from "@/modules/catalog/data";
+import { normalizeSearchTerm } from "@/modules/search/log";
 import { getShowProductImages } from "@/modules/settings/site";
+import { getDb } from "@/lib/db";
 import ProductCard from "@/components/ProductCard";
 import PageBanner from "@/components/PageBanner";
 import SearchPageForm from "@/components/SearchPageForm";
@@ -46,6 +48,28 @@ async function Results({ searchParams }: Props) {
     query ? searchProducts(query) : Promise.resolve([]),
     getShowProductImages(),
   ]);
+
+  // Registro de la búsqueda (Fase 3, 2a parte): solo la página
+  // /search, nunca el desplegable en vivo del header. El registro
+  // jamás rompe la búsqueda: cualquier fallo de base de datos se
+  // traga en silencio, igual que el resto de la capa pública
+  // degrada sin base de datos. Matiz: el formulario actualiza ?q=
+  // con debounce, así que un término intermedio puede quedar
+  // registrado; la agregación del reporte lo absorbe (ver
+  // modules/search/log).
+  if (query) {
+    const term = normalizeSearchTerm(query);
+    if (term) {
+      try {
+        const db = await getDb();
+        await db.searchLog.create({
+          data: { term, resultCount: products.length },
+        });
+      } catch {
+        // El registro es analítica, no parte del resultado.
+      }
+    }
+  }
 
   if (!query) {
     return (

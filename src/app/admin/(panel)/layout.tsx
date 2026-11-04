@@ -45,6 +45,18 @@ async function Shell({ children }: { children: React.ReactNode }) {
             Nuevo producto
           </Link>
           <Link
+            href="/admin/tendencias"
+            className="block rounded-xl px-3 py-2.5 transition hover:bg-white/10"
+          >
+            Tendencias
+          </Link>
+          <Link
+            href="/admin/reportes"
+            className="block rounded-xl px-3 py-2.5 transition hover:bg-white/10"
+          >
+            Reportes
+          </Link>
+          <Link
             href="/admin/configuracion"
             className="block rounded-xl px-3 py-2.5 transition hover:bg-white/10"
           >
@@ -93,6 +105,12 @@ async function Shell({ children }: { children: React.ReactNode }) {
             </Link>
             <Link href="/admin/productos/nuevo" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
               Nuevo producto
+            </Link>
+            <Link href="/admin/tendencias" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
+              Tendencias
+            </Link>
+            <Link href="/admin/reportes" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
+              Reportes
             </Link>
             <Link href="/admin/configuracion" className="rounded-full bg-zinc-100 px-3 py-1.5 whitespace-nowrap">
               Configuración

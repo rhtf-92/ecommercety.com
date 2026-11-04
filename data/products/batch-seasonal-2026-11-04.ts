@@ -6,17 +6,13 @@ import type { BatchProduct } from "./batch-001";
 // sigue mostrando "Check price on Amazon" hasta la Creators API).
 // Los 5 ASIN son nuevos en el catálogo (verificado contra los lotes
 // existentes); Switch 2 + Mario Kart y AirTag 2 4-pack ya estaban y
-// no se duplican aquí. Enlaces con el Tracking ID WEB
-// (ecommercety00-20); sin linkId de SiteStripe, que es metadato de
-// reporte y no requisito de la validación del import ni de la
-// atribución: si se generan enlaces SiteStripe después, se
-// actualizan las URLs en un lote posterior, como se hizo con
-// SKITTLES, Stanley y Blink Mini.
+// no se duplican aquí. Enlaces SiteStripe generados por Alya el
+// 2026-11-04 con el Tracking ID WEB (ecommercety00-20).
 export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
   {
     asin: "B0FQFB8FMG",
     affiliateUrl:
-      "https://www.amazon.com/dp/B0FQFB8FMG?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+      "https://www.amazon.com/dp/B0FQFB8FMG?&linkCode=ll2&tag=ecommercety00-20&linkId=777ae75b6931912fcfd4681680ae0e53&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     brand: "Apple",
     title: "Apple AirPods Pro 3 Wireless Earbuds with Active Noise Cancellation",
     categorySlug: "tech-smart-home",
@@ -29,7 +25,7 @@ export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
   {
     asin: "B0D2LZYQ2M",
     affiliateUrl:
-      "https://www.amazon.com/dp/B0D2LZYQ2M?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+      "https://www.amazon.com/dp/B0D2LZYQ2M?ie=UTF8&s=psc&ASIN=B0D2LZYQ2M&linkCode=ll2&tag=ecommercety00-20&linkId=a4b52782e59a61f32256a433a807cd3f&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     brand: "Ninja",
     title: "Ninja SLUSHi with RapidChill Technology, 88 oz. Frozen Drink & Slushie Machine, 5 Preset Programs, FS301",
     categorySlug: "home-kitchen",
@@ -42,7 +38,7 @@ export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
   {
     asin: "B08D66HCXW",
     affiliateUrl:
-      "https://www.amazon.com/dp/B08D66HCXW?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+      "https://www.amazon.com/dp/B08D66HCXW?&linkCode=ll2&tag=ecommercety00-20&linkId=3cf70ff04750efa090795b7e767a8622&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     brand: "LHKNL",
     title: "LHKNL Rechargeable Headlamp, 2-Pack with Motion Sensor",
     categorySlug: "sports-outdoors",
@@ -55,7 +51,7 @@ export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
   {
     asin: "B0BXKB7QF6",
     affiliateUrl:
-      "https://www.amazon.com/dp/B0BXKB7QF6?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+      "https://www.amazon.com/dp/B0BXKB7QF6?&linkCode=ll2&tag=ecommercety00-20&linkId=c05a543278a99bf56192954343189a97&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     brand: "Coquimbo",
     title: "Coquimbo Sewing Kit, 86-Piece Travel Set",
     categorySlug: "tools-home-improvement",
@@ -68,7 +64,7 @@ export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
   {
     asin: "1250892317",
     affiliateUrl:
-      "https://www.amazon.com/dp/1250892317?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+      "https://www.amazon.com/dp/1250892317?&linkCode=ll2&tag=ecommercety00-20&linkId=1f93f9469f08765d3d9018aadfcba3e4&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     brand: "Murdle",
     title: "Murdle: Volume 1 — 100 Murder Mystery Logic Puzzles",
     categorySlug: "toys-games",

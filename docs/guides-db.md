@@ -41,12 +41,45 @@ mismo PR dejaría al sitio sin respaldo si el seed falla.
    código: borrar las filas de `Guide` devuelve el sitio al
    contenido del código.
 
-## Archivos
+## Limpieza posterior al PR #7 (paridad verificada en producción el 2026-11-04)
+
+Con el seed aplicado (11 guías, 0 ASINs saltados) y la paridad
+verificada en vivo (`/guides` con las 11 guías en el mismo orden,
+la ficha navideña con sus grupos y su veredicto, todo idéntico
+al código), el respaldo se retiró:
+
+- Se borraron `src/modules/guides/content.ts` y
+  `scripts/seed-guides.ts`, y el script `db:seed-guides` de
+  `package.json`. Los tipos `Guide`, `GuideSection` y `GuideGroup`
+  viven ahora en `src/modules/guides/data.ts`, que es la única
+  capa de lectura: sin base, el hub queda vacío y la ficha da
+  404, sin respaldo que lo oculte.
+- Los metadatos de `/guides/[slug]` ya no vienen del código:
+  `generateMetadata` lee la guía de la base.
+- `tests/guides-db.test.ts` ya no usa el código retirado: prueba
+  el mapeo puro con fixtures pequeños (una guía con grupos y
+  otra con secciones).
+- Nota operativa, aprendida del primer seed fallido: tras
+  cualquier cambio de esquema, corre `npx prisma generate`
+  antes de cualquier script que use el cliente Prisma (un `git
+  pull` no lo regenera; `postinstall` solo lo hace al instalar).
+  No actualizar a Prisma 8: el aviso durante `migrate deploy`
+  es solo un notice.
+- Autoría a partir de aquí: una guía nueva o editada se escribe
+  directo en base (Prisma Studio, SQL o un upsert con
+  `guideToDbPayload`); no hay panel de guías todavía. Un entorno
+  nuevo se siembra copiando las filas `Guide`/`GuideProduct`
+  desde producción. Sin respaldo en código, un borrado accidental
+  de filas ya no se recupera solo: la copia de seguridad de Neon
+  es la red de seguridad.
+
+## Archivos (tras la limpieza)
 
 - `prisma/schema.prisma` (campos nuevos en `Guide`) y
   `prisma/migrations/20261104060000_guides_db/migration.sql`.
-- `src/modules/guides/data.ts` (mapeo puro + lectura con
-  respaldo) y `tests/guides-db.test.ts`.
-- `scripts/seed-guides.ts` y script `db:seed-guides`.
-- Páginas y rutas que ahora usan la capa de datos: `/guides`,
+- `src/modules/guides/data.ts` (mapeo puro + lectura solo de
+  base, tras la limpieza) y `tests/guides-db.test.ts`.
+- Páginas y rutas que usan la capa de datos: `/guides`,
   `/guides/[slug]`, `sitemap.xml`, `/llms.txt`.
+- Retirados en la limpieza: `src/modules/guides/content.ts`,
+  `scripts/seed-guides.ts` y el script `db:seed-guides`.

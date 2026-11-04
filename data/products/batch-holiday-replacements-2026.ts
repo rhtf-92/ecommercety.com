@@ -14,25 +14,25 @@ export const BATCH_HOLIDAY_REPLACEMENTS: BatchProduct[] = [
   },
   {
     "asin": "B0DLLFVYZW",
-    "affiliateUrl": "https://www.amazon.com/dp/B0DLLFVYZW?th=1&linkCode=ll2&tag=ecommercety00-20&linkId=8ea2023d8d74f8b56a0cad8f245b7695&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    "affiliateUrl": "https://www.amazon.com/dp/B0DLLFVYZW?&linkCode=ll2&tag=ecommercety00-20&linkId=1ac33b0fd267fcf46d072e2fa65fb7c2&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     "brand": "SKITTLES",
     "title": "SKITTLES POP’d Original Freeze-Dried Candy",
     "categorySlug": "grocery-gourmet",
     "shortDescription": "A crunchy version of the original fruit-flavored candy, sized for sharing or adding to a holiday stocking.",
     "imageUrl": null,
     "highlights": [],
-    "discoveredVia": "Curaduría navideña (SiteStripe, 2026-11-02)"
+    "discoveredVia": "Radar de tendencias (reemplazo, SiteStripe, 2026-11-03)"
   },
   {
     "asin": "B0CP9Y3152",
-    "affiliateUrl": "https://www.amazon.com/dp/B0CP9Y3152?&linkCode=ll2&tag=ecommercety00-20&linkId=846058ca60b44ffc1861b76c72c9a038&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    "affiliateUrl": "https://www.amazon.com/dp/B0CP9Y3152?&linkCode=ll2&tag=ecommercety00-20&linkId=934fea8c7e638781cf91bea83c27c95d&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
     "brand": "Stanley",
     "title": "Stanley Quencher H2.0 FlowState Tumbler, 40 oz, Cream 2.0",
     "categorySlug": "home-kitchen",
     "shortDescription": "A handled insulated tumbler with a straw lid. This 40-ounce version comes in the Cream 2.0 finish.",
     "imageUrl": null,
     "highlights": [],
-    "discoveredVia": "Curaduría navideña (SiteStripe, 2026-11-02)"
+    "discoveredVia": "Radar de tendencias (reemplazo, SiteStripe, 2026-11-03)"
   },
   {
     "asin": "B07P8WVZ5D",

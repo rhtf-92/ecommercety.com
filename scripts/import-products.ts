@@ -26,9 +26,13 @@ import { BATCH_TREND_2026_11_02_H3_5 } from "../data/products/batch-trend-2026-1
 import { BATCH_TREND_2026_11_02_H1_5_C2 } from "../data/products/batch-trend-2026-11-02-h1-5-c2";
 import { BATCH_TREND_2026_11_02_SITESTRIPE } from "../data/products/batch-trend-2026-11-02-sitestripe";
 import { BATCH_HOLIDAY_REPLACEMENTS } from "../data/products/batch-holiday-replacements-2026";
+import { BATCH_OSOU_REPLACEMENT } from "../data/products/batch-osou-replacement";
+import { BATCH_CRESCENT_REPLACEMENT } from "../data/products/batch-crescent-replacement";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
 const BATCHES: { id: string; items: BatchProduct[] }[] = [
+  { id: "batch-crescent-replacement", items: BATCH_CRESCENT_REPLACEMENT },
+  { id: "batch-osou-replacement", items: BATCH_OSOU_REPLACEMENT },
   { id: "batch-001", items: BATCH_001 },
   { id: "batch-trending-2026", items: BATCH_TRENDING_2026 },
   { id: "batch-wave1-a", items: BATCH_WAVE1_A },

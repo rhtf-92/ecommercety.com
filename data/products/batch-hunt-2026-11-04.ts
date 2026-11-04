@@ -4,11 +4,12 @@ import type { BatchProduct } from "./batch-001";
 // Lima), con enlaces SiteStripe generados por Alya con el Tracking
 // ID WEB (ecommercety00-20). Sin scraping de Amazon y sin precios
 // copiados: el sitio sigue mostrando "Check price on Amazon" hasta
-// la Creators API. Los 4 ASIN son nuevos en el catálogo (verificado
-// contra los lotes existentes). El quinto candidato de la revisión,
-// Labubu B0FQ4CPRWH, queda FUERA porque su ficha no ofrece compra
-// en este momento; hay otra ficha del mismo producto (B0DT44TSM2)
-// pendiente de verificación por Alya, no incluida aquí.
+// la Creators API. Los 5 ASIN son nuevos en el catálogo (verificado
+// contra los lotes existentes). El primer candidato Labubu
+// (B0FQ4CPRWH) queda FUERA porque su ficha no ofrece compra en
+// este momento; en su lugar entra la ficha alternativa del mismo
+// producto (B0DT44TSM2, tienda oficial POP MART), verificada por
+// Alya y con su propio enlace SiteStripe.
 export const BATCH_HUNT_2026_11_04: BatchProduct[] = [
   {
     asin: "B0FLYL568F",
@@ -60,6 +61,19 @@ export const BATCH_HUNT_2026_11_04: BatchProduct[] = [
       "Zoey from KPop Demon Hunters as a collectible vinyl figure, part of the 2026 toy story.",
     imageUrl: null,
     highlights: ["Collectible vinyl figure", "KPop Demon Hunters", "Display-ready"],
+    discoveredVia: "Radar de tendencias (caza manual 2026-11-04, SiteStripe)",
+  },
+  {
+    asin: "B0DT44TSM2",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0DT44TSM2?&linkCode=ll2&tag=ecommercety00-20&linkId=192a4911b49359625f243c1548cf7137&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "POP MART",
+    title: "POP MART The Monsters Big into Energy Series — Vinyl Plush Pendant Blind Box, Single Box",
+    categorySlug: "toys-games",
+    shortDescription:
+      "A single blind-box vinyl plush pendant from the Big into Energy series: one random figure per box, a viral collectible for the season.",
+    imageUrl: null,
+    highlights: ["Single blind box", "Vinyl plush pendant", "Random figure", "Collectible"],
     discoveredVia: "Radar de tendencias (caza manual 2026-11-04, SiteStripe)",
   },
 ];

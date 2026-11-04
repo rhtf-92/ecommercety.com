@@ -1,15 +1,16 @@
 import { FALLBACK_CATEGORIES } from "@/modules/catalog/data";
-import { GUIDES } from "@/modules/guides/content";
+import { getGuides } from "@/modules/guides/data";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/modules/seo/site";
 
 // /llms.txt — resumen del sitio en texto plano para motores de
 // búsqueda con IA (ChatGPT, Perplexity, Claude, Gemini): qué es
 // T&F Picks, cómo trabaja y dónde está su contenido principal.
-export function GET() {
+export async function GET() {
+  const guides = await getGuides();
   const categories = FALLBACK_CATEGORIES.map(
     (category) => `- [${category.nameEn}](${SITE_URL}/category/${category.slug})`,
   ).join("\n");
-  const guides = GUIDES.map(
+  const guidesText = guides.map(
     (guide) => `- [${guide.title}](${SITE_URL}/guides/${guide.slug})`,
   ).join("\n");
 
@@ -23,7 +24,7 @@ T&F Picks is an independent curation site for Amazon.com shoppers in the United 
 ${categories}
 
 ## Buying guides
-${guides}
+${guidesText}
 
 ## Key pages
 - [Home](${SITE_URL}/)

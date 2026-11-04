@@ -149,14 +149,31 @@ model AffiliateLink {
 }
 
 model Guide {
-  id        String         @id @default(cuid())
-  slug      String         @unique
-  titleEn   String
-  introEn   String?
-  status    ProductStatus  @default(DRAFT)
-  items     GuideProduct[]
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @updatedAt
+  id             String         @id @default(cuid())
+  slug           String         @unique
+  titleEn        String
+  introEn        String?
+  status         ProductStatus  @default(DRAFT)
+  // Campos de la guía editorial (Fase 3, 3a parte): antes vivían
+  // solo en src/modules/guides/content.ts. sections/groups son
+  // JSON porque la prosa (títulos + párrafos, grupos con línea y
+  // ASINs) no tiene consultas por campo: se lee entera y se
+  // renderiza. Los productos enlazados viven en GuideProduct
+  // (posición + FK), que es lo que la página usa para las tarjetas.
+  description    String?
+  categorySlug   String         @default("")
+  categoryLabel  String         @default("")
+  readingMinutes Int            @default(3)
+  verdict        String         @default("")
+  sections       Json?
+  groups         Json?
+  // Orden editorial del índice de guías (el mismo orden del
+  // arreglo GUIDES del código): sin él, la base devolvería las
+  // guías en orden alfabético y el índice cambiaría tras el seed.
+  position       Int            @default(0)
+  items          GuideProduct[]
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
 }
 
 model GuideProduct {

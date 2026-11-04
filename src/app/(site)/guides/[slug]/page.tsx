@@ -1,8 +1,10 @@
 import { Suspense } from "react";
+import { getGuideBySlug as getGuideBySlugFromCode } from "@/modules/guides/content";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getGuideBySlug, GUIDES, type Guide } from "@/modules/guides/content";
+import { getGuideBySlug, getGuides } from "@/modules/guides/data";
+import type { Guide } from "@/modules/guides/content";
 import { getProductByAsin } from "@/modules/catalog/data";
 import ProductCard from "@/components/ProductCard";
 import SubscribeForm from "@/components/SubscribeForm";
@@ -16,8 +18,12 @@ import { CATEGORY_VISUALS, DEFAULT_VISUAL } from "@/modules/catalog/visuals";
 type Props = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  // Metadatos desde el código, no desde la base: el seed copia
+  // título y descripción byte a byte, así que el metadato es
+  // idéntico en ambos casos, y esto mantiene la ruta prerenderizable
+  // sin acceso a datos fuera de <Suspense> (ver GuideContent).
   const { slug } = await params;
-  const guide = getGuideBySlug(slug);
+  const guide = getGuideBySlugFromCode(slug);
   if (!guide) return {};
   return {
     title: guide.title,
@@ -57,8 +63,10 @@ function GuideCard({ guide }: { guide: Guide }) {
 }
 
 async function GuideContent({ params }: Props) {
+  // Dentro de <Suspense>: el acceso a base se sirve en streaming,
+  // como en /search, sin bloquear el prerender de la página.
   const { slug } = await params;
-  const guide = getGuideBySlug(slug);
+  const guide = await getGuideBySlug(slug);
   if (!guide) notFound();
 
   const [fetched, showImages] = await Promise.all([
@@ -107,7 +115,10 @@ async function GuideContent({ params }: Props) {
   // con una línea editorial por grupo; sin la prosa larga de `sections`.
   if (guide.groups) {
     const byAsin = new Map(products.map((p) => [p!.asin, p!]));
-    const keepReading = HUB_KEEP_READING.map((s) => getGuideBySlug(s)).filter(
+    const keepReadingSlugs = await Promise.all(
+      HUB_KEEP_READING.map((s) => getGuideBySlug(s)),
+    );
+    const keepReading = keepReadingSlugs.filter(
       (g): g is Guide => Boolean(g) && g!.slug !== guide.slug,
     );
     return (
@@ -238,9 +249,11 @@ async function GuideContent({ params }: Props) {
           Keep reading
         </h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {GUIDES.filter((other) => other.slug !== guide.slug).map((other) => (
-            <GuideCard key={other.slug} guide={other} />
-          ))}
+          {(await getGuides())
+            .filter((other) => other.slug !== guide.slug)
+            .map((other) => (
+              <GuideCard key={other.slug} guide={other} />
+            ))}
         </div>
 
         {browseCta}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
-import { GUIDES as PUBLISHED_GUIDES } from "@/modules/guides/content";
+import { getGuides } from "@/modules/guides/data";
 import { IconArrowRight } from "@/components/icons";
 import PageBanner from "@/components/PageBanner";
 
@@ -10,6 +11,44 @@ export const metadata: Metadata = {
     "Honest Amazon buying guides and comparisons from T&F Picks: decide in minutes, not hours.",
   alternates: { canonical: "/guides" },
 };
+
+// La lista sale de la base (o del código como respaldo) dentro de
+// <Suspense>, como la página /search: en Next 16, un acceso a datos
+// fuera de Suspense bloquea el prerender; dentro, la lista se
+// sirve en streaming y un seed posterior se refleja sin redesplegar.
+async function GuidesList() {
+  const guides = await getGuides();
+  return (
+    <div className="mt-4 grid gap-4 md:grid-cols-2">
+      {guides.map((guide) => (
+        <Link
+          key={guide.slug}
+          href={`/guides/${guide.slug}`}
+          className="group rounded-3xl border border-brand-200 bg-brand-50/60 p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/10"
+        >
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-xs font-bold tracking-wide text-brand-700 uppercase">
+              {guide.categoryLabel}
+            </p>
+            <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-bold text-emerald-700 uppercase">
+              Published
+            </span>
+          </div>
+          <h3 className="mt-3 text-lg leading-snug font-bold text-zinc-900">
+            {guide.title}
+          </h3>
+          <p className="mt-2 text-sm leading-relaxed text-zinc-600">
+            {guide.description}
+          </p>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
+            Read the guide
+            <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
+          </span>
+        </Link>
+      ))}
+    </div>
+  );
+}
 
 export default function GuidesPage() {
   return (
@@ -25,35 +64,13 @@ export default function GuidesPage() {
         <h2 className="text-sm font-bold tracking-wide text-zinc-500 uppercase">
           Published guides
         </h2>
-        <div className="mt-4 grid gap-4 md:grid-cols-2">
-          {PUBLISHED_GUIDES.map((guide) => (
-            <Link
-              key={guide.slug}
-              href={`/guides/${guide.slug}`}
-              className="group rounded-3xl border border-brand-200 bg-brand-50/60 p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-brand-500/10"
-            >
-              <div className="flex items-center justify-between gap-3">
-                <p className="text-xs font-bold tracking-wide text-brand-700 uppercase">
-                  {guide.categoryLabel}
-                </p>
-                <span className="rounded-full bg-emerald-100 px-2.5 py-1 text-[11px] font-bold text-emerald-700 uppercase">
-                  Published
-                </span>
-              </div>
-              <h3 className="mt-3 text-lg leading-snug font-bold text-zinc-900">
-                {guide.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-zinc-600">
-                {guide.description}
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-zinc-900">
-                Read the guide
-                <IconArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-              </span>
-            </Link>
-          ))}
-        </div>
-
+        <Suspense
+          fallback={
+            <p className="mt-4 text-sm text-zinc-500">Loading guides…</p>
+          }
+        >
+          <GuidesList />
+        </Suspense>
       </section>
     </main>
   );

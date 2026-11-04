@@ -3,7 +3,7 @@ import {
   FALLBACK_CATEGORIES,
   getSitemapProducts,
 } from "@/modules/catalog/data";
-import { GUIDES } from "@/modules/guides/content";
+import { getGuides } from "@/modules/guides/data";
 import { SITE_URL } from "@/modules/seo/site";
 
 // Sitemap completo: portada, guías, páginas institucionales, las 14
@@ -13,11 +13,12 @@ import { SITE_URL } from "@/modules/seo/site";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const products = await getSitemapProducts();
+  const guides = await getGuides();
   return [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "daily", priority: 1 },
     { url: `${SITE_URL}/guides`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
     { url: `${SITE_URL}/todays-deals`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
-    ...GUIDES.map((guide) => ({
+    ...guides.map((guide) => ({
       url: `${SITE_URL}/guides/${guide.slug}`,
       lastModified: now,
       changeFrequency: "weekly" as const,

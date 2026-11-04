@@ -1,1 +1,81 @@
-aW1wb3J0IHR5cGUgeyBCYXRjaFByb2R1Y3QgfSBmcm9tICIuL2JhdGNoLTAwMSI7CgovLyBMb3RlIGVzdGFjaW9uYWwgTmF2aWRhZCAvIEN5YmVyIE1vbmRheSAyMDI2LCBjdXJhZG8gcG9yIGLDunNxdWVkYQovLyBlZGl0b3JpYWwgZWwgMjAyNi0xMS0wNCAobGlzdGFzIGRlIHRlbmRlbmNpYXMgeSBtw6FzIHZlbmRpZG9zIGRlCi8vIG5vdmllbWJyZSwgc2luIHNjcmFwaW5nIGRlIEFtYXpvbiB5IHNpbiBwcmVjaW9zIGNvcGlhZG9zOiBlbCBzaXRpbwovLyBzaWd1ZSBtb3N0cmFuZG8gIkNoZWNrIHByaWNlIG9uIEFtYXpvbiIgaGFzdGEgbGEgQ3JlYXRvcnMgQVBJKS4KLy8gTG9zIDUgQVNJTiBzb24gbnVldm9zIGVuIGVsIGNhdMOhbG9nbyAodmVyaWZpY2FkbyBjb250cmEgbG9zIGxvdGVzCi8vIGV4aXN0ZW50ZXMpOyBTd2l0Y2ggMiArIE1hcmlvIEthcnQgeSBBaXJUYWcgMiA0LXBhY2sgeWEgZXN0YWJhbiB5Ci8vIG5vIHNlIGR1cGxpY2FuIGFxdcOtLiBFbmxhY2VzIGNvbiBlbCBUcmFja2luZyBJRCBXRUIKLy8gKGVjb21tZXJjZXR5MDAtMjApOyBzaW4gbGlua0lkIGRlIFNpdGVTdHJpcGUsIHF1ZSBlcyBtZXRhZGF0byBkZQovLyByZXBvcnRlIHkgbm8gcmVxdWlzaXRvIGRlIGxhIHZhbGlkYWNpw7NuIGRlbCBpbXBvcnQgbmkgZGUgbGEKLy8gYXRyaWJ1Y2nDs246IHNpIHNlIGdlbmVyYW4gZW5sYWNlcyBTaXRlU3RyaXBlIGRlc3B1w6lzLCBzZQovLyBhY3R1YWxpemFuIGxhcyBVUkxzIGVuIHVuIGxvdGUgcG9zdGVyaW9yLCBjb21vIHNlIGhpem8gY29uCi8vIFNLSVRUTEVTLCBTdGFubGV5IHkgQmxpbmsgTWluaS4KZXhwb3J0IGNvbnN0IEJBVENIX1NFQVNPTkFMXzIwMjZfMTFfMDQ6IEJhdGNoUHJvZHVjdFtdID0gWwogIHsKICAgIGFzaW46ICJCMEZRRkI4Rk1HIiwKICAgIGFmZmlsaWF0ZVVybDoKICAgICAgImh0dHBzOi8vd3d3LmFtYXpvbi5jb20vZHAvQjBGUUZCOEZNRz8mbGlua0NvZGU9bGwyJnRhZz1lY29tbWVyY2V0eTAwLTIwJmxhbmd1YWdlPWVuX1VTJmdhT3B0SW5TdGF0dXM9dHJ1ZSZyZWZfPWFzX2xpX3NzX3RsIiwKICAgIGJyYW5kOiAiQXBwbGUiLAogICAgdGl0bGU6ICJBcHBsZSBBaXJQb2RzIFBybyAzIFdpcmVsZXNzIEVhcmJ1ZHMgd2l0aCBBY3RpdmUgTm9pc2UgQ2FuY2VsbGF0aW9uIiwKICAgIGNhdGVnb3J5U2x1ZzogInRlY2gtc21hcnQtaG9tZSIsCiAgICBzaG9ydERlc2NyaXB0aW9uOgogICAgICAiQXBwbGUncyBuZXdlc3QgZWFyYnVkcyB3aXRoIHN0cm9uZ2VyIG5vaXNlIGNhbmNlbGxhdGlvbiwgbGl2ZSB0cmFuc2xhdGlvbiBhbmQgaGVhcnQtcmF0ZSBzZW5zaW5nLCBpbiBhIHBvY2tldC1zaXplZCBVU0ItQyBjYXNlLiIsCiAgICBpbWFnZVVybDogbnVsbCwKICAgIGhpZ2hsaWdodHM6IFsiQWN0aXZlIG5vaXNlIGNhbmNlbGxhdGlvbiIsICJMaXZlIHRyYW5zbGF0aW9uIiwgIkhlYXJ0LXJhdGUgc2Vuc2luZyIsICJVU0ItQyBjaGFyZ2luZyBjYXNlIl0sCiAgICBkaXNjb3ZlcmVkVmlhOiAiUmFkYXIgZGUgdGVuZGVuY2lhcyAoTmF2aWRhZC9DeWJlciAyMDI2LCBiw7pzcXVlZGEgZWRpdG9yaWFsLCAyMDI2LTExLTA0KSIsCiAgfSwKICB7CiAgICBhc2luOiAiQjBEMkxaWVEyTSIsCiAgICBhZmZpbGlhdGVVcmw6CiAgICAgICJodHRwczovL3d3dy5hbWF6b24uY29tL2RwL0IwRDJMWllRMk0/JmxpbmtDb2RlPWxsMiZ0YWc9ZWNvbW1lcmNldHkwMC0yMCZsYW5ndWFnZT1lbl9VUyZnYU9wdEluU3RhdHVzPXRydWUmcmVmXz1hc19saV9zc190bCIsCiAgICBicmFuZDogIk5pbmphIiwKICAgIHRpdGxlOiAiTmluamEgU0xVU0hpIHdpdGggUmFwaWRDaGlsbCBUZWNobm9sb2d5LCA4OCBvei4gRnJvemVuIERyaW5rICYgU2x1c2hpZSBNYWNoaW5lLCA1IFByZXNldCBQcm9ncmFtcywgRlMzMDEiLAogICAgY2F0ZWdvcnlTbHVnOiAiaG9tZS1raXRjaGVuIiwKICAgIHNob3J0RGVzY3JpcHRpb246CiAgICAgICJUdXJucyBhbG1vc3QgYW55IGRyaW5rIGludG8gYSBmcm96ZW4gc2x1c2hpZSB3aXRoIG5vIGljZSBhbmQgbm8gYmxlbmRlciDigJQgZml2ZSBwcmVzZXRzIGNvdmVyIHNsdXNoaWVzLCBmcm96ZW4gbWFyZ2FyaXRhcywgZnJhcHDDqXMgYW5kIG1vcmUuIiwKICAgIGltYWdlVXJsOiBudWxsLAogICAgaGlnaGxpZ2h0czogWyJObyBpY2UgbmVlZGVkIiwgIjUgcHJlc2V0IHByb2dyYW1zIiwgIjg4IG96LiB2ZXNzZWwiLCAiS2VlcHMgZHJpbmtzIGZyb3plbiB1cCB0byAxMiBob3VycyJdLAogICAgZGlzY292ZXJlZFZpYTogIlJhZGFyIGRlIHRlbmRlbmNpYXMgKE5hdmlkYWQvQ3liZXIgMjAyNiwgYsO6c3F1ZWRhIGVkaXRvcmlhbCwgMjAyNi0xMS0wNCkiLAogIH0sCiAgewogICAgYXNpbjogIkIwOEQ2NkhDWFciLAogICAgYWZmaWxpYXRlVXJsOgogICAgICAiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9kcC9CMDhENjZIQ1hXPyZsaW5rQ29kZT1sbDImdGFnPWVjb21tZXJjZXR5MDAtMjAmbGFuZ3VhZ2U9ZW5fVVMmZ2FPcHRJblN0YXR1cz10cnVlJnJlZl89YXNfbGlfc3NfdGwiLAogICAgYnJhbmQ6ICJMSEtOTCIsCiAgICB0aXRsZTogIkxIS05MIFJlY2hhcmdlYWJsZSBIZWFkbGFtcCwgMi1QYWNrIHdpdGggTW90aW9uIFNlbnNvciIsCiAgICBjYXRlZ29yeVNsdWc6ICJzcG9ydHMtb3V0ZG9vcnMiLAogICAgc2hvcnREZXNjcmlwdGlvbjoKICAgICAgIkEgcGFpciBvZiByZWNoYXJnZWFibGUsIG1vdGlvbi1zZW5zb3IgaGVhZGxhbXBzIGZvciBoYW5kcy1mcmVlIGxpZ2h0IG9uIHdhbGtzLCBjYW1waW5nIHRyaXBzIGFuZCBqb2JzIGFyb3VuZCB0aGUgaG91c2UuIiwKICAgIGltYWdlVXJsOiBudWxsLAogICAgaGlnaGxpZ2h0czogWyJSZWNoYXJnZWFibGUiLCAiTW90aW9uIHNlbnNvciIsICIyLXBhY2siLCAiSGFuZHMtZnJlZSBsaWdodCJdLAogICAgZGlzY292ZXJlZFZpYTogIlJhZGFyIGRlIHRlbmRlbmNpYXMgKG3DoXMgdmVuZGlkb3Mgbm92aWVtYnJlIDIwMjYsIGLDunNxdWVkYSBlZGl0b3JpYWwsIDIwMjYtMTEtMDQpIiwKICB9LAogIHsKICAgIGFzaW46ICJCMEJYS0I3UUY2IiwKICAgIGFmZmlsaWF0ZVVybDoKICAgICAgImh0dHBzOi8vd3d3LmFtYXpvbi5jb20vZHAvQjBCWEtCN1FGNj8mbGlua0NvZGU9bGwyJnRhZz1lY29tbWVyY2V0eTAwLTIwJmxhbmd1YWdlPWVuX1VTJmdhT3B0SW5TdGF0dXM9dHJ1ZSZyZWZfPWFzX2xpX3NzX3RsIiwKICAgIGJyYW5kOiAiQ29xdWltYm8iLAogICAgdGl0bGU6ICJDb3F1aW1ibyBTZXdpbmcgS2l0LCA4Ni1QaWVjZSBUcmF2ZWwgU2V0IiwKICAgIGNhdGVnb3J5U2x1ZzogInRvb2xzLWhvbWUtaW1wcm92ZW1lbnQiLAogICAgc2hvcnREZXNjcmlwdGlvbjoKICAgICAgIkFuIDg2LXBpZWNlIHRyYXZlbCBzZXdpbmcga2l0IHRoYXQgY292ZXJzIHF1aWNrIHJlcGFpcnMgYXQgaG9tZSBvciBvbiB0aGUgcm9hZCwgaW4gb25lIGNvbXBhY3QgY2FzZS4iLAogICAgaW1hZ2VVcmw6IG51bGwsCiAgICBoaWdobGlnaHRzOiBbIjg2IHBpZWNlcyIsICJDb21wYWN0IHRyYXZlbCBjYXNlIiwgIlF1aWNrIHJlcGFpcnMiXSwKICAgIGRpc2NvdmVyZWRWaWE6ICJSYWRhciBkZSB0ZW5kZW5jaWFzIChtw6FzIHZlbmRpZG9zIG5vdmllbWJyZSAyMDI2LCBiw7pzcXVlZGEgZWRpdG9yaWFsLCAyMDI2LTExLTA0KSIsCiAgfSwKICB7CiAgICBhc2luOiAiMTI1MDg5MjMxNyIsCiAgICBhZmZpbGlhdGVVcmw6CiAgICAgICJodHRwczovL3d3dy5hbWF6b24uY29tL2RwLzEyNTA4OTIzMTc/JmxpbmtDb2RlPWxsMiZ0YWc9ZWNvbW1lcmNldHkwMC0yMCZsYW5ndWFnZT1lbl9VUyZnYU9wdEluU3RhdHVzPXRydWUmcmVmXz1hc19saV9zc190bCIsCiAgICBicmFuZDogIk11cmRsZSIsCiAgICB0aXRsZTogIk11cmRsZTogVm9sdW1lIDEg4oCUIDEwMCBNdXJkZXIgTXlzdGVyeSBMb2dpYyBQdXp6bGVzIiwKICAgIGNhdGVnb3J5U2x1ZzogInRveXMtZ2FtZXMiLAogICAgc2hvcnREZXNjcmlwdGlvbjoKICAgICAgIjEwMCBtdXJkZXItbXlzdGVyeSBsb2dpYyBwdXp6bGVzIHRvIHNvbHZlIGJ5IGRlZHVjdGlvbiDigJQgYSBzdG9ja2luZyBzdHVmZmVyIGZvciBwdXp6bGUgbG92ZXJzIGFuZCBnYW1lIG5pZ2h0cy4iLAogICAgaW1hZ2VVcmw6IG51bGwsCiAgICBoaWdobGlnaHRzOiBbIjEwMCBsb2dpYyBwdXp6bGVzIiwgIkRlZHVjdGlvbiBnYW1lcGxheSIsICJTdG9ja2luZyBzdHVmZmVyIl0sCiAgICBkaXNjb3ZlcmVkVmlhOiAiUmFkYXIgZGUgdGVuZGVuY2lhcyAobcOhcyB2ZW5kaWRvcyBub3ZpZW1icmUgMjAyNiwgYsO6c3F1ZWRhIGVkaXRvcmlhbCwgMjAyNi0xMS0wNCkiLAogIH0sCl07Cg==
+import type { BatchProduct } from "./batch-001";
+
+// Lote estacional Navidad / Cyber Monday 2026, curado por búsqueda
+// editorial el 2026-11-04 (listas de tendencias y más vendidos de
+// noviembre, sin scraping de Amazon y sin precios copiados: el sitio
+// sigue mostrando "Check price on Amazon" hasta la Creators API).
+// Los 5 ASIN son nuevos en el catálogo (verificado contra los lotes
+// existentes); Switch 2 + Mario Kart y AirTag 2 4-pack ya estaban y
+// no se duplican aquí. Enlaces con el Tracking ID WEB
+// (ecommercety00-20); sin linkId de SiteStripe, que es metadato de
+// reporte y no requisito de la validación del import ni de la
+// atribución: si se generan enlaces SiteStripe después, se
+// actualizan las URLs en un lote posterior, como se hizo con
+// SKITTLES, Stanley y Blink Mini.
+export const BATCH_SEASONAL_2026_11_04: BatchProduct[] = [
+  {
+    asin: "B0FQFB8FMG",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0FQFB8FMG?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "Apple",
+    title: "Apple AirPods Pro 3 Wireless Earbuds with Active Noise Cancellation",
+    categorySlug: "tech-smart-home",
+    shortDescription:
+      "Apple's newest earbuds with stronger noise cancellation, live translation and heart-rate sensing, in a pocket-sized USB-C case.",
+    imageUrl: null,
+    highlights: ["Active noise cancellation", "Live translation", "Heart-rate sensing", "USB-C charging case"],
+    discoveredVia: "Radar de tendencias (Navidad/Cyber 2026, búsqueda editorial, 2026-11-04)",
+  },
+  {
+    asin: "B0D2LZYQ2M",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0D2LZYQ2M?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "Ninja",
+    title: "Ninja SLUSHi with RapidChill Technology, 88 oz. Frozen Drink & Slushie Machine, 5 Preset Programs, FS301",
+    categorySlug: "home-kitchen",
+    shortDescription:
+      "Turns almost any drink into a frozen slushie with no ice and no blender — five presets cover slushies, frozen margaritas, frappés and more.",
+    imageUrl: null,
+    highlights: ["No ice needed", "5 preset programs", "88 oz. vessel", "Keeps drinks frozen up to 12 hours"],
+    discoveredVia: "Radar de tendencias (Navidad/Cyber 2026, búsqueda editorial, 2026-11-04)",
+  },
+  {
+    asin: "B08D66HCXW",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B08D66HCXW?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "LHKNL",
+    title: "LHKNL Rechargeable Headlamp, 2-Pack with Motion Sensor",
+    categorySlug: "sports-outdoors",
+    shortDescription:
+      "A pair of rechargeable, motion-sensor headlamps for hands-free light on walks, camping trips and jobs around the house.",
+    imageUrl: null,
+    highlights: ["Rechargeable", "Motion sensor", "2-pack", "Hands-free light"],
+    discoveredVia: "Radar de tendencias (más vendidos noviembre 2026, búsqueda editorial, 2026-11-04)",
+  },
+  {
+    asin: "B0BXKB7QF6",
+    affiliateUrl:
+      "https://www.amazon.com/dp/B0BXKB7QF6?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "Coquimbo",
+    title: "Coquimbo Sewing Kit, 86-Piece Travel Set",
+    categorySlug: "tools-home-improvement",
+    shortDescription:
+      "An 86-piece travel sewing kit that covers quick repairs at home or on the road, in one compact case.",
+    imageUrl: null,
+    highlights: ["86 pieces", "Compact travel case", "Quick repairs"],
+    discoveredVia: "Radar de tendencias (más vendidos noviembre 2026, búsqueda editorial, 2026-11-04)",
+  },
+  {
+    asin: "1250892317",
+    affiliateUrl:
+      "https://www.amazon.com/dp/1250892317?&linkCode=ll2&tag=ecommercety00-20&language=en_US&gaOptInStatus=true&ref_=as_li_ss_tl",
+    brand: "Murdle",
+    title: "Murdle: Volume 1 — 100 Murder Mystery Logic Puzzles",
+    categorySlug: "toys-games",
+    shortDescription:
+      "100 murder-mystery logic puzzles to solve by deduction — a stocking stuffer for puzzle lovers and game nights.",
+    imageUrl: null,
+    highlights: ["100 logic puzzles", "Deduction gameplay", "Stocking stuffer"],
+    discoveredVia: "Radar de tendencias (más vendidos noviembre 2026, búsqueda editorial, 2026-11-04)",
+  },
+];

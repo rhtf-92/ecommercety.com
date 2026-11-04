@@ -1,33 +1,46 @@
-// Guías editoriales desde la base de datos (Fase 3, 3a parte),
-// con el código como respaldo. El diseño es deliberadamente
-// reversible y sin tiempo de inactividad:
+// Guías editoriales desde la base de datos (Fase 3, 3a parte,
+// limpieza posterior al PR #7). La base es la única fuente: el
+// respaldo en código (`content.ts`) se retiró tras verificar la
+// paridad en producción el 2026-11-04 (las 11 guías en /guides en
+// el mismo orden, y la ficha de la guía navideña con sus grupos y
+// su veredicto, idénticos al código; seed con 0 ASINs saltados).
 //
-// - La base es la fuente cuando tiene la guía (estado PUBLISHED);
-//   si la base está vacía, sin migrar o sin esa guía, se devuelve
-//   el contenido de `content.ts`, idéntico al de hoy. Por eso
-//   fusionar este PR no cambia nada visible: el cambio visible
-//   llega solo cuando se corre el seed (`npm run db:seed-guides`)
-//   tras la migración, y aun entonces el contenido sembrado es
-//   byte a byte el mismo que el del código (la paridad se prueba
-//   en tests/guides-db.test.ts).
-// - `content.ts` se retira en un PR de limpieza posterior, solo
-//   después de verificar la paridad en producción. Retirarlo en
-//   este mismo PR dejaría al sitio sin respaldo si el seed falla.
 // - sections/groups se guardan como JSON: la prosa se lee entera
 //   y se renderiza, sin consultas por campo. Los productos
 //   enlazados van en GuideProduct (posición + FK), que es lo que
 //   la página usa para las tarjetas; un ASIN sin producto en base
-//   se salta en el seed, igual que la página ya filtra hoy los
-//   productos que no están publicados.
+//   simplemente no muestra tarjeta.
+// - Una fila malformada se descarta (hub) o da 404 (ficha), nunca
+//   una página rota. Si la base no responde, el hub queda vacío y
+//   la ficha da 404, igual que el resto de la capa pública cuando
+//   la base falla: ya no hay respaldo en código que lo oculte.
+// - El script de seed se retiró con `content.ts` (su fuente era el
+//   código). Las guías ya sembradas viven en Neon; una guía nueva
+//   o editada se escribe directo en base (Prisma Studio, SQL o un
+//   upsert con `guideToDbPayload`), y un entorno nuevo se siembra
+//   copiando las filas Guide/GuideProduct desde producción.
 
 import { getDb } from "@/lib/db";
-import {
-  GUIDES,
-  getGuideBySlug as getGuideBySlugFromCode,
-  type Guide,
-  type GuideGroup,
-  type GuideSection,
-} from "./content";
+
+// Tipos de guía (antes vivían en `content.ts`, retirado aquí).
+export type GuideSection = { heading: string; paragraphs: string[] };
+// Variante de hub orientada a productos (p. ej. Holiday Gifts): en vez
+// de secciones de prosa, la página muestra primero los productos
+// agrupados por tema, cada grupo con una sola línea editorial corta.
+export type GuideGroup = { heading: string; line: string; asins: string[] };
+export type Guide = {
+  slug: string;
+  title: string;
+  description: string;
+  categorySlug: string;
+  categoryLabel: string;
+  readingMinutes: number;
+  intro: string;
+  sections: GuideSection[];
+  groups?: GuideGroup[];
+  asins: string[];
+  verdict: string;
+};
 
 export type GuideDbRow = {
   slug: string;
@@ -71,8 +84,8 @@ function isGroup(value: unknown): value is GuideGroup {
 /**
  * Convierte una fila de base de datos en una guía del tipo que
  * usan las páginas. Devuelve null si la fila está incompleta o
- * malformada (prosa que no es un arreglo válido): quien llama
- * cae entonces al contenido del código, nunca a una página rota.
+ * malformada (prosa que no es un arreglo válido): quien llama la
+ * descarta, nunca renderiza una página rota.
  */
 export function guideFromDbRow(row: GuideDbRow): Guide | null {
   if (
@@ -161,7 +174,7 @@ const guideInclude = {
   },
 };
 
-/** Todas las guías publicadas: base primero, código como respaldo. */
+/** Todas las guías publicadas, solo desde la base. */
 export async function getGuides(): Promise<Guide[]> {
   try {
     const db = await getDb();
@@ -170,20 +183,17 @@ export async function getGuides(): Promise<Guide[]> {
       include: guideInclude,
       orderBy: { position: "asc" },
     });
-    const guides = rows
+    return rows
       .map((row) => fromDbGuide(row as DbGuideWithItems))
       .filter((guide): guide is Guide => guide !== null);
-    // Si la base aún no tiene guías (sin seed), el código manda:
-    // el orden de la lista es el editorial, no el alfabético.
-    if (guides.length > 0) return guides;
   } catch {
-    // Sin base o sin migrar: respaldo silencioso, como el resto
-    // de la capa pública.
+    // Sin base o sin migrar: lista vacía, como el resto de la
+    // capa pública cuando la base falla. Ya no hay respaldo.
+    return [];
   }
-  return GUIDES;
 }
 
-/** Una guía por slug: base primero, código como respaldo. */
+/** Una guía por slug, solo desde la base. */
 export async function getGuideBySlug(
   slug: string,
 ): Promise<Guide | undefined> {
@@ -194,11 +204,10 @@ export async function getGuideBySlug(
       include: guideInclude,
     });
     if (row && row.status === "PUBLISHED") {
-      const guide = fromDbGuide(row as DbGuideWithItems);
-      if (guide) return guide;
+      return fromDbGuide(row as DbGuideWithItems) ?? undefined;
     }
   } catch {
-    // Respaldo silencioso al código.
+    // Sin base o sin migrar: sin guía (la página da 404).
   }
-  return getGuideBySlugFromCode(slug);
+  return undefined;
 }

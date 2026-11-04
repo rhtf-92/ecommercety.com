@@ -1,5 +1,13 @@
 # Automatización — Fase 2: ciclo cada 5 horas
 
+> SUSPENDIDO 2026-11-04 por decisión de Alya: el disparo automático
+> cada 5 horas está pausado hasta que Amazon emita las credenciales
+> de la Creators API. Sin credenciales el sincronizador responde
+> NOT_CONFIGURED y no escribe nada; la caza de productos pasa a
+> revisiones manuales programadas (07, 11, 15, 19 y 23 hora Lima).
+> Para reactivar: restaurar el `schedule` en
+> `.github/workflows/cron-sync.yml` y quitar este aviso.
+
 ## Qué automatiza (y qué no)
 
 Antes, el ciclo de 5 horas dependía de que alguien pulsara

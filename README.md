@@ -8,7 +8,7 @@ afiliado generado con SiteStripe y su Tracking ID por canal.
 - **Next.js 16 + TypeScript** (App Router), monolito modular
 - **PostgreSQL + Prisma ORM**
 - **Tailwind CSS 4**
-- Despliegue: Render (plan Starter) + Neon (PostgreSQL), DNS en Cloudflare
+- Despliegue: Vercel (plan Hobby, región iad1) + Neon (PostgreSQL), DNS en Cloudflare. El ciclo de sincronización cada 5 horas lo dispara GitHub Actions, no Vercel Cron (en Hobby solo se admiten crons diarios; ver docs/automation.md).
 
 ## Puesta en marcha (desarrollo)
 ```bash

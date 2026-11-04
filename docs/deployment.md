@@ -1,16 +1,18 @@
 # Despliegue en producción — runbook
 
-Arquitectura de producción: **Vercel** (plan Pro, US$20/mes) para
-la aplicación + **Neon** (PostgreSQL, nivel gratuito) como base +
-**Cloudflare Registrar** (dominio ecommercety.com, comprado el
-2026-11-01).
+Arquitectura de producción: **Vercel** (plan Hobby, región iad1)
+para la aplicación + **Neon** (PostgreSQL, nivel gratuito) como
+base + **Cloudflare Registrar** (dominio ecommercety.com, comprado
+el 2026-11-01). El ciclo de sincronización cada 5 horas NO usa
+Vercel Cron (en Hobby solo se admiten crons diarios): lo dispara
+GitHub Actions; ver `docs/automation.md`.
 
 **Historia de la ruta:** el lanzamiento del 2026-11-01 salió en
 Render Starter (US$7/mes), pero su instancia única (0.5 CPU /
 512 MB) se saturó con el tráfico normal de la tienda y sirvió
 errores 502 intermitentes desde el primer día, incluso tras
 optimizar el código (topes al optimizador de imágenes). El mismo
-2026-11-01 Renato decidió migrar la app a **Vercel Pro**: cómputo
+2026-11-01 Renato decidió migrar la app a **Vercel**: cómputo
 serverless (Fluid) que escala por petición, sin instancia única
 que se caiga. La base en Neon **no se mueve**: solo cambia dónde
 corre la app. Esa independencia fue la decisión de diseño original
@@ -36,7 +38,7 @@ configuración, en orden.
 Con el `.env` local apuntando al `DATABASE_URL` **directo** de
 Neon (no al Docker local), en este orden:
 
-1. `npx prisma migrate deploy` (aplica las 5 migraciones)
+1. `npx prisma migrate deploy` (aplica las migraciones pendientes)
 2. `npm run db:seed` (crea las 14 categorías)
 3. `npm run db:import` (carga los 128 productos con enlace)
 
@@ -47,9 +49,10 @@ hacía; en Vercel ese paso no existe y no hace falta).
 
 ## 3. Aplicación en Vercel (verificación previa al dominio)
 
-1. En vercel.com: registrarse con GitHub (`rhtf-92`) y pasar el
-   equipo a **Pro** (US$20/mes; el plan Hobby prohíbe uso
-   comercial y sitios de afiliación, por eso Pro es el piso).
+1. En vercel.com: registrarse con GitHub (`rhtf-92`). El equipo
+   actual es **Hobby** (verificado en el panel de Vercel); por
+   eso el ciclo cada 5 horas se dispara desde GitHub Actions y
+   no desde Vercel Cron (ver `docs/automation.md`).
 2. *Add New → Project → Import* `rhtf-92/ecommercety.com`.
    Framework **Next.js** detectado automáticamente; raíz `./`;
    comandos por defecto (install/build). El `postinstall` genera

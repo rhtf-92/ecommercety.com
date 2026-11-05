@@ -2,6 +2,7 @@ import {
   IconBaby,
   IconBasket,
   IconBlocks,
+  IconBook,
   IconBriefcase,
   IconCar,
   IconCpu,
@@ -9,10 +10,15 @@ import {
   IconGamepad,
   IconHeartPulse,
   IconHome,
+  IconLeaf,
+  IconMusic,
   IconPaw,
+  IconPhone,
+  IconPlug,
   IconShirt,
   IconSparkles,
   IconTrending,
+  IconWatch,
   IconWrench,
 } from "@/components/icons";
 
@@ -53,6 +59,26 @@ export default function CategoryIcon({
       return <IconHeartPulse className={cls} />;
     case "grocery-gourmet":
       return <IconBasket className={cls} />;
+    case "books":
+      return <IconBook className={cls} />;
+    case "jewelry":
+      return <IconSparkles className={cls} />;
+    case "watches":
+      return <IconWatch className={cls} />;
+    case "musical-instruments":
+      return <IconMusic className={cls} />;
+    case "arts-crafts":
+      return <IconSparkles className={cls} />;
+    case "cell-phones-accessories":
+      return <IconPhone className={cls} />;
+    case "computers":
+      return <IconCpu className={cls} />;
+    case "garden":
+      return <IconLeaf className={cls} />;
+    case "luggage":
+      return <IconBriefcase className={cls} />;
+    case "appliances":
+      return <IconPlug className={cls} />;
     default:
       return <IconTrending className={cls} />;
   }

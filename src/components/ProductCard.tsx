@@ -76,9 +76,18 @@ export default function ProductCard({
           </p>
         ) : null}
         <h3 className="mt-1 leading-snug font-bold break-words text-zinc-900">
-          <Link href={`/product/${product.asin}`} className="hover:text-brand-700">
+          {/* El título va DIRECTO a Amazon con el enlace SiteStripe
+              (el mismo que el botón), con beacon de clic y
+              rel="sponsored nofollow": ningún clic en el producto llega
+              a Amazon sin el tag. La ficha interna sigue accesible desde
+              la imagen y desde "Why we picked it". */}
+          <TrackedAffiliateButton
+            asin={product.asin}
+            href={webAffiliateUrl(product)}
+            className="hover:text-brand-700"
+          >
             {product.title}
-          </Link>
+          </TrackedAffiliateButton>
         </h3>
         {product.shortDescription ? (
           <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-zinc-600">

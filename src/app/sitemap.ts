@@ -6,7 +6,7 @@ import {
 import { getGuides } from "@/modules/guides/data";
 import { SITE_URL } from "@/modules/seo/site";
 
-// Sitemap completo: portada, guías, páginas institucionales, las 14
+// Sitemap completo: portada, guías, páginas institucionales, las 25
 // categorías y TODOS los productos publicados (desde la base; sin
 // base, el sitemap sigue válido sin productos). La búsqueda queda
 // fuera a propósito: su página es noindex.

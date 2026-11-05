@@ -258,3 +258,55 @@ export function IconBook(p: P) {
     </svg>
   );
 }
+
+export function IconWatch(p: P) {
+  return (
+    <svg {...base(p)}>
+      <circle cx="12" cy="12" r="6" />
+      <path d="M12 10v2l1.5 1" />
+      <path d="M9.5 6.5 8 3" />
+      <path d="M14.5 6.5 16 3" />
+      <path d="M9.5 17.5 8 21" />
+      <path d="M14.5 17.5 16 21" />
+    </svg>
+  );
+}
+
+export function IconMusic(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M9 18V5l12-2v13" />
+      <circle cx="6" cy="18" r="3" />
+      <circle cx="18" cy="16" r="3" />
+    </svg>
+  );
+}
+
+export function IconPhone(p: P) {
+  return (
+    <svg {...base(p)}>
+      <rect x="7" y="2" width="10" height="20" rx="2" />
+      <path d="M11 18h2" />
+    </svg>
+  );
+}
+
+export function IconLeaf(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z" />
+      <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12" />
+    </svg>
+  );
+}
+
+export function IconPlug(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M12 22v-5" />
+      <path d="M9 8V2" />
+      <path d="M15 8V2" />
+      <path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z" />
+    </svg>
+  );
+}

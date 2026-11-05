@@ -15,8 +15,8 @@ export type ProductWithLinks = Product & {
 };
 
 /**
- * Categorías de Fase 1 (aprobadas el 2026-10-31) y Fase 2 (Sprint 8,
- * 2026-11-01). Sirven como respaldo para que el sitio renderice aunque
+ * Categorías de Fase 1 (aprobadas el 2026-10-31), Fase 2 (Sprint 8,
+ * 2026-11-01) y Fase 3 (2026-11-05). Sirven como respaldo para que el sitio renderice aunque
  * la base de datos aún no esté provisionada; en cuanto exista
  * DATABASE_URL, manda la base de datos.
  */
@@ -38,6 +38,17 @@ export const FALLBACK_CATEGORIES: Pick<
   { id: "fallback-video-games", slug: "video-games", nameEn: "Video Games & Electronics", descriptionEn: "Consoles, controllers and gear for every kind of player.", phase: 2, isActive: true },
   { id: "fallback-health-household", slug: "health-household", nameEn: "Health & Household", descriptionEn: "Wellness, rest and everyday-care essentials.", phase: 2, isActive: true },
   { id: "fallback-grocery-gourmet", slug: "grocery-gourmet", nameEn: "Grocery & Gourmet Gifts", descriptionEn: "Gift baskets, coffee and treats worth sharing.", phase: 2, isActive: true },
+  { id: "fallback-books", slug: "books", nameEn: "Books & Reading", descriptionEn: "Stories, novels and bestsellers worth gifting.", phase: 3, isActive: true },
+  { id: "fallback-jewelry", slug: "jewelry", nameEn: "Jewelry", descriptionEn: "Necklaces, bracelets and pieces made to be gifted.", phase: 3, isActive: true },
+  { id: "fallback-watches", slug: "watches", nameEn: "Watches", descriptionEn: "Timeless watches worth giving.", phase: 3, isActive: true },
+  { id: "fallback-musical-instruments", slug: "musical-instruments", nameEn: "Musical Instruments", descriptionEn: "Instruments and musical gifts for every age.", phase: 3, isActive: true },
+  { id: "fallback-arts-crafts", slug: "arts-crafts", nameEn: "Arts & Crafts", descriptionEn: "Creative kits and craft gifts for makers.", phase: 3, isActive: true },
+  { id: "fallback-cell-phones-accessories", slug: "cell-phones-accessories", nameEn: "Cell Phones & Accessories", descriptionEn: "Chargers, power banks and phone essentials.", phase: 3, isActive: true },
+  { id: "fallback-computers", slug: "computers", nameEn: "Computers & Tablets", descriptionEn: "Tablets, laptops and computer gifts.", phase: 3, isActive: true },
+  { id: "fallback-garden", slug: "garden", nameEn: "Patio, Lawn & Garden", descriptionEn: "Garden lights and outdoor décor worth gifting.", phase: 3, isActive: true },
+  { id: "fallback-luggage", slug: "luggage", nameEn: "Luggage & Travel", descriptionEn: "Carry-ons and travel gifts for every trip.", phase: 3, isActive: true },
+  { id: "fallback-shoes", slug: "shoes", nameEn: "Shoes", descriptionEn: "Comfortable shoes worth gifting.", phase: 3, isActive: true },
+  { id: "fallback-appliances", slug: "appliances", nameEn: "Appliances", descriptionEn: "Small appliances that make everyday life easier.", phase: 3, isActive: true },
 ];
 
 async function dbOrNull<T>(
@@ -151,14 +162,14 @@ export type ProductWithCategory = ProductWithLinks & {
 };
 
 /**
- * Destacados de portada, UNO por categoría (las 14): la portada dejó
+ * Destacados de portada, UNO por categoría: la portada dejó
  * de mostrar la parrilla de categorías (redundante con el mega-menú)
  * y en su lugar resalta el producto más interesante de cada una.
  * Criterio por categoría, en orden: (1) el hallazgo más reciente del
  * radar de tendencias en esa categoría; (2) el publicado más
  * reciente. El modelo no tiene marca editorial de "destacado", así
  * que la frescura del radar es el primer criterio. La representación
- * de las 14 queda garantizada por construcción (una consulta por
+ * de todas queda garantizada por construcción (una consulta por
  * categoría de getCategories); sin base, devuelve vacío como el
  * resto de la capa (la portada muestra su estado vacío).
  */

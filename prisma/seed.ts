@@ -21,6 +21,19 @@ const categories = [
   { slug: "video-games", nameEn: "Video Games & Electronics", phase: 2, commissionRate: 1.0 },
   { slug: "health-household", nameEn: "Health & Household", phase: 2, commissionRate: 1.0 },
   { slug: "grocery-gourmet", nameEn: "Grocery & Gourmet Gifts", phase: 2, commissionRate: 1.0 },
+  // Fase 3 (2026-11-05): categorías nuevas de la caza amplia de
+  // noviembre — departamentos de Amazon que el sitio aún no cubría.
+  { slug: "books", nameEn: "Books & Reading", phase: 3, commissionRate: 4.5 },
+  { slug: "jewelry", nameEn: "Jewelry", phase: 3, commissionRate: 4.0 },
+  { slug: "watches", nameEn: "Watches", phase: 3, commissionRate: 4.0 },
+  { slug: "musical-instruments", nameEn: "Musical Instruments", phase: 3, commissionRate: 4.5 },
+  { slug: "arts-crafts", nameEn: "Arts & Crafts", phase: 3, commissionRate: 4.0 },
+  { slug: "cell-phones-accessories", nameEn: "Cell Phones & Accessories", phase: 3, commissionRate: 4.0 },
+  { slug: "computers", nameEn: "Computers & Tablets", phase: 3, commissionRate: 4.0 },
+  { slug: "garden", nameEn: "Patio, Lawn & Garden", phase: 3, commissionRate: 3.0 },
+  { slug: "luggage", nameEn: "Luggage & Travel", phase: 3, commissionRate: 4.0 },
+  { slug: "shoes", nameEn: "Shoes", phase: 3, commissionRate: 4.0 },
+  { slug: "appliances", nameEn: "Appliances", phase: 3, commissionRate: 4.5 },
 ];
 
 async function main() {
@@ -31,7 +44,7 @@ async function main() {
       create: category,
     });
   }
-  console.log(`Seed completado: ${categories.length} categorías (Fase 1 + Fase 2).`);
+  console.log(`Seed completado: ${categories.length} categorías (Fase 1 + Fase 2 + Fase 3).`);
 }
 
 main()

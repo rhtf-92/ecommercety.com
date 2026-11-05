@@ -14,6 +14,7 @@ try {
 import { PrismaClient } from "@prisma/client";
 import { BATCH_001, type BatchProduct } from "../data/products/batch-001";
 import { BATCH_TRENDING_2026 } from "../data/products/batch-trending-2026";
+import { BATCH_WIDE_2026_11_05 } from "../data/products/batch-wide-2026-11-05";
 import { BATCH_WAVE1_A } from "../data/products/batch-wave1-a";
 import { BATCH_WAVE1_B } from "../data/products/batch-wave1-b";
 import { BATCH_WAVE2_A } from "../data/products/batch-wave2-a";
@@ -33,7 +34,7 @@ import { BATCH_HUNT_2026_11_04 } from "../data/products/batch-hunt-2026-11-04";
 import { BATCH_HUNT_1100_2026_11_04 } from "../data/products/batch-hunt-1100-2026-11-04";
 import { BATCH_HUNT_1500_2026_11_04 } from "../data/products/batch-hunt-1500-2026-11-04";
 import { BATCH_HUNT_1900_2300_2026_11_04 } from "../data/products/batch-hunt-1900-2300-2026-11-04";
-import { BATCH_WIDE_2026_11_05 } from "../data/products/batch-wide-2026-11-05";
+import { BATCH_HUNT_0700_2026_11_05 } from "../data/products/batch-hunt-0700-2026-11-05";
 import { TRACKING_IDS } from "../src/modules/affiliate/tracking";
 
 const BATCHES: { id: string; items: BatchProduct[] }[] = [
@@ -43,7 +44,7 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-hunt-1100-2026-11-04", items: BATCH_HUNT_1100_2026_11_04 },
   { id: "batch-hunt-1500-2026-11-04", items: BATCH_HUNT_1500_2026_11_04 },
   { id: "batch-hunt-1900-2300-2026-11-04", items: BATCH_HUNT_1900_2300_2026_11_04 },
-  { id: "batch-wide-2026-11-05", items: BATCH_WIDE_2026_11_05 },
+  { id: "batch-hunt-0700-2026-11-05", items: BATCH_HUNT_0700_2026_11_05 },
   { id: "batch-osou-replacement", items: BATCH_OSOU_REPLACEMENT },
   { id: "batch-001", items: BATCH_001 },
   { id: "batch-trending-2026", items: BATCH_TRENDING_2026 },
@@ -58,6 +59,7 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-trend-2026-11-02-h3-5", items: BATCH_TREND_2026_11_02_H3_5 },
   { id: "batch-trend-2026-11-02-h1-5-c2", items: BATCH_TREND_2026_11_02_H1_5_C2 },
   { id: "batch-trend-2026-11-02-sitestripe", items: BATCH_TREND_2026_11_02_SITESTRIPE },
+  { id: "batch-wide-2026-11-05", items: BATCH_WIDE_2026_11_05 },
   { id: "batch-holiday-replacements-2026", items: BATCH_HOLIDAY_REPLACEMENTS },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;

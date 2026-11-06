@@ -16,6 +16,7 @@ import { BATCH_001, type BatchProduct } from "../data/products/batch-001";
 import { BATCH_HUNT_1100_2026_11_05 } from "../data/products/batch-hunt-1100-2026-11-05";
 import { BATCH_HUNT_1500_1900_2026_11_05 } from "../data/products/batch-hunt-1500-1900-2026-11-05";
 import { BATCH_HUNT_2300_2026_11_05 } from "../data/products/batch-hunt-2300-2026-11-05";
+import { BATCH_HUNT_0700_2026_11_06 } from "../data/products/batch-hunt-0700-2026-11-06";
 import { BATCH_TRENDING_2026 } from "../data/products/batch-trending-2026";
 import { BATCH_WIDE_2026_11_05 } from "../data/products/batch-wide-2026-11-05";
 import { BATCH_WAVE1_A } from "../data/products/batch-wave1-a";
@@ -67,6 +68,7 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-hunt-1100-2026-11-05", items: BATCH_HUNT_1100_2026_11_05 },
   { id: "batch-hunt-1500-1900-2026-11-05", items: BATCH_HUNT_1500_1900_2026_11_05 },
   { id: "batch-hunt-2300-2026-11-05", items: BATCH_HUNT_2300_2026_11_05 },
+  { id: "batch-hunt-0700-2026-11-06", items: BATCH_HUNT_0700_2026_11_06 },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 

@@ -14,7 +14,7 @@ export const SITE_TITLE_DEFAULT =
   "Best Amazon Deals & Trending Products — Honest Picks | T&F Picks";
 
 export const SITE_DESCRIPTION =
-  "Find the best Amazon deals and trending products, hand-picked and re-verified every 5 hours across 26 categories — home, tech, beauty, toys, gaming and more. Honest guides, zero guesswork: every pick links straight to Amazon for the live price.";
+  "Find the best Amazon deals and trending products, hand-picked and re-verified every 5 hours across 27 categories — home, tech, beauty, toys, gaming and more. Honest guides, zero guesswork: every pick links straight to Amazon for the live price.";
 
 export const SITE_KEYWORDS = [
   "amazon deals",

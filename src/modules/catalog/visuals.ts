@@ -222,6 +222,14 @@ export const CATEGORY_VISUALS: Record<string, CategoryVisual> = {
     image: "/slides/brand.jpg",
     imageAlt: "Delivery boxes in a sunlit modern home entryway",
   },
+  "3d-printers": {
+    band: "bg-cyan-100",
+    bar: "bg-cyan-600",
+    chip: "bg-cyan-200 text-cyan-700",
+    tagline: "Print your ideas",
+    image: "/slides/brand.jpg",
+    imageAlt: "Delivery boxes in a sunlit modern home entryway",
+  },
 };
 
 export const DEFAULT_VISUAL: CategoryVisual = {

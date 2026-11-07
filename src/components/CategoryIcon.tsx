@@ -16,6 +16,7 @@ import {
   IconPaw,
   IconPhone,
   IconPlug,
+  IconPrinter3D,
   IconShirt,
   IconSparkles,
   IconTrending,
@@ -82,6 +83,8 @@ export default function CategoryIcon({
       return <IconPlug className={cls} />;
     case "cameras-photo":
       return <IconCamera className={cls} />;
+    case "3d-printers":
+      return <IconPrinter3D className={cls} />;
     default:
       return <IconTrending className={cls} />;
   }

@@ -319,3 +319,14 @@ export function IconCamera(p: P) {
     </svg>
   );
 }
+
+export function IconPrinter3D(p: P) {
+  return (
+    <svg {...base(p)}>
+      <path d="M12 2.5 20 6.5v11l-8 4-8-4v-11L12 2.5Z" />
+      <path d="M4 6.5 12 10.5 20 6.5" />
+      <path d="M12 10.5v11" />
+      <path d="M8 14.5 12 16.5 16 14.5" />
+    </svg>
+  );
+}

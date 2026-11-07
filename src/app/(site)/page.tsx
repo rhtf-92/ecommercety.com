@@ -20,7 +20,7 @@ import { IconArrowRight, IconBook } from "@/components/icons";
 // Destacados por categoría (2026-11-02): la parrilla de tarjetas de
 // categorías salió de la portada (redundante con el mega-menú del
 // header) y en su lugar va UN producto sobresaliente por cada una de
-// las 26 categorías, con su etiqueta de categoría en la tarjeta.
+// las 27 categorías, con su etiqueta de categoría en la tarjeta.
 async function CategoryStandouts() {
   const [products, showImages] = await Promise.all([
     getCategoryStandouts(),

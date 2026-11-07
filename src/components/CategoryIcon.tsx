@@ -4,6 +4,7 @@ import {
   IconBlocks,
   IconBook,
   IconBriefcase,
+  IconCamera,
   IconCar,
   IconCpu,
   IconDumbbell,
@@ -79,6 +80,8 @@ export default function CategoryIcon({
       return <IconBriefcase className={cls} />;
     case "appliances":
       return <IconPlug className={cls} />;
+    case "cameras-photo":
+      return <IconCamera className={cls} />;
     default:
       return <IconTrending className={cls} />;
   }

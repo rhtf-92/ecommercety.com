@@ -214,6 +214,14 @@ export const CATEGORY_VISUALS: Record<string, CategoryVisual> = {
     image: "/slides/brand.jpg",
     imageAlt: "Delivery boxes in a sunlit modern home entryway",
   },
+  "cameras-photo": {
+    band: "bg-slate-100",
+    bar: "bg-slate-500",
+    chip: "bg-slate-200 text-slate-700",
+    tagline: "Capture the moment",
+    image: "/slides/brand.jpg",
+    imageAlt: "Delivery boxes in a sunlit modern home entryway",
+  },
 };
 
 export const DEFAULT_VISUAL: CategoryVisual = {

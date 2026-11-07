@@ -34,6 +34,7 @@ const categories = [
   { slug: "luggage", nameEn: "Luggage & Travel", phase: 3, commissionRate: 4.0 },
   { slug: "shoes", nameEn: "Shoes", phase: 3, commissionRate: 4.0 },
   { slug: "appliances", nameEn: "Appliances", phase: 3, commissionRate: 4.5 },
+  { slug: "cameras-photo", nameEn: "Camera & Photo", phase: 3, commissionRate: 4.0 },
 ];
 
 async function main() {

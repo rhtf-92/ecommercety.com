@@ -27,8 +27,8 @@ import {
   IconX,
 } from "@/components/icons";
 // Navegación principal (Sprint de navegación, 2026-11-01): la barra ya no
-// intenta comprimir las 25 categorías en enlaces sueltos. En escritorio un
-// disparador "Shop by Category" abre un mega-menú con las 25 categorías en
+// intenta comprimir las 26 categorías en enlaces sueltos. En escritorio un
+// disparador "Shop by Category" abre un mega-menú con las 26 categorías en
 // columnas (con icono, nombre y descripción de la fuente central,
 // FALLBACK_CATEGORIES); en móvil un botón hamburguesa abre un panel con la
 // lista completa. El panel de escritorio se renderiza siempre (mejor SEO y
@@ -214,7 +214,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
         </button>
       </div>
 
-      {/* Mega-menú de escritorio: panel amplio con las 25 categorías. */}
+      {/* Mega-menú de escritorio: panel amplio con las 26 categorías. */}
       <div
         id="site-category-menu"
         aria-hidden={!megaOpen}
@@ -282,7 +282,7 @@ export default function Header({ logo }: { logo: ReactNode }) {
         </div>
       </div>
 
-      {/* Panel móvil: buscador, guías y las 25 categorías completas. */}
+      {/* Panel móvil: buscador, guías y las 26 categorías completas. */}
       <div
         id="site-mobile-menu"
         className={`border-t border-zinc-100 bg-white lg:hidden ${

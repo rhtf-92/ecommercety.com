@@ -49,6 +49,7 @@ export const FALLBACK_CATEGORIES: Pick<
   { id: "fallback-luggage", slug: "luggage", nameEn: "Luggage & Travel", descriptionEn: "Carry-ons and travel gifts for every trip.", phase: 3, isActive: true },
   { id: "fallback-shoes", slug: "shoes", nameEn: "Shoes", descriptionEn: "Comfortable shoes worth gifting.", phase: 3, isActive: true },
   { id: "fallback-appliances", slug: "appliances", nameEn: "Appliances", descriptionEn: "Small appliances that make everyday life easier.", phase: 3, isActive: true },
+  { id: "fallback-cameras-photo", slug: "cameras-photo", nameEn: "Camera & Photo", descriptionEn: "Cameras, lenses and photo gifts.", phase: 3, isActive: true },
 ];
 
 async function dbOrNull<T>(

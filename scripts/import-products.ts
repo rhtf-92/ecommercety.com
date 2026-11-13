@@ -45,6 +45,9 @@ import { BATCH_HUNT_1500_2026_11_11 } from "../data/products/batch-hunt-1500-202
 import { BATCH_HUNT_1900_2026_11_11 } from "../data/products/batch-hunt-1900-2026-11-11";
 import { BATCH_HUNT_2300_2026_11_11 } from "../data/products/batch-hunt-2300-2026-11-11";
 import { BATCH_HUNT_0700_2026_11_12 } from "../data/products/batch-hunt-0700-2026-11-12";
+import { BATCH_HUNT_1500_2026_11_12 } from "../data/products/batch-hunt-1500-2026-11-12";
+import { BATCH_HUNT_1900_2026_11_12 } from "../data/products/batch-hunt-1900-2026-11-12";
+import { BATCH_HUNT_2300_2026_11_12 } from "../data/products/batch-hunt-2300-2026-11-12";
 import { BATCH_TRENDING_2026 } from "../data/products/batch-trending-2026";
 import { BATCH_WIDE_2026_11_05 } from "../data/products/batch-wide-2026-11-05";
 import { BATCH_WAVE1_A } from "../data/products/batch-wave1-a";
@@ -125,6 +128,9 @@ const BATCHES: { id: string; items: BatchProduct[] }[] = [
   { id: "batch-hunt-1900-2026-11-11", items: BATCH_HUNT_1900_2026_11_11 },
   { id: "batch-hunt-2300-2026-11-11", items: BATCH_HUNT_2300_2026_11_11 },
   { id: "batch-hunt-0700-2026-11-12", items: BATCH_HUNT_0700_2026_11_12 },
+  { id: "batch-hunt-1500-2026-11-12", items: BATCH_HUNT_1500_2026_11_12 },
+  { id: "batch-hunt-1900-2026-11-12", items: BATCH_HUNT_1900_2026_11_12 },
+  { id: "batch-hunt-2300-2026-11-12", items: BATCH_HUNT_2300_2026_11_12 },
 ];
 const ASIN_RE = /^[A-Z0-9]{10}$/;
 
